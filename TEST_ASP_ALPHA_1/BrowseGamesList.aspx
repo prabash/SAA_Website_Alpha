@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BrowseGamesList.aspx.cs" Inherits="TEST_ASP_ALPHA_1.BrowseGamesList" MasterPageFile="~/Site.Master" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-  <!-- breadcrumbs -->
+    <!-- breadcrumbs -->
   <div class="breadcrumbs" style="margin-left:-15px">
     <div class="container">
       <div class="row">
@@ -41,12 +41,13 @@
                 <ul id="sortByList" runat="server">
                   
                 </ul>
-                <a class="button-asc left" href="#" title="Set Descending Direction"><span style="color:#999;font-size:11px;" class="glyphicon glyphicon-arrow-up"></span></a> </div>
+                <a class="button-asc left" href="#" title="Desc" onclick="insertParam('asc', 'false');"><span style="color:#33cc99;font-size:11px;" class="glyphicon glyphicon-arrow-down" id="anchorDesc" runat="server"></span></a>
+                <a class="button-asc left" href="#" title="Asc" onclick="insertParam('asc', 'true');"><span style="color:#999;font-size:11px;" class="glyphicon glyphicon-arrow-up" runat="server" id="anchorAsc"></span></a>
+              </div>
               <div class="pager">
                 <div id="limiter">
                   <label>View: </label>
                   <ul id="viewPerPage" runat="server">
-                    
                   </ul>
                 </div>
                 <div class="pages">

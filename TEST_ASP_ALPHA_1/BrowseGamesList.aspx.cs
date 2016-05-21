@@ -13,6 +13,8 @@ namespace TEST_ASP_ALPHA_1
     {
         public int count = 2;
         public string sortBy = "Name";
+        public bool ascending = true;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -29,6 +31,23 @@ namespace TEST_ASP_ALPHA_1
                 if (_sortBy != null)
                 {
                     sortBy = _sortBy;
+                }
+
+                var _asc = Request.QueryString["asc"];
+                if (_asc != null)
+                {
+                    ascending = Convert.ToBoolean(_asc);
+                }
+
+                if (ascending)
+                {
+                    anchorAsc.Attributes["style"] = "color:#33cc99;font-size:11px;";
+                    anchorDesc.Attributes["style"] = "color:#999;font-size:11px;";
+                }
+                else
+                {
+                    anchorAsc.Attributes["style"] = "color:#999;font-size:11px;";
+                    anchorDesc.Attributes["style"] = "color:#33cc99;font-size:11px;";
                 }
 
                 AddViewPerPageList();
@@ -64,7 +83,7 @@ namespace TEST_ASP_ALPHA_1
 
         private void GetListDetails()
         {
-            var gridDetails = new ItemsModel().GetItemDetails(ItemType.Games, ItemSortBy.NameAsc, count);
+            var gridDetails = new ItemsModel().GetItemDetails(ItemType.Games, EnumsManager.GetSortByOption(sortBy, ascending), count);
             foreach (var item in gridDetails)
             {
                 var liControl = HTMLControlsManager.GetCustomTag("li", new[] { "item odd" });
@@ -81,12 +100,12 @@ namespace TEST_ASP_ALPHA_1
 
         private void AddViewPerPageList()
         {
-            viewPerPage.Controls.Add(CommonHtmlManager.GetItemsPerPageList(new List<int> { 2, 4, 6, 8 }, count));
+            viewPerPage.Controls.Add(CommonHtmlManager.GetItemsPerPageList(CommonManager.GetValuesPerPage(), count));
         }
 
         private void AddSortByList()
         {
-            sortByList.Controls.Add(CommonHtmlManager.GetSortValuesList(new List<string> { "Name", "Price", "Position" }, sortBy));
+            sortByList.Controls.Add(CommonHtmlManager.GetSortValuesList(CommonManager.GetSortByOptions(), sortBy));
         }
     }
 }

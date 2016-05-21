@@ -333,5 +333,20 @@
 <script>
     new UISearch(document.getElementById('form-search'));
 		</script>
+
+    
+   <script type="text/javascript">
+       function insertParam(key, value) {
+           var uri = window.location.href;
+           var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+           var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+           if (uri.match(re)) {
+               window.location.replace(uri.replace(re, '$1' + key + "=" + value + '$2'));
+           }
+           else {
+               window.location.replace(uri + separator + key + "=" + value);
+           }
+       }
+   </script>
 </body>
 </html>

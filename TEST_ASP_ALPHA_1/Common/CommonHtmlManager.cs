@@ -10,12 +10,12 @@ namespace TEST_ASP_ALPHA_1.Common
     {
         public static HtmlGenericControl GetItemsPerPageList(List<int> valuesList, int currentValue)
         {
-            return GetCommonList<int>(valuesList, currentValue, "?count");
+            return GetCommonList<int>(valuesList, currentValue, "count");
         }
 
         public static HtmlGenericControl GetSortValuesList(List<string> valuesList, string currentValue)
         {
-            return GetCommonList<string>(valuesList, currentValue, "#?sortby");
+            return GetCommonList<string>(valuesList, currentValue, "sortby");
         }
 
         private static HtmlGenericControl GetCommonList<T>(List<T> valuesList, T currentValue, string queryStringVal)
@@ -37,7 +37,9 @@ namespace TEST_ASP_ALPHA_1.Common
                         var otherValueListItemControl = HTMLControlsManager.GetCustomTag("li", null);
                         otherValuesUnorderedList.Controls.Add(otherValueListItemControl);
                         {
-                            var anchorOtherValueControl = HTMLControlsManager.GetAnchorTag(queryStringVal + "=" + item, null, item.ToString());
+                            var addAtt = new Dictionary<string, string>() { { "onclick", "insertParam('" + queryStringVal + "', '" + item + "');" } };
+
+                            var anchorOtherValueControl = HTMLControlsManager.GetAnchorTag("#", null, item.ToString(), null, null, addAtt);
                             otherValueListItemControl.Controls.Add(anchorOtherValueControl);
                         }
                     }

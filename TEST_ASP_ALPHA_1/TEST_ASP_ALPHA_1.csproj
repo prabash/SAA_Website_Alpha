@@ -427,7 +427,9 @@
       <DependentUpon>BrowseTvSeriesGrid.aspx</DependentUpon>
     </Compile>
     <Compile Include="Common\CommonHtmlManager.cs" />
+    <Compile Include="Common\CommonManager.cs" />
     <Compile Include="Common\Enums.cs" />
+    <Compile Include="Common\EnumsManager.cs" />
     <Compile Include="Common\HTMLControlsManager.cs" />
     <Compile Include="Common\ItemHtmlManager.cs" />
     <Compile Include="Common\NumberManager.cs" />
