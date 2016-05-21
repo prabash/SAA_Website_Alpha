@@ -13,7 +13,6 @@ namespace TEST_ASP_ALPHA_1
     {
         public int count = 2;
         public string sortBy = "Name";
-        public string queryString = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
