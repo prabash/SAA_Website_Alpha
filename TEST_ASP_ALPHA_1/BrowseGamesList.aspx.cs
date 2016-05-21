@@ -19,7 +19,6 @@ namespace TEST_ASP_ALPHA_1
             {
                 GetSlideshowDetails();
 
-                queryString = Request.QueryString.ToString();
                 var _count = Request.QueryString["count"];
                 if (_count != null)
                 {
