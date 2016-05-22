@@ -21,6 +21,11 @@ namespace TEST_ASP_ALPHA_1.Common
             return valuesPerPage;
         }
 
+        public static int GetDefaultValuePerPage()
+        {
+            return Convert.ToInt32(ConfigurationManager.AppSettings["DefaultValuePerPage"]);
+        }
+
         public static List<string> GetSortByOptions()
         {
             List<string> sortByOptions = new List<string>();
@@ -30,6 +35,10 @@ namespace TEST_ASP_ALPHA_1.Common
                 sortByOptions.Add(item);
             }
             return sortByOptions;
+        }
+        public static string GetDefaultSortByOption()
+        {
+            return ConfigurationManager.AppSettings["DefaultSortBy"];
         }
         #endregion 
     }

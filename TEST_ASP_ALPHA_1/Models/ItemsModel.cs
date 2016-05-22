@@ -62,7 +62,7 @@ namespace TEST_ASP_ALPHA_1.Models
             return returnList;
         }
 
-        public List<ItemObject> GetItemDetails(ItemType type, ItemSortBy sortBy, int limit, bool getRelatedItems = false, int currentItemId = 0)
+        public List<ItemObject> GetItemDetails(ItemType type, ItemSortBy sortBy, int limit, int currentPage = 0)
         {
             List<ItemObject> returnList = new List<ItemObject>();
             MySqlConnection con = ConnectionManager.GetConnection();
@@ -77,82 +77,71 @@ namespace TEST_ASP_ALPHA_1.Models
 
             StringBuilder sqlString = new StringBuilder();
             sqlString.Append("SELECT * FROM items ");
-            sqlString.Append("WHERE type = @type ");
-            if (getRelatedItems)
-            {
-                sqlString.Append("AND id > " + currentItemId + " ");
-            }
-            sqlString.Append("ORDER BY @orderBy ");
-            sqlString.Append("LIMIT @limit ");
-
-            //string sqlString = "SELECT * FROM items WHERE type = @type ORDER BY @orderBy LIMIT @limit";
-            if (getRelatedItems)
-            {
-
-            }
+            
+           
             using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
             {
                 switch (type)
                 {
                     case ItemType.Games:
-                        com.Parameters.AddWithValue("@type", "Games");
+                        sqlString.Append("WHERE type = 'Games'");
                         break;
                     case ItemType.TvSeries:
-                        com.Parameters.AddWithValue("@type", "TvSeries");
+                        sqlString.Append("WHERE type = 'TvSeries'");
                         break;
                     case ItemType.Movies:
-                        com.Parameters.AddWithValue("@type", "Movies");
+                        sqlString.Append("WHERE type = 'Movies'");
                         break;
                     case ItemType.Gifts:
-                        com.Parameters.AddWithValue("@type", "Gifts");
+                        sqlString.Append("WHERE type = 'Gifts'");
                         break;
                     case ItemType.Electronics:
-                        com.Parameters.AddWithValue("@type", "Electronics");
+                        sqlString.Append("WHERE type = 'Electronics'");
                         break;
                     default:
-                        com.Parameters.AddWithValue("@type", "");
                         break;
                 }
+                sqlString.Append(" ");
 
                 switch (sortBy)
                 {
                     case ItemSortBy.NameAsc:
-                        com.Parameters.AddWithValue("@orderBy", "title ASC");
+                        sqlString.Append("ORDER BY title ASC");
                         break;
                     case ItemSortBy.NameDesc:
-                        com.Parameters.AddWithValue("@orderBy", "title DESC");
+                        sqlString.Append("ORDER BY title DESC");
                         break;
                     case ItemSortBy.YearAsc:
-                        com.Parameters.AddWithValue("@orderBy", "year ASC");
+                        sqlString.Append("ORDER BY year ASC");
                         break;
                     case ItemSortBy.YearDesc:
-                        com.Parameters.AddWithValue("@orderBy", "year DESC");
+                        sqlString.Append("ORDER BY year DESC");
                         break;
                     case ItemSortBy.PriceAsc:
-                        com.Parameters.AddWithValue("@orderBy", "current_price ASC");
+                        sqlString.Append("ORDER BY current_price ASC");
                         break;
                     case ItemSortBy.PriceDesc:
-                        com.Parameters.AddWithValue("@orderBy", "current_price DESC");
+                        sqlString.Append("ORDER BY current_price DESC");
                         break;
                     case ItemSortBy.OnSaleAsc:
-                        com.Parameters.AddWithValue("@orderBy", "on_sale ASC");
+                        sqlString.Append("ORDER BY on_sale ASC");
                         break;
                     case ItemSortBy.OnSaleDesc:
-                        com.Parameters.AddWithValue("@orderBy", "on_sale DESC");
+                        sqlString.Append("ORDER BY on_sale DESC");
                         break;
                     case ItemSortBy.BestSellerAsc:
-                        com.Parameters.AddWithValue("@orderBy", "best_seller ASC");
+                        sqlString.Append("ORDER BY best_seller ASC");
                         break;
                     case ItemSortBy.BestSellerDesc:
-                        com.Parameters.AddWithValue("@orderBy", "best_seller DESC");
+                        sqlString.Append("ORDER BY best_seller DESC");
                         break;
                     default:
-                        com.Parameters.AddWithValue("@orderBy", "title ASC");
+                        sqlString.Append("ORDER BY title ASC");
                         break;
                 }
 
-                com.Parameters.AddWithValue("@limit", limit);
-
+                sqlString.Append(" LIMIT " + currentPage + "," + limit);
+                com.CommandText = sqlString.ToString();
 
                 MySqlDataReader dr = com.ExecuteReader();
                 while (dr.Read())
@@ -161,6 +150,58 @@ namespace TEST_ASP_ALPHA_1.Models
                 }
             }
             return returnList;
+        }
+
+        public int GetItemsCount(ItemType type)
+        {
+            int count = 0;
+            MySqlConnection con = ConnectionManager.GetConnection();
+            try
+            {
+                con.Open();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            StringBuilder sqlString = new StringBuilder();
+            sqlString.Append("SELECT COUNT(1) AS count FROM items ");
+
+
+            using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
+            {
+                switch (type)
+                {
+                    case ItemType.Games:
+                        sqlString.Append("WHERE type = 'Games'");
+                        break;
+                    case ItemType.TvSeries:
+                        sqlString.Append("WHERE type = 'TvSeries'");
+                        break;
+                    case ItemType.Movies:
+                        sqlString.Append("WHERE type = 'Movies'");
+                        break;
+                    case ItemType.Gifts:
+                        sqlString.Append("WHERE type = 'Gifts'");
+                        break;
+                    case ItemType.Electronics:
+                        sqlString.Append("WHERE type = 'Electronics'");
+                        break;
+                    default:
+                        break;
+                }
+
+                com.CommandText = sqlString.ToString();
+
+                MySqlDataReader dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    count = Convert.ToInt32(dr["count"]);
+                }
+            }
+
+            return count;
         }
 
         public ItemObject GetItemDetailById(int id)
@@ -204,7 +245,8 @@ namespace TEST_ASP_ALPHA_1.Models
                 year = dr["year"].ToString(),
                 description = dr["description"].ToString(),
                 overview = dr["overview"].ToString(),
-                type = dr["type"].ToString()
+                type = dr["type"].ToString(),
+                dateAdded = Convert.ToDateTime(dr["date_added"])
             };
         }
     }

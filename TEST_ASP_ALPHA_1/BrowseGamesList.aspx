@@ -52,14 +52,7 @@
                 </div>
                 <div class="pages">
                   <label>Page:</label>
-                  <ul class="pagination">
-                    <li><a href="#">&laquo;</a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&raquo;</a></li>
+                  <ul class="pagination" runat="server" id="paginationCtrl">
                   </ul>
                 </div>
               </div>
@@ -124,37 +117,26 @@
               <dl id="narrow-by-list">
                 <dt class="odd">Price</dt>
                 <dd class="odd">
-                  <ol>
-                    <li> <a href="#"><span class="price">$0.00</span> - <span class="price">$99.99</span></a> (6) </li>
-                    <li> <a href="#"><span class="price">$100.00</span> and above</a> (6) </li>
+                  <ol runat="server" id="priceRangeSearch">
+                    <li> <a href="#"><span class="price">LKR 0</span> - <span class="price">LKR 500</span></a> (6) </li>
+                    <li> <a href="#"><span class="price">LKR 501</span> - <span class="price">LKR 1000</span></a> (6) </li>
                   </ol>
                 </dd>
-                <dt class="even">Manufacturer</dt>
+                <dt class="even">Year</dt>
                 <dd class="even">
-                  <ol>
-                    <li> <a href="#">TheBrand</a> (9) </li>
-                    <li> <a href="#">Company</a> (4) </li>
-                    <li> <a href="#">LogoFashion</a> (1) </li>
+                  <ol runat="server" id="yearSearch">
+                    <li> <a href="#">2016</a> (9) </li>
+                    <li> <a href="#">2015</a> (4) </li>
+                    <li> <a href="#">2014</a> (1) </li>
                   </ol>
                 </dd>
-                <dt class="odd">Color</dt>
+                <dt class="odd">Genre</dt>
                 <dd class="odd">
-                  <ol>
-                    <li> <a href="#">Green</a> (1) </li>
-                    <li> <a href="#">White</a> (5) </li>
-                    <li> <a href="#">Black</a> (5) </li>
-                    <li> <a href="#">Gray</a> (4) </li>
-                    <li> <a href="#">Dark Gray</a> (3) </li>
-                    <li> <a href="#">Blue</a> (1) </li>
-                  </ol>
-                </dd>
-                <dt class="last even">Size</dt>
-                <dd class="last even">
-                  <ol>
-                    <li> <a href="#">S</a> (6) </li>
-                    <li> <a href="#">M</a> (6) </li>
-                    <li> <a href="#">L</a> (4) </li>
-                    <li> <a href="#">XL</a> (4) </li>
+                  <ol runat="server" id="genreSearch">
+                    <li> <a href="#">Action</a> (1) </li>
+                    <li> <a href="#">Adventure</a> (5) </li>
+                    <li> <a href="#">Fantasy</a> (5) </li>
+                    <li> <a href="#">Sci-Fi</a> (4) </li>
                   </ol>
                 </dd>
               </dl>
@@ -190,34 +172,17 @@
             </div>
           </div>
           <div class="block block-subscribe">
-        <div class="block-title">Newsletter</div>
-        <form id="newsletter-validate-detail" method="post" action="http://www.magikcommerce.com//newsletter/subscriber/new/">
-          <div class="block-content">
-            <div class="form-subscribe-header"> Sign up for our newsletter:</div>
-            <input type="text" placeholder="Enter your email address" class="input-text required-entry validate-email" title="" id="newsletter" name="email">
-            <div class="actions">
-              <button class="button button-subscribe" title="Submit" type="submit"><span>Subscribe</span></button>
+            <div class="block-title">Newsletter</div>
+                <form id="newsletter-validate-detail" method="post" action="http://www.magikcommerce.com//newsletter/subscriber/new/">
+                    <div class="block-content">
+                    <div class="form-subscribe-header"> Sign up for our newsletter:</div>
+                    <input type="text" placeholder="Enter your email address" class="input-text required-entry validate-email" title="" id="newsletter" name="email">
+                    <div class="actions">
+                        <button class="button button-subscribe" title="Submit" type="submit"><span>Subscribe</span></button>
+                    </div>
+                    </div>
+                </form>
             </div>
-          </div>
-        </form>
-      </div>
-          <div class="block block-compare">
-            <div class="block-title ">Compare Products (2)</div>
-            <div class="block-content">
-              <ol id="compare-items">
-                <li class="item odd">
-                  <input type="hidden" class="compare-item-id" value="2173">
-                  <a href="#" title="Remove This Item" class="btn-remove1"></a> <a class="product-name" href="#"> Sofa with Box-Edge Polyester Wrapped Cushions</a> </li>
-                <li class="item last even">
-                  <input type="hidden" class="compare-item-id" value="2174">
-                  <a href="#" title="Remove This Item" class="btn-remove1"></a> <a class="product-name" href="#"> Sofa with Box-Edge Down-Blend Wrapped Cushions</a> </li>
-              </ol>
-              <div class="ajax-checkout">
-                <button class="button button-compare" title="Submit" type="submit"><span>Compare</span></button>
-                <button class="button button-clear" title="Submit" type="submit"><span>Clear</span></button>
-              </div>
-            </div>
-          </div>
         </aside>
       </div>
     </div>

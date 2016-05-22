@@ -58,6 +58,15 @@ namespace TEST_ASP_ALPHA_1 {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl viewPerPage;
         
         /// <summary>
+        /// paginationCtrl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl paginationCtrl;
+        
+        /// <summary>
         /// productsList control.
         /// </summary>
         /// <remarks>
@@ -65,5 +74,32 @@ namespace TEST_ASP_ALPHA_1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl productsList;
+        
+        /// <summary>
+        /// priceRangeSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl priceRangeSearch;
+        
+        /// <summary>
+        /// yearSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl yearSearch;
+        
+        /// <summary>
+        /// genreSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl genreSearch;
     }
 }

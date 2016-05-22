@@ -26,5 +26,6 @@ namespace TEST_ASP_ALPHA_1.Common
         public string overview { get; set; }
         public string year { get; set; }
         public string type { get; set; }
+        public DateTime dateAdded { get; set; }
     }
 }

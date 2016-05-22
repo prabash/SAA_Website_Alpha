@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using TEST_ASP_ALPHA_1.Common;
 using TEST_ASP_ALPHA_1.Models;
@@ -11,9 +12,10 @@ namespace TEST_ASP_ALPHA_1
 {
     public partial class BrowseGamesList : System.Web.UI.Page
     {
-        public int count = 2;
-        public string sortBy = "Name";
-        public bool ascending = true;
+        private int currentViewPerPage = CommonManager.GetDefaultValuePerPage();
+        private string sortBy = CommonManager.GetDefaultSortByOption();
+        private bool ascending = true;
+        private int currentPage = 1;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,7 +26,7 @@ namespace TEST_ASP_ALPHA_1
                 var _count = Request.QueryString["count"];
                 if (_count != null)
                 {
-                    count = Convert.ToInt32(_count);
+                    currentViewPerPage = Convert.ToInt32(_count);
                 }
 
                 var _sortBy = Request.QueryString["sortby"];
@@ -37,6 +39,12 @@ namespace TEST_ASP_ALPHA_1
                 if (_asc != null)
                 {
                     ascending = Convert.ToBoolean(_asc);
+                }
+
+                var _page = Request.QueryString["page"];
+                if (_page != null)
+                {
+                    currentPage = Convert.ToInt32(_page);
                 }
 
                 if (ascending)
@@ -53,6 +61,7 @@ namespace TEST_ASP_ALPHA_1
                 AddViewPerPageList();
                 AddSortByList();
                 GetListDetails();
+                AddPagination();
             }
         }
 
@@ -83,7 +92,7 @@ namespace TEST_ASP_ALPHA_1
 
         private void GetListDetails()
         {
-            var gridDetails = new ItemsModel().GetItemDetails(ItemType.Games, EnumsManager.GetSortByOption(sortBy, ascending), count);
+            var gridDetails = new ItemsModel().GetItemDetails(ItemType.Games, EnumsManager.GetSortByOption(sortBy, ascending), currentViewPerPage, (currentPage - 1) * currentViewPerPage);
             foreach (var item in gridDetails)
             {
                 var liControl = HTMLControlsManager.GetCustomTag("li", new[] { "item odd" });
@@ -98,9 +107,45 @@ namespace TEST_ASP_ALPHA_1
             }
         }
 
+        private void AddPagination()
+        {
+            var itemCount = new ItemsModel().GetItemsCount(ItemType.Games);
+            var noOfPages = itemCount / currentViewPerPage;
+
+            for (int i = 0; i <= noOfPages + 1; i++)
+            {
+                HtmlGenericControl itemLiControl;
+                if (currentPage == i)
+                    itemLiControl = HTMLControlsManager.GetCustomTag("li", new[] { "active" });
+                else
+                    itemLiControl = HTMLControlsManager.GetCustomTag("li", null);
+
+                paginationCtrl.Controls.Add(itemLiControl);
+                {
+                    HtmlAnchor anchorControl = null;
+                    if (i == 0)
+                    {
+                        var addAtt = new Dictionary<string, string>() { { "onclick", "insertParam('page', '" + (currentPage - 1) + "');" } };
+                        anchorControl = HTMLControlsManager.GetAnchorTag("#", null, "\u00AB", null, null, addAtt);
+                    }
+                    if (i > 0 && i < noOfPages + 1)
+                    {
+                        var addAtt = new Dictionary<string, string>() { { "onclick", "insertParam('page', '" + i + "');" } };
+                        anchorControl = HTMLControlsManager.GetAnchorTag("#", null, i.ToString(), null, null, addAtt);
+                    }
+                    if (i == noOfPages + 1)
+                    {
+                        var addAtt = new Dictionary<string, string>() { { "onclick", "insertParam('page', '" + (currentPage + 1) + "');" } };
+                        anchorControl = HTMLControlsManager.GetAnchorTag("#", null, "\u00BB", null, null, addAtt);
+                    }
+                    itemLiControl.Controls.Add(anchorControl);
+                }
+            }
+        }
+
         private void AddViewPerPageList()
         {
-            viewPerPage.Controls.Add(CommonHtmlManager.GetItemsPerPageList(CommonManager.GetValuesPerPage(), count));
+            viewPerPage.Controls.Add(CommonHtmlManager.GetItemsPerPageList(CommonManager.GetValuesPerPage(), currentViewPerPage));
         }
 
         private void AddSortByList()

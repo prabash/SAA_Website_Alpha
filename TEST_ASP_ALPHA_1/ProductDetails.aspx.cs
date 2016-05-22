@@ -70,7 +70,7 @@ namespace TEST_ASP_ALPHA_1
 
         private void GetRelatedItemsGridDetails(int itemId, ItemType currentItemType)
         {
-            var gridDetails = new ItemsModel().GetItemDetails(currentItemType, ItemSortBy.YearDesc, 5, true, itemId);
+            var gridDetails = new ItemsModel().GetItemDetails(currentItemType, ItemSortBy.YearDesc, 5, itemId);
             foreach (var item in gridDetails)
             {
                 var itemDivControl = HTMLControlsManager.GetDivTag(new[] { "item" });
