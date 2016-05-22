@@ -13,15 +13,8 @@ namespace TEST_ASP_ALPHA_1.Models
         public List<SlideShowObj> GetSlideShowDetails()
         {
             List<SlideShowObj> returnList = new List<SlideShowObj>();
-            MySqlConnection con = ConnectionManager.GetConnection();
-            try
-            {
-                con.Open();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            MySqlConnection con = ConnectionManager.GetOpenConnection();
+
             using (MySqlCommand com = new MySqlCommand("select * from index_slideshowpictures;", con))
             {
                 MySqlDataReader dr = com.ExecuteReader();
@@ -40,15 +33,8 @@ namespace TEST_ASP_ALPHA_1.Models
         public List<ItemObject> GetBestSellersDetails()
         {
             List<ItemObject> returnList = new List<ItemObject>();
-            MySqlConnection con = ConnectionManager.GetConnection();
-            try
-            {
-                con.Open();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            MySqlConnection con = ConnectionManager.GetOpenConnection();
+
             using (MySqlCommand com = new MySqlCommand("SELECT * FROM items where best_seller IS TRUE;", con))
             {
                 MySqlDataReader dr = com.ExecuteReader();
@@ -63,15 +49,8 @@ namespace TEST_ASP_ALPHA_1.Models
         public List<ItemObject> GetGiftItemsDetails()
         {
             List<ItemObject> returnList = new List<ItemObject>();
-            MySqlConnection con = ConnectionManager.GetConnection();
-            try
-            {
-                con.Open();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            MySqlConnection con = ConnectionManager.GetOpenConnection();
+
             using (MySqlCommand com = new MySqlCommand("SELECT * FROM items where type = 'Gifts';", con))
             {
                 MySqlDataReader dr = com.ExecuteReader();

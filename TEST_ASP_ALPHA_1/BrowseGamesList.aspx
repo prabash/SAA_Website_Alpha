@@ -118,25 +118,25 @@
                 <dt class="odd">Price</dt>
                 <dd class="odd">
                   <ol runat="server" id="priceRangeSearch">
-                    <li> <a href="#"><span class="price">LKR 0</span> - <span class="price">LKR 500</span></a> (6) </li>
-                    <li> <a href="#"><span class="price">LKR 501</span> - <span class="price">LKR 1000</span></a> (6) </li>
+                    <%--<li> <a href="#"><span class="price">LKR 0</span> - <span class="price">LKR 500</span></a> (6) </li>
+                    <li> <a href="#"><span class="price">LKR 501</span> - <span class="price">LKR 1000</span></a> (6) </li>--%>
                   </ol>
                 </dd>
                 <dt class="even">Year</dt>
                 <dd class="even">
                   <ol runat="server" id="yearSearch">
-                    <li> <a href="#">2016</a> (9) </li>
+                    <%--<li> <a href="#">2016</a> (9) </li>
                     <li> <a href="#">2015</a> (4) </li>
-                    <li> <a href="#">2014</a> (1) </li>
+                    <li> <a href="#">2014</a> (1) </li>--%>
                   </ol>
                 </dd>
                 <dt class="odd">Genre</dt>
                 <dd class="odd">
                   <ol runat="server" id="genreSearch">
-                    <li> <a href="#">Action</a> (1) </li>
+                    <%--<li> <a href="#">Action</a> (1) </li>
                     <li> <a href="#">Adventure</a> (5) </li>
                     <li> <a href="#">Fantasy</a> (5) </li>
-                    <li> <a href="#">Sci-Fi</a> (4) </li>
+                    <li> <a href="#">Sci-Fi</a> (4) </li>--%>
                   </ol>
                 </dd>
               </dl>

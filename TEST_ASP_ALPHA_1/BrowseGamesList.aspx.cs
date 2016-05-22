@@ -62,6 +62,10 @@ namespace TEST_ASP_ALPHA_1
                 AddSortByList();
                 GetListDetails();
                 AddPagination();
+
+                GetPriceSearchByOptions();
+                GetYearSearchByOptions();
+                GetGenreSearchByOptions();
             }
         }
 
@@ -106,6 +110,8 @@ namespace TEST_ASP_ALPHA_1
                 }
             }
         }
+
+        #region Sort By
 
         private void AddPagination()
         {
@@ -152,5 +158,67 @@ namespace TEST_ASP_ALPHA_1
         {
             sortByList.Controls.Add(CommonHtmlManager.GetSortValuesList(CommonManager.GetSortByOptions(), sortBy));
         }
+
+        #endregion
+
+        #region Search By
+
+        private void GetPriceSearchByOptions()
+        {
+            var priceRanges = new ItemsModel().GetPriceRangesWithCounts(ItemType.Games);
+
+            foreach (var item in priceRanges)
+            {
+                var liPriceRangeControl = HTMLControlsManager.GetCustomTag("li", null);
+                priceRangeSearch.Controls.Add(liPriceRangeControl);
+                {
+                    var addAtt = new Dictionary<string, string>() { { "onclick", "insertParam('priceRange', '" + item.Key + "');" } };
+                    var anchorCtrl = HTMLControlsManager.GetAnchorTag("#", null, null, null, null, addAtt);
+                    liPriceRangeControl.Controls.Add(anchorCtrl);
+                    {
+                        var priceRange = item.Key.Split('|');
+                        var spanPrice1 = HTMLControlsManager.GetCustomTag("span", new[] { "price" }, priceRange[0] + " LKR - ");
+                        anchorCtrl.Controls.Add(spanPrice1);
+
+                        var spanPrice2 = HTMLControlsManager.GetCustomTag("span", new[] { "price" }, priceRange[1] == "above" ? priceRange[1] : priceRange[1] + " LKR (" + item.Value + ")");
+                        anchorCtrl.Controls.Add(spanPrice2);
+                    }
+                }
+            }
+        }
+
+        private void GetYearSearchByOptions()
+        {
+            var yearRanges = new ItemsModel().GetYearsWithCounts(ItemType.Games);
+
+            foreach (var item in yearRanges)
+            {
+                var liYearRangeControl = HTMLControlsManager.GetCustomTag("li", null);
+                yearSearch.Controls.Add(liYearRangeControl);
+                {
+                    var addAtt = new Dictionary<string, string>() { { "onclick", "insertParam('year', '" + item.Key + "');" } };
+                    var anchorCtrl = HTMLControlsManager.GetAnchorTag("#", null, item.Key + " (" + item.Value + ")", null, null, addAtt);
+                    liYearRangeControl.Controls.Add(anchorCtrl);
+                }
+            }
+        }
+
+        private void GetGenreSearchByOptions()
+        {
+            var genres = new ItemsModel().GetGenresWithCounts(ItemType.Games);
+
+            foreach (var item in genres)
+            {
+                var liGenreControl = HTMLControlsManager.GetCustomTag("li", null);
+                genreSearch.Controls.Add(liGenreControl);
+                {
+                    var addAtt = new Dictionary<string, string>() { { "onclick", "insertParam('genre', '" + item.Key + "');" } };
+                    var anchorCtrl = HTMLControlsManager.GetAnchorTag("#", null, item.Key + " (" + item.Value + ")", null, null, addAtt);
+                    liGenreControl.Controls.Add(anchorCtrl);
+                }
+            }
+        }
+
+        #endregion
     }
 }

@@ -36,6 +36,7 @@ namespace TEST_ASP_ALPHA_1.Common
             }
             return sortByOptions;
         }
+
         public static string GetDefaultSortByOption()
         {
             return ConfigurationManager.AppSettings["DefaultSortBy"];
