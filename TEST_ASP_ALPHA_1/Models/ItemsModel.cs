@@ -54,7 +54,7 @@ namespace TEST_ASP_ALPHA_1.Models
             return returnList;
         }
 
-        public List<ItemObject> GetItemDetails(ItemType type, ItemSortBy sortBy, int limit, int currentPage = 0)
+        public List<ItemObject> GetItemDetails(ItemType type, ItemSortBy sortBy, int limit, int currentPage = 0, Dictionary<string, string> searchCriteria = null)
         {
             List<ItemObject> returnList = new List<ItemObject>();
             MySqlConnection con = ConnectionManager.GetOpenConnection();
@@ -66,6 +66,9 @@ namespace TEST_ASP_ALPHA_1.Models
             using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
             {
                 AppendWhereConditionByItemType(sqlString, type);
+                if (searchCriteria != null)
+                    AppendSearchCriteriatoWhereCondition(sqlString, searchCriteria);
+                
                 sqlString.Append(" ");
 
                 switch (sortBy)
@@ -175,7 +178,8 @@ namespace TEST_ASP_ALPHA_1.Models
                 description = dr["description"].ToString(),
                 overview = dr["overview"].ToString(),
                 type = dr["type"].ToString(),
-                dateAdded = Convert.ToDateTime(dr["date_added"])
+                dateAdded = Convert.ToDateTime(dr["date_added"]),
+                genre = dr["genre"].ToString()
             };
         }
 
@@ -356,6 +360,41 @@ namespace TEST_ASP_ALPHA_1.Models
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void AppendSearchCriteriatoWhereCondition(StringBuilder sqlString, Dictionary<string, string> searchCriteria)
+        {
+            if (searchCriteria.Count() > 0)
+            {
+                foreach (var criterion in searchCriteria)
+                {
+                    if (!String.IsNullOrEmpty(criterion.Key))
+                    {
+                        if (criterion.Key == CommonManager.GetPriceRangeCriterionName())
+                        {
+                            if (!String.IsNullOrEmpty(criterion.Value))
+                            {
+                                var priceRange = criterion.Value.Split('|');
+                                sqlString.Append("AND current_price BETWEEN " + priceRange[0] + " AND " + priceRange[1] + " ");
+                            }
+                        }
+                        else if (criterion.Key == CommonManager.GetYearCriterionName())
+                        {
+                            if (!String.IsNullOrEmpty(criterion.Value))
+                            {
+                                sqlString.Append("AND year = " + criterion.Value + " ");
+                            }
+                        }
+                        else if (criterion.Key == CommonManager.GetGenreCriterionName())
+                        {
+                            if (!String.IsNullOrEmpty(criterion.Value))
+                            {
+                                sqlString.Append("AND genre like '%" + criterion.Value + "%'" + " ");
+                            }
+                        }
+                    }
+                }
             }
         }
 

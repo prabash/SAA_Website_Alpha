@@ -258,7 +258,8 @@ namespace TEST_ASP_ALPHA_1.Common
                 var descriptionDivControl = HTMLControlsManager.GetDivTag(new[] { "desc std" });
                 productDetailDivControl.Controls.Add(descriptionDivControl);
                 {
-                    var paraDescControl = HTMLControlsManager.GetCustomTag("p", null, item.description);
+                    var paraDescControl = HTMLControlsManager.GetCustomTag("p", null);
+                    paraDescControl.InnerHtml = "<b>Year</b> : " + item.year + "<br/>" + "<b>Genre</b> : " + item.genre + "<br/>" + item.description;
                     descriptionDivControl.Controls.Add(paraDescControl);
                 }
 

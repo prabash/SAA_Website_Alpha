@@ -83,9 +83,9 @@
                     <div class="email-addto-box">
                       <ul class="add-to-links">
                         <li> <a class="link-wishlist" href="wishlist.html"><span>Add to Wishlist</span></a></li>
-                        <li><span class="separator">|</span> <a class="link-compare" href="compare.html"><span>Add to Compare</span></a></li>
+                        <li style="visibility:collapse;width:0px;"><span class="separator">|</span> <a class="link-compare" href="compare.html"><span></span></a></li>
                       </ul>
-                      <p class="email-friend"><a href="#" class=""><span>Email to a Friend</span></a></p>
+                      <p style="margin-left:-30px;" class="email-friend"><a href="#" class=""><span>Email to a Friend</span></a></p>
                     </div>
                   </div>
                 </div>

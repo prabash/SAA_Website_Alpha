@@ -41,7 +41,7 @@ namespace TEST_ASP_ALPHA_1
 
                     largeImage.Src = zoom1.HRef = itemDetails.defaultLocation;
                     ratingBox.Attributes["style"] = "width:" + itemDetails.rating + "%";
-                    overviewPara.InnerText = itemDetails.overview;
+                    overviewPara.InnerHtml = "<b>Year</b> : " + itemDetails.year + "<br/>" + "<b>Genre</b> : " + itemDetails.genre + "<br/>" + itemDetails.overview;
 
                     if (itemDetails.onSale)
                     {

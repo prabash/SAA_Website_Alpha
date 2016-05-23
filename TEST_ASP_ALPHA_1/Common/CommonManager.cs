@@ -10,6 +10,7 @@ namespace TEST_ASP_ALPHA_1.Common
     {
         #region Web Config Manager
 
+        #region Sort By
         public static List<int> GetValuesPerPage()
         {
             List<int> valuesPerPage = new List<int>();
@@ -41,6 +42,42 @@ namespace TEST_ASP_ALPHA_1.Common
         {
             return ConfigurationManager.AppSettings["DefaultSortBy"];
         }
-        #endregion 
+
+        #endregion
+
+        #region Search By
+
+        public static Dictionary<string,string> GetSearchByDictionary()
+        {
+            var searchCriteria = ConfigurationManager.AppSettings["SearchCriteria"];
+            var splittedCriteria = searchCriteria.Split('|');
+            Dictionary<string, string> returnDic = new Dictionary<string, string>();
+            foreach (var item in splittedCriteria)
+            {
+                returnDic.Add(item, "");
+            }
+            return returnDic;
+        }
+
+        public static string GetPriceRangeCriterionName()
+        {
+            var searchCriteria = ConfigurationManager.AppSettings["SearchCriteria"];
+            return searchCriteria.Split('|')[0];
+        }
+
+        public static string GetYearCriterionName()
+        {
+            var searchCriteria = ConfigurationManager.AppSettings["SearchCriteria"];
+            return searchCriteria.Split('|')[1];
+        }
+        public static string GetGenreCriterionName()
+        {
+            var searchCriteria = ConfigurationManager.AppSettings["SearchCriteria"];
+            return searchCriteria.Split('|')[2];
+        }
+
+        #endregion
+
+        #endregion
     }
 }

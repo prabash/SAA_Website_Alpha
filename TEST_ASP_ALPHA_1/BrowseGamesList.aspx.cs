@@ -16,13 +16,17 @@ namespace TEST_ASP_ALPHA_1
         private string sortBy = CommonManager.GetDefaultSortByOption();
         private bool ascending = true;
         private int currentPage = 1;
+        private Dictionary<string, string> searchCriteria = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            searchCriteria = CommonManager.GetSearchByDictionary();
+           
             if (!IsPostBack)
             {
                 GetSlideshowDetails();
 
+                #region Sort By
                 var _count = Request.QueryString["count"];
                 if (_count != null)
                 {
@@ -40,6 +44,27 @@ namespace TEST_ASP_ALPHA_1
                 {
                     ascending = Convert.ToBoolean(_asc);
                 }
+                #endregion
+
+                #region Search By
+                var _priceRange = Request.QueryString["priceRange"];
+                if (_priceRange != null)
+                {
+                    searchCriteria[CommonManager.GetPriceRangeCriterionName()] = _priceRange;
+                }
+
+                var _year = Request.QueryString["year"];
+                if (_year != null)
+                {
+                    searchCriteria[CommonManager.GetYearCriterionName()] = _year;
+                }
+
+                var _genre = Request.QueryString["genre"];
+                if (_genre != null)
+                {
+                    searchCriteria[CommonManager.GetGenreCriterionName()] = _genre;
+                }
+                #endregion
 
                 var _page = Request.QueryString["page"];
                 if (_page != null)
@@ -60,12 +85,13 @@ namespace TEST_ASP_ALPHA_1
 
                 AddViewPerPageList();
                 AddSortByList();
-                GetListDetails();
                 AddPagination();
 
                 GetPriceSearchByOptions();
                 GetYearSearchByOptions();
                 GetGenreSearchByOptions();
+
+                GetListDetails();
             }
         }
 
@@ -96,7 +122,7 @@ namespace TEST_ASP_ALPHA_1
 
         private void GetListDetails()
         {
-            var gridDetails = new ItemsModel().GetItemDetails(ItemType.Games, EnumsManager.GetSortByOption(sortBy, ascending), currentViewPerPage, (currentPage - 1) * currentViewPerPage);
+            var gridDetails = new ItemsModel().GetItemDetails(ItemType.Games, EnumsManager.GetSortByOption(sortBy, ascending), currentViewPerPage, (currentPage - 1) * currentViewPerPage, searchCriteria);
             foreach (var item in gridDetails)
             {
                 var liControl = HTMLControlsManager.GetCustomTag("li", new[] { "item odd" });
@@ -185,6 +211,19 @@ namespace TEST_ASP_ALPHA_1
                     }
                 }
             }
+
+            var liClearAllControl = HTMLControlsManager.GetCustomTag("li", null);
+            priceRangeSearch.Controls.Add(liClearAllControl);
+            {
+                var addAtt = new Dictionary<string, string>() { { "onclick", "insertParam('priceRange', '');" } };
+                var anchorCtrl = HTMLControlsManager.GetAnchorTag("#", null, null, null, null, addAtt);
+                liClearAllControl.Controls.Add(anchorCtrl);
+                {
+                    var spanPrice1 = HTMLControlsManager.GetCustomTag("span", new[] { "price" }, "Clear All");
+                    anchorCtrl.Controls.Add(spanPrice1);
+
+                }
+            }
         }
 
         private void GetYearSearchByOptions()
@@ -201,6 +240,14 @@ namespace TEST_ASP_ALPHA_1
                     liYearRangeControl.Controls.Add(anchorCtrl);
                 }
             }
+
+            var liClearAllControl = HTMLControlsManager.GetCustomTag("li", null);
+            yearSearch.Controls.Add(liClearAllControl);
+            {
+                var addAtt = new Dictionary<string, string>() { { "onclick", "insertParam('year', '');" } };
+                var anchorCtrl = HTMLControlsManager.GetAnchorTag("#", null, "Clear All", null, null, addAtt);
+                liClearAllControl.Controls.Add(anchorCtrl);
+            }
         }
 
         private void GetGenreSearchByOptions()
@@ -216,6 +263,14 @@ namespace TEST_ASP_ALPHA_1
                     var anchorCtrl = HTMLControlsManager.GetAnchorTag("#", null, item.Key + " (" + item.Value + ")", null, null, addAtt);
                     liGenreControl.Controls.Add(anchorCtrl);
                 }
+            }
+
+            var liClearAllControl = HTMLControlsManager.GetCustomTag("li", null);
+            genreSearch.Controls.Add(liClearAllControl);
+            {
+                var addAtt = new Dictionary<string, string>() { { "onclick", "insertParam('genre', '');" } };
+                var anchorCtrl = HTMLControlsManager.GetAnchorTag("#", null, "Clear All", null, null, addAtt);
+                liClearAllControl.Controls.Add(anchorCtrl);
             }
         }
 
