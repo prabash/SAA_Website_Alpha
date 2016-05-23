@@ -13,18 +13,19 @@ namespace TEST_ASP_ALPHA_1.Models
         public List<SlideShowObj> GetSlideShowDetails()
         {
             List<SlideShowObj> returnList = new List<SlideShowObj>();
-            MySqlConnection con = ConnectionManager.GetOpenConnection();
-
-            using (MySqlCommand com = new MySqlCommand("select * from index_slideshowpictures;", con))
+            using (MySqlConnection con = ConnectionManager.GetOpenConnection())
             {
-                MySqlDataReader dr = com.ExecuteReader();
-                while (dr.Read())
+                using (MySqlCommand com = new MySqlCommand("select * from index_slideshowpictures;", con))
                 {
-                    returnList.Add(new SlideShowObj
+                    MySqlDataReader dr = com.ExecuteReader();
+                    while (dr.Read())
                     {
-                        location = dr["location"].ToString(),
-                        title = dr["title"].ToString()
-                    });
+                        returnList.Add(new SlideShowObj
+                        {
+                            location = dr["location"].ToString(),
+                            title = dr["title"].ToString()
+                        });
+                    }
                 }
             }
             return returnList;
@@ -33,14 +34,15 @@ namespace TEST_ASP_ALPHA_1.Models
         public List<ItemObject> GetBestSellersDetails()
         {
             List<ItemObject> returnList = new List<ItemObject>();
-            MySqlConnection con = ConnectionManager.GetOpenConnection();
-
-            using (MySqlCommand com = new MySqlCommand("SELECT * FROM items where best_seller IS TRUE;", con))
+            using (MySqlConnection con = ConnectionManager.GetOpenConnection())
             {
-                MySqlDataReader dr = com.ExecuteReader();
-                while (dr.Read())
+                using (MySqlCommand com = new MySqlCommand("SELECT * FROM items where best_seller IS TRUE;", con))
                 {
-                    returnList.Add(new ItemsModel().GetInfoAddedItemObject(dr));
+                    MySqlDataReader dr = com.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        returnList.Add(new ItemsModel().GetInfoAddedItemObject(dr));
+                    }
                 }
             }
             return returnList;
@@ -49,14 +51,15 @@ namespace TEST_ASP_ALPHA_1.Models
         public List<ItemObject> GetGiftItemsDetails()
         {
             List<ItemObject> returnList = new List<ItemObject>();
-            MySqlConnection con = ConnectionManager.GetOpenConnection();
-
-            using (MySqlCommand com = new MySqlCommand("SELECT * FROM items where type = 'Gifts';", con))
+            using (MySqlConnection con = ConnectionManager.GetOpenConnection())
             {
-                MySqlDataReader dr = com.ExecuteReader();
-                while (dr.Read())
+                using (MySqlCommand com = new MySqlCommand("SELECT * FROM items where type = 'Gifts';", con))
                 {
-                    returnList.Add(new ItemsModel().GetInfoAddedItemObject(dr));
+                    MySqlDataReader dr = com.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        returnList.Add(new ItemsModel().GetInfoAddedItemObject(dr));
+                    }
                 }
             }
             return returnList;

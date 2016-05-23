@@ -338,15 +338,63 @@
    <script type="text/javascript">
        function insertParam(key, value) {
            var uri = window.location.href;
-           var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
-           var separator = uri.indexOf('?') !== -1 ? "&" : "?";
-           if (uri.match(re)) {
-               window.location.replace(uri.replace(re, '$1' + key + "=" + value + '$2'));
+           var substring = "|";
+           var valueDivided = false;
+           var splittedValues;
+
+           if (key.indexOf(substring) == -1)
+           {
+               var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+               var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+               if (uri.match(re)) {
+                   window.location.replace(uri.replace(re, '$1' + key + "=" + value + '$2'));
+               }
+               else {
+                   window.location.replace(uri + separator + key + "=" + value);
+               }
            }
-           else {
-               window.location.replace(uri + separator + key + "=" + value);
+           else
+           {
+               splittedKeys = key.split('|');
+               var arrayLength = splittedKeys.length;
+
+               if (value.indexOf(substring) > -1) {
+                   valueDivided = true;
+                   splittedValues = value.split('|');
+               }
+
+               for (var i = 0; i < arrayLength; i++) {
+                   var re = new RegExp("([?&])" + splittedKeys[i] + "=.*?(&|$)", "i");
+                   var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+                   if (uri.match(re)) {
+                       if (valueDivided)                       {
+                           uri = uri.replace(re, '$1' + splittedKeys[i] + "=" + splittedValues[i] + '$2');
+                       }
+                       else {
+                           uri = uri.replace(re, '$1' + splittedKeys[i] + "=" + value + '$2');
+                       }
+                   }
+                   else {
+                       if (valueDivided) {
+                           uri = uri + separator + splittedKeys[i] + "=" + splittedValues[i];
+                       }
+                       else {
+                           uri = uri + separator + splittedKeys[i] + "=" + value;
+                       }
+                       
+                   }
+               }
+               window.location.replace(uri);
            }
-       }
+           
+       };
+
+       function navigateWithParam(currentLocation, nextLocation) {
+           var url = window.location.href;
+           url = url.replace(currentLocation, nextLocation);
+           window.location.replace(url);
+           return false; //cancel default behaviour of the href
+       };
    </script>
 </body>
 </html>

@@ -10,7 +10,7 @@ namespace TEST_ASP_ALPHA_1.Common
     {
         public static HtmlGenericControl GetItemsPerPageList(List<int> valuesList, int currentValue)
         {
-            return GetCommonList<int>(valuesList, currentValue, "count");
+            return GetCommonList<int>(valuesList, currentValue, "count|page", "|1");
         }
 
         public static HtmlGenericControl GetSortValuesList(List<string> valuesList, string currentValue)
@@ -18,7 +18,7 @@ namespace TEST_ASP_ALPHA_1.Common
             return GetCommonList<string>(valuesList, currentValue, "sortby");
         }
 
-        private static HtmlGenericControl GetCommonList<T>(List<T> valuesList, T currentValue, string queryStringVal)
+        private static HtmlGenericControl GetCommonList<T>(List<T> valuesList, T currentValue, string queryStringVal, string appendValueForParam = null)
         {
             HtmlGenericControl itemSelectedValueControl = HTMLControlsManager.GetCustomTag("li", null);
             {
@@ -37,7 +37,7 @@ namespace TEST_ASP_ALPHA_1.Common
                         var otherValueListItemControl = HTMLControlsManager.GetCustomTag("li", null);
                         otherValuesUnorderedList.Controls.Add(otherValueListItemControl);
                         {
-                            var addAtt = new Dictionary<string, string>() { { "onclick", "insertParam('" + queryStringVal + "', '" + item + "');" } };
+                            var addAtt = new Dictionary<string, string>() { { "onclick", "insertParam('" + queryStringVal + "', '" + item + appendValueForParam + "');" } };
 
                             var anchorOtherValueControl = HTMLControlsManager.GetAnchorTag("#", null, item.ToString(), null, null, addAtt);
                             otherValueListItemControl.Controls.Add(anchorOtherValueControl);

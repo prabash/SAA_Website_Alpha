@@ -70,10 +70,23 @@ namespace TEST_ASP_ALPHA_1.Common
             var searchCriteria = ConfigurationManager.AppSettings["SearchCriteria"];
             return searchCriteria.Split('|')[1];
         }
+
         public static string GetGenreCriterionName()
         {
             var searchCriteria = ConfigurationManager.AppSettings["SearchCriteria"];
             return searchCriteria.Split('|')[2];
+        }
+
+        public static string GetBestSellerCriterionName()
+        {
+            var searchCriteria = ConfigurationManager.AppSettings["SearchCriteria"];
+            return searchCriteria.Split('|')[3];
+        }
+
+        public static string GetOnSaleCriterionName()
+        {
+            var searchCriteria = ConfigurationManager.AppSettings["SearchCriteria"];
+            return searchCriteria.Split('|')[4];
         }
 
         #endregion

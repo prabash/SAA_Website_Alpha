@@ -13,42 +13,43 @@ namespace TEST_ASP_ALPHA_1.Models
         public List<SlideShowObj> GetSlideShowDetails(ItemType type)
         {
             List<SlideShowObj> returnList = new List<SlideShowObj>();
-            MySqlConnection con = ConnectionManager.GetOpenConnection();
-
-            string sqlString = "select * from items_slideshowpictures where type = @type";
-            
-            using (MySqlCommand com = new MySqlCommand(sqlString, con))
+            using (MySqlConnection con = ConnectionManager.GetOpenConnection())
             {
-                switch (type)
-                {
-                    case ItemType.Games:
-                        com.Parameters.AddWithValue("@type", "Games");
-                        break;
-                    case ItemType.TvSeries:
-                        com.Parameters.AddWithValue("@type", "TvSeries");
-                        break;
-                    case ItemType.Movies:
-                        com.Parameters.AddWithValue("@type", "Movies");
-                        break;
-                    case ItemType.Gifts:
-                        com.Parameters.AddWithValue("@type", "Gifts");
-                        break;
-                    case ItemType.Electronics:
-                        com.Parameters.AddWithValue("@type", "Electronics");
-                        break;
-                    default:
-                        com.Parameters.AddWithValue("@type", "");
-                        break;
-                }
+                string sqlString = "select * from items_slideshowpictures where type = @type";
 
-                MySqlDataReader dr = com.ExecuteReader();
-                while (dr.Read())
+                using (MySqlCommand com = new MySqlCommand(sqlString, con))
                 {
-                    returnList.Add(new SlideShowObj
+                    switch (type)
                     {
-                        location = dr["location"].ToString(),
-                        title = dr["title"].ToString()
-                    });
+                        case ItemType.Games:
+                            com.Parameters.AddWithValue("@type", "Games");
+                            break;
+                        case ItemType.TvSeries:
+                            com.Parameters.AddWithValue("@type", "TvSeries");
+                            break;
+                        case ItemType.Movies:
+                            com.Parameters.AddWithValue("@type", "Movies");
+                            break;
+                        case ItemType.Gifts:
+                            com.Parameters.AddWithValue("@type", "Gifts");
+                            break;
+                        case ItemType.Electronics:
+                            com.Parameters.AddWithValue("@type", "Electronics");
+                            break;
+                        default:
+                            com.Parameters.AddWithValue("@type", "");
+                            break;
+                    }
+
+                    MySqlDataReader dr = com.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        returnList.Add(new SlideShowObj
+                        {
+                            location = dr["location"].ToString(),
+                            title = dr["title"].ToString()
+                        });
+                    }
                 }
             }
             return returnList;
@@ -57,64 +58,65 @@ namespace TEST_ASP_ALPHA_1.Models
         public List<ItemObject> GetItemDetails(ItemType type, ItemSortBy sortBy, int limit, int currentPage = 0, Dictionary<string, string> searchCriteria = null)
         {
             List<ItemObject> returnList = new List<ItemObject>();
-            MySqlConnection con = ConnectionManager.GetOpenConnection();
-
-            StringBuilder sqlString = new StringBuilder();
-            sqlString.Append("SELECT * FROM items ");
-            
-           
-            using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
+            using (MySqlConnection con = ConnectionManager.GetOpenConnection())
             {
-                AppendWhereConditionByItemType(sqlString, type);
-                if (searchCriteria != null)
-                    AppendSearchCriteriatoWhereCondition(sqlString, searchCriteria);
-                
-                sqlString.Append(" ");
+                StringBuilder sqlString = new StringBuilder();
+                sqlString.Append("SELECT * FROM items ");
 
-                switch (sortBy)
+
+                using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
                 {
-                    case ItemSortBy.NameAsc:
-                        sqlString.Append("ORDER BY title ASC");
-                        break;
-                    case ItemSortBy.NameDesc:
-                        sqlString.Append("ORDER BY title DESC");
-                        break;
-                    case ItemSortBy.YearAsc:
-                        sqlString.Append("ORDER BY year ASC");
-                        break;
-                    case ItemSortBy.YearDesc:
-                        sqlString.Append("ORDER BY year DESC");
-                        break;
-                    case ItemSortBy.PriceAsc:
-                        sqlString.Append("ORDER BY current_price ASC");
-                        break;
-                    case ItemSortBy.PriceDesc:
-                        sqlString.Append("ORDER BY current_price DESC");
-                        break;
-                    case ItemSortBy.OnSaleAsc:
-                        sqlString.Append("ORDER BY on_sale ASC");
-                        break;
-                    case ItemSortBy.OnSaleDesc:
-                        sqlString.Append("ORDER BY on_sale DESC");
-                        break;
-                    case ItemSortBy.BestSellerAsc:
-                        sqlString.Append("ORDER BY best_seller ASC");
-                        break;
-                    case ItemSortBy.BestSellerDesc:
-                        sqlString.Append("ORDER BY best_seller DESC");
-                        break;
-                    default:
-                        sqlString.Append("ORDER BY title ASC");
-                        break;
-                }
+                    AppendWhereConditionByItemType(sqlString, type);
+                    if (searchCriteria != null)
+                        AppendSearchCriteriatoWhereCondition(sqlString, searchCriteria);
 
-                sqlString.Append(" LIMIT " + currentPage + "," + limit);
-                com.CommandText = sqlString.ToString();
+                    sqlString.Append(" ");
 
-                MySqlDataReader dr = com.ExecuteReader();
-                while (dr.Read())
-                {
-                    returnList.Add(GetInfoAddedItemObject(dr));
+                    switch (sortBy)
+                    {
+                        case ItemSortBy.NameAsc:
+                            sqlString.Append("ORDER BY title ASC");
+                            break;
+                        case ItemSortBy.NameDesc:
+                            sqlString.Append("ORDER BY title DESC");
+                            break;
+                        case ItemSortBy.YearAsc:
+                            sqlString.Append("ORDER BY year ASC");
+                            break;
+                        case ItemSortBy.YearDesc:
+                            sqlString.Append("ORDER BY year DESC");
+                            break;
+                        case ItemSortBy.PriceAsc:
+                            sqlString.Append("ORDER BY current_price ASC");
+                            break;
+                        case ItemSortBy.PriceDesc:
+                            sqlString.Append("ORDER BY current_price DESC");
+                            break;
+                        case ItemSortBy.OnSaleAsc:
+                            sqlString.Append("ORDER BY on_sale ASC");
+                            break;
+                        case ItemSortBy.OnSaleDesc:
+                            sqlString.Append("ORDER BY on_sale DESC");
+                            break;
+                        case ItemSortBy.BestSellerAsc:
+                            sqlString.Append("ORDER BY best_seller ASC");
+                            break;
+                        case ItemSortBy.BestSellerDesc:
+                            sqlString.Append("ORDER BY best_seller DESC");
+                            break;
+                        default:
+                            sqlString.Append("ORDER BY title ASC");
+                            break;
+                    }
+
+                    sqlString.Append(" LIMIT " + currentPage + "," + limit);
+                    com.CommandText = sqlString.ToString();
+
+                    MySqlDataReader dr = com.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        returnList.Add(GetInfoAddedItemObject(dr));
+                    }
                 }
             }
             return returnList;
@@ -123,21 +125,21 @@ namespace TEST_ASP_ALPHA_1.Models
         public int GetItemsCount(ItemType type)
         {
             int count = 0;
-            MySqlConnection con = ConnectionManager.GetOpenConnection();
-
-            StringBuilder sqlString = new StringBuilder();
-            sqlString.Append("SELECT COUNT(1) AS count FROM items ");
-
-
-            using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
+            using (MySqlConnection con = ConnectionManager.GetOpenConnection())
             {
-                AppendWhereConditionByItemType(sqlString, type);
-                com.CommandText = sqlString.ToString();
+                StringBuilder sqlString = new StringBuilder();
+                sqlString.Append("SELECT COUNT(1) AS count FROM items ");
 
-                MySqlDataReader dr = com.ExecuteReader();
-                while (dr.Read())
+                using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
                 {
-                    count = Convert.ToInt32(dr["count"]);
+                    AppendWhereConditionByItemType(sqlString, type);
+                    com.CommandText = sqlString.ToString();
+
+                    MySqlDataReader dr = com.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        count = Convert.ToInt32(dr["count"]);
+                    }
                 }
             }
 
@@ -147,16 +149,17 @@ namespace TEST_ASP_ALPHA_1.Models
         public ItemObject GetItemDetailById(int id)
         {
             var returnObj = new ItemObject();
-            MySqlConnection con = ConnectionManager.GetOpenConnection();
-
-            string sqlString = "SELECT * FROM items WHERE id = @id";
-            using (MySqlCommand com = new MySqlCommand(sqlString, con))
+            using (MySqlConnection con = ConnectionManager.GetOpenConnection())
             {
-                com.Parameters.AddWithValue("@id", id);
-                MySqlDataReader dr = com.ExecuteReader();
-                while (dr.Read())
+                string sqlString = "SELECT * FROM items WHERE id = @id";
+                using (MySqlCommand com = new MySqlCommand(sqlString, con))
                 {
-                    returnObj = GetInfoAddedItemObject(dr);
+                    com.Parameters.AddWithValue("@id", id);
+                    MySqlDataReader dr = com.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        returnObj = GetInfoAddedItemObject(dr);
+                    }
                 }
             }
             return returnObj;
@@ -188,32 +191,33 @@ namespace TEST_ASP_ALPHA_1.Models
         public Dictionary<string, int> GetPriceRangesWithCounts(ItemType type)
         {
             Dictionary<string, int> returnList = new Dictionary<string, int>();
-            MySqlConnection con = ConnectionManager.GetOpenConnection();
-
-            StringBuilder sqlString = new StringBuilder();
-            sqlString.Append("SELECT t.current_price as price_range, count(*) as count \n");
-            sqlString.Append("FROM ( \n");
-            sqlString.Append("SELECT case \n");
-            sqlString.Append("WHEN current_price BETWEEN 0 and 500 THEN '0|500' \n");
-            sqlString.Append("WHEN current_price BETWEEN 501 and 1000 THEN '501|1000' \n");
-            sqlString.Append("ELSE '1000|above' END AS current_price \n");
-            sqlString.Append("FROM items \n");
-
-
-            using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
+            using (MySqlConnection con = ConnectionManager.GetOpenConnection())
             {
-                AppendWhereConditionByItemType(sqlString, type);
-                sqlString.Append(") t \n");
-                sqlString.Append("GROUP BY t.current_price");
+                StringBuilder sqlString = new StringBuilder();
+                sqlString.Append("SELECT t.current_price as price_range, count(*) as count \n");
+                sqlString.Append("FROM ( \n");
+                sqlString.Append("SELECT case \n");
+                sqlString.Append("WHEN current_price BETWEEN 0 and 500 THEN '0|500' \n");
+                sqlString.Append("WHEN current_price BETWEEN 501 and 1000 THEN '501|1000' \n");
+                sqlString.Append("ELSE '1000|above' END AS current_price \n");
+                sqlString.Append("FROM items \n");
 
-                com.CommandText = sqlString.ToString();
 
-                MySqlDataReader dr = com.ExecuteReader();
-                while (dr.Read())
+                using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
                 {
-                    var range = dr["price_range"].ToString();
-                    var count = Convert.ToInt32(dr["count"]);
-                    returnList.Add(range, count);
+                    AppendWhereConditionByItemType(sqlString, type);
+                    sqlString.Append(") t \n");
+                    sqlString.Append("GROUP BY t.current_price");
+
+                    com.CommandText = sqlString.ToString();
+
+                    MySqlDataReader dr = com.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        var range = dr["price_range"].ToString();
+                        var count = Convert.ToInt32(dr["count"]);
+                        returnList.Add(range, count);
+                    }
                 }
             }
             return returnList;
@@ -222,26 +226,27 @@ namespace TEST_ASP_ALPHA_1.Models
         public Dictionary<string, int> GetYearsWithCounts(ItemType type)
         {
             Dictionary<string, int> returnList = new Dictionary<string, int>();
-            MySqlConnection con = ConnectionManager.GetOpenConnection();
-
-            StringBuilder sqlString = new StringBuilder();
-            sqlString.Append("SELECT t.year, count(*) as count \n");
-            sqlString.Append("FROM items t \n");
-
-
-            using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
+            using (MySqlConnection con = ConnectionManager.GetOpenConnection())
             {
-                AppendWhereConditionByItemType(sqlString, type);
-                sqlString.Append("GROUP BY t.year");
+                StringBuilder sqlString = new StringBuilder();
+                sqlString.Append("SELECT t.year, count(*) as count \n");
+                sqlString.Append("FROM items t \n");
 
-                com.CommandText = sqlString.ToString();
 
-                MySqlDataReader dr = com.ExecuteReader();
-                while (dr.Read())
+                using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
                 {
-                    var range = dr["year"].ToString();
-                    var count = Convert.ToInt32(dr["count"]);
-                    returnList.Add(range, count);
+                    AppendWhereConditionByItemType(sqlString, type);
+                    sqlString.Append("GROUP BY t.year");
+
+                    com.CommandText = sqlString.ToString();
+
+                    MySqlDataReader dr = com.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        var range = dr["year"].ToString();
+                        var count = Convert.ToInt32(dr["count"]);
+                        returnList.Add(range, count);
+                    }
                 }
             }
             return returnList;
@@ -250,43 +255,45 @@ namespace TEST_ASP_ALPHA_1.Models
         public Dictionary<string, int> GetGenresWithCounts(ItemType type)
         {
             Dictionary<string, int> returnList = new Dictionary<string, int>();
-            MySqlConnection con = ConnectionManager.GetOpenConnection();
-            List<string> genresList = GetDistinctGenres(type);
-
-            StringBuilder sqlString = new StringBuilder();
-            sqlString.Append("SELECT t.genre, count(*) as count \n");
-            sqlString.Append("FROM ( \n");
-            
-            using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
+            using (MySqlConnection con = ConnectionManager.GetOpenConnection())
             {
-                for (int i = 0; i < genresList.Count; i++)
-                {
-                    sqlString.Append("(SELECT CASE \n");
-                    sqlString.Append("WHEN genre like '%" + genresList[i] + "%' THEN '" + genresList[i] + "' \n");
-                    sqlString.Append("END AS genre \n");
-                    sqlString.Append("FROM items \n");
-                    AppendWhereConditionByItemType(sqlString, type);
-                    sqlString.Append(") \n");
+                List<string> genresList = GetDistinctGenres(type);
 
-                    if (i < genresList.Count - 1)
+                StringBuilder sqlString = new StringBuilder();
+                sqlString.Append("SELECT t.genre, count(*) as count \n");
+                sqlString.Append("FROM ( \n");
+
+                using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
+                {
+                    for (int i = 0; i < genresList.Count; i++)
                     {
-                        sqlString.Append("UNION ALL \n");
+                        sqlString.Append("(SELECT CASE \n");
+                        sqlString.Append("WHEN genre like '%" + genresList[i] + "%' THEN '" + genresList[i] + "' \n");
+                        sqlString.Append("END AS genre \n");
+                        sqlString.Append("FROM items \n");
+                        AppendWhereConditionByItemType(sqlString, type);
+                        sqlString.Append(") \n");
+
+                        if (i < genresList.Count - 1)
+                        {
+                            sqlString.Append("UNION ALL \n");
+                        }
                     }
-                }
 
-                
-                sqlString.Append(") t \n");
-                sqlString.Append("WHERE t.genre != ''");
-                sqlString.Append("GROUP BY t.genre");
 
-                com.CommandText = sqlString.ToString();
+                    sqlString.Append(") t \n");
+                    sqlString.Append("WHERE t.genre != ''");
+                    sqlString.Append("GROUP BY t.genre");
 
-                MySqlDataReader dr = com.ExecuteReader();
-                while (dr.Read())
-                {
-                    var range = dr["genre"].ToString();
-                    var count = Convert.ToInt32(dr["count"]);
-                    returnList.Add(range, count);
+                    com.CommandText = sqlString.ToString();
+
+                    MySqlDataReader dr = com.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        var range = dr["genre"].ToString();
+                        var count = Convert.ToInt32(dr["count"]);
+                        returnList.Add(range, count);
+                    }
                 }
             }
             return returnList;
@@ -296,24 +303,25 @@ namespace TEST_ASP_ALPHA_1.Models
         {
             List<string> distinctGenres = new List<string>();
             List<string> genresList = new List<string>();
-            MySqlConnection con = ConnectionManager.GetOpenConnection();
-
-            StringBuilder sqlString = new StringBuilder();
-            sqlString.Append("SELECT distinct t.genre\n");
-            sqlString.Append("FROM items t \n");
-
-
-            using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
+            using (MySqlConnection con = ConnectionManager.GetOpenConnection())
             {
-                AppendWhereConditionByItemType(sqlString, type);
+                StringBuilder sqlString = new StringBuilder();
+                sqlString.Append("SELECT distinct t.genre\n");
+                sqlString.Append("FROM items t \n");
 
-                com.CommandText = sqlString.ToString();
 
-                MySqlDataReader dr = com.ExecuteReader();
-                while (dr.Read())
+                using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
                 {
-                    var genre = dr["genre"].ToString();
-                    distinctGenres.Add(genre);
+                    AppendWhereConditionByItemType(sqlString, type);
+
+                    com.CommandText = sqlString.ToString();
+
+                    MySqlDataReader dr = com.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        var genre = dr["genre"].ToString();
+                        distinctGenres.Add(genre);
+                    }
                 }
             }
 
@@ -331,10 +339,71 @@ namespace TEST_ASP_ALPHA_1.Models
                 else
                     if (!genresList.Contains(item))
                         genresList.Add(item);
-                
+
             }
             return genresList;
         }
+
+        public Dictionary<string, int> GetBestSellersWithCounts(ItemType type)
+        {
+            Dictionary<string, int> returnList = new Dictionary<string, int>();
+            using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+            {
+                StringBuilder sqlString = new StringBuilder();
+                sqlString.Append("SELECT t.best_seller, count(*) as count \n");
+                sqlString.Append("FROM items t \n");
+
+
+                using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
+                {
+                    AppendWhereConditionByItemType(sqlString, type);
+                    sqlString.Append("AND t.best_seller = '1' \n");
+                    sqlString.Append("GROUP BY t.best_seller");
+
+                    com.CommandText = sqlString.ToString();
+
+                    MySqlDataReader dr = com.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        var range = CommonManager.GetBestSellerCriterionName();
+                        var count = Convert.ToInt32(dr["count"]);
+                        returnList.Add(range, count);
+                    }
+                }
+            }
+            return returnList;
+        }
+
+        public Dictionary<string, int> GetOnSaleWithCounts(ItemType type)
+        {
+            Dictionary<string, int> returnList = new Dictionary<string, int>();
+            using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+            {
+                StringBuilder sqlString = new StringBuilder();
+                sqlString.Append("SELECT t.on_sale, count(*) as count \n");
+                sqlString.Append("FROM items t \n");
+
+
+                using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
+                {
+                    AppendWhereConditionByItemType(sqlString, type);
+                    sqlString.Append("AND t.on_sale = '1' \n");
+                    sqlString.Append("GROUP BY t.on_sale");
+
+                    com.CommandText = sqlString.ToString();
+
+                    MySqlDataReader dr = com.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        var range = CommonManager.GetOnSaleCriterionName();
+                        var count = Convert.ToInt32(dr["count"]);
+                        returnList.Add(range, count);
+                    }
+                }
+            }
+            return returnList;
+        }
+
         #endregion
 
         #region String SQL Operations
@@ -357,6 +426,9 @@ namespace TEST_ASP_ALPHA_1.Models
                     break;
                 case ItemType.Electronics:
                     sqlString.Append("WHERE type = 'Electronics'");
+                    break;
+                case ItemType.All:
+                    sqlString.Append("WHERE type like '%'");
                     break;
                 default:
                     break;
@@ -391,6 +463,20 @@ namespace TEST_ASP_ALPHA_1.Models
                             if (!String.IsNullOrEmpty(criterion.Value))
                             {
                                 sqlString.Append("AND genre like '%" + criterion.Value + "%'" + " ");
+                            }
+                        }
+                        else if (criterion.Key == CommonManager.GetBestSellerCriterionName())
+                        {
+                            if (!String.IsNullOrEmpty(criterion.Value))
+                            {
+                                sqlString.Append("AND best_seller = " + criterion.Value + " ");
+                            }
+                        }
+                        else if (criterion.Key == CommonManager.GetOnSaleCriterionName())
+                        {
+                            if (!String.IsNullOrEmpty(criterion.Value))
+                            {
+                                sqlString.Append("AND on_sale = " + criterion.Value + " ");
                             }
                         }
                     }
