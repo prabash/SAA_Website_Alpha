@@ -168,6 +168,7 @@
     <Content Include="BrowseGamesList.aspx" />
     <Content Include="BrowseGiftsGrid.aspx" />
     <Content Include="BrowseMoviesGrid.aspx" />
+    <Content Include="BrowseMoviesList.aspx" />
     <Content Include="BrowseTvSeriesGrid.aspx" />
     <Content Include="BrowseTvSeriesList.aspx" />
     <Content Include="Contact.aspx" />
@@ -419,6 +420,13 @@
     </Compile>
     <Compile Include="BrowseMoviesGrid.aspx.designer.cs">
       <DependentUpon>BrowseMoviesGrid.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BrowseMoviesList.aspx.cs">
+      <DependentUpon>BrowseMoviesList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BrowseMoviesList.aspx.designer.cs">
+      <DependentUpon>BrowseMoviesList.aspx</DependentUpon>
     </Compile>
     <Compile Include="BrowseTvSeriesGrid.aspx.cs">
       <DependentUpon>BrowseTvSeriesGrid.aspx</DependentUpon>

@@ -10,7 +10,7 @@
 namespace TEST_ASP_ALPHA_1 {
     
     
-    public partial class BrowseMoviesGrid {
+    public partial class BrowseMoviesList {
         
         /// <summary>
         /// itemSlideShow control.
@@ -67,13 +67,13 @@ namespace TEST_ASP_ALPHA_1 {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl paginationCtrl;
         
         /// <summary>
-        /// gridItemsList control.
+        /// productsList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl gridItemsList;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl productsList;
         
         /// <summary>
         /// priceRangeSearch control.
