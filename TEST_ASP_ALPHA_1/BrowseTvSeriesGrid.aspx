@@ -31,41 +31,25 @@
           <div class="category-products">
             <div class="toolbar">
               <div class="sorter">
-                <div class="view-mode"> <span title="Grid" class="button button-active button-grid">Grid</span><a href="list.html" title="List" class="button button-list">List</a> </div>
+                <div class="view-mode"> <span title="Grid" class="button button-active button-grid">Grid</span><a href="#" onclick="navigateWithParam('BrowseTvSeriesGrid', 'BrowseTvSeriesList');" title="List" class="button button-list">List</a> </div>
               </div>
               <div id="sort-by">
                 <label class="left">Sort By: </label>
-                <ul>
-                  <li><a href="#">Position<span class="right-arrow"></span></a>
-                    <ul>
-                      <li><a href="#">Name</a></li>
-                      <li><a href="#">Price</a></li>
-                      <li><a href="#">Position</a></li>
-                    </ul>
-                  </li>
+                <ul id="sortByList" runat="server">
+                  
                 </ul>
-                <a class="button-asc left" href="#" title="Set Descending Direction"><span style="color:#999;font-size:11px;" class="glyphicon glyphicon-arrow-up"></span></a> </div>
+                <a class="button-asc left" href="#" title="Desc" onclick="insertParam('asc', 'false');"><span style="color:#33cc99;font-size:11px;" class="glyphicon glyphicon-arrow-down" id="anchorDesc" runat="server"></span></a>
+                <a class="button-asc left" href="#" title="Asc" onclick="insertParam('asc', 'true');"><span style="color:#999;font-size:11px;" class="glyphicon glyphicon-arrow-up" runat="server" id="anchorAsc"></span></a>
+              </div>
               <div class="pager">
                 <div id="limiter">
                   <label>View: </label>
-                  <ul>
-                    <li><a href="#">15<span class="right-arrow"></span></a>
-                      <ul>
-                        <li><a href="#">20</a></li>
-                        <li><a href="#">30</a></li>
-                        <li><a href="#">35</a></li>
-                      </ul>
-                    </li>
+                  <ul id="viewPerPage" runat="server">
                   </ul>
                 </div>
                 <div class="pages">
                   <label>Page:</label>
-                  <ul class="pagination">
-                    <li><a href="#">&laquo;</a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">&raquo;</a></li>
+                  <ul class="pagination" runat="server" id="paginationCtrl">
                   </ul>
                 </div>
               </div>
@@ -94,38 +78,19 @@
               <dl id="narrow-by-list">
                 <dt class="odd">Price</dt>
                 <dd class="odd">
-                  <ol>
-                    <li> <a href="#"><span class="price">$0.00</span> - <span class="price">$99.99</span></a> (6) </li>
-                    <li> <a href="#"><span class="price">$100.00</span> and above</a> (6) </li>
-                  </ol>
+                  <ol runat="server" id="priceRangeSearch"> </ol>
                 </dd>
-                <dt class="even">Manufacturer</dt>
+                <dt class="even">Year</dt>
                 <dd class="even">
-                  <ol>
-                    <li> <a href="#">TheBrand</a> (9) </li>
-                    <li> <a href="#">Company</a> (4) </li>
-                    <li> <a href="#">LogoFashion</a> (1) </li>
-                  </ol>
+                  <ol runat="server" id="yearSearch"> </ol>
                 </dd>
-                <dt class="odd">Color</dt>
+                <dt class="odd">Genre</dt>
                 <dd class="odd">
-                  <ol>
-                    <li> <a href="#">Green</a> (1) </li>
-                    <li> <a href="#">White</a> (5) </li>
-                    <li> <a href="#">Black</a> (5) </li>
-                    <li> <a href="#">Gray</a> (4) </li>
-                    <li> <a href="#">Dark Gray</a> (3) </li>
-                    <li> <a href="#">Blue</a> (1) </li>
-                  </ol>
+                  <ol runat="server" id="genreSearch"> </ol>
                 </dd>
-                <dt class="last even">Size</dt>
-                <dd class="last even">
-                  <ol>
-                    <li> <a href="#">S</a> (6) </li>
-                    <li> <a href="#">M</a> (6) </li>
-                    <li> <a href="#">L</a> (4) </li>
-                    <li> <a href="#">XL</a> (4) </li>
-                  </ol>
+                <dt class="even">Sales</dt>
+                  <dd class="even">
+                  <ol runat="server" id="salesSearch"> </ol>
                 </dd>
               </dl>
             </div>
@@ -160,112 +125,17 @@
             </div>
           </div>
           <div class="block block-subscribe">
-        <div class="block-title">Newsletter</div>
-        <form id="newsletter-validate-detail" method="post" action="http://www.magikcommerce.com//newsletter/subscriber/new/">
-          <div class="block-content">
-            <div class="form-subscribe-header"> Sign up for our newsletter:</div>
-            <input type="text" placeholder="Enter your email address" class="input-text required-entry validate-email" title="" id="newsletter" name="email">
-            <div class="actions">
-              <button class="button button-subscribe" title="Submit" type="submit"><span>Subscribe</span></button>
-            </div>
-          </div>
-        </form>
-      </div>
-          <div class="block block-compare">
-            <div class="block-title ">Compare Products (2)</div>
-            <div class="block-content">
-              <ol id="compare-items">
-                <li class="item odd">
-                  <input type="hidden" class="compare-item-id" value="2173">
-                  <a href="#" title="Remove This Item" class="btn-remove1"></a> <a class="product-name" href="#"> Sofa with Box-Edge Polyester Wrapped Cushions</a> </li>
-                <li class="item last even">
-                  <input type="hidden" class="compare-item-id" value="2174">
-                  <a href="#" title="Remove This Item" class="btn-remove1"></a> <a class="product-name" href="#"> Sofa with Box-Edge Down-Blend Wrapped Cushions</a> </li>
-              </ol>
-              <div class="ajax-checkout">
-                <button class="button button-compare" title="Submit" type="submit"><span>Compare</span></button>
-                <button class="button button-clear" title="Submit" type="submit"><span>Clear</span></button>
-              </div>
-            </div>
-          </div>
-          <div class="block block-list block-viewed">
-            <div class="block-title"> Recently Viewed </div>
-            <div class="block-content">
-              <ol id="recently-viewed-items">
-                <li class="item odd">
-                  <p class="product-name"><a href="#"> Armchair with Box-Edge Upholstered Arm</a></p>
-                </li>
-                <li class="item even">
-                  <p class="product-name"><a href="#"> Pearce Upholstered Slee pere</a></p>
-                </li>
-                <li class="item last odd">
-                  <p class="product-name"><a href="#"> Sofa with Box-Edge Down-Blend Wrapped Cushions</a></p>
-                </li>
-              </ol>
-            </div>
-          </div>
-          <div class="block block-poll">
-            <div class="block-title">Community Poll </div>
-            <form onSubmit="return validatePollAnswerIsSelected();" method="post" action="#" id="pollForm">
+            <div class="block-title">Newsletter</div>
+            <form id="newsletter-validate-detail" method="post" action="http://www.magikcommerce.com//newsletter/subscriber/new/">
               <div class="block-content">
-                <p class="block-subtitle">What is your favorite Magento feature?</p>
-                <ul id="poll-answers">
-                  <li class="odd">
-                    <input type="radio" value="5" id="vote_5" class="radio poll_vote" name="vote">
-                    <span class="label">
-                    <label for="vote_5">Layered Navigation</label>
-                    </span> </li>
-                  <li class="even">
-                    <input type="radio" value="6" id="vote_6" class="radio poll_vote" name="vote">
-                    <span class="label">
-                    <label for="vote_6">Price Rules</label>
-                    </span> </li>
-                  <li class="odd">
-                    <input type="radio" value="7" id="vote_7" class="radio poll_vote" name="vote">
-                    <span class="label">
-                    <label for="vote_7">Category Management</label>
-                    </span> </li>
-                  <li class="last even">
-                    <input type="radio" value="8" id="vote_8" class="radio poll_vote" name="vote">
-                    <span class="label">
-                    <label for="vote_8">Compare Products</label>
-                    </span> </li>
-                </ul>
+                <div class="form-subscribe-header"> Sign up for our newsletter:</div>
+                <input type="text" placeholder="Enter your email address" class="input-text required-entry validate-email" title="" id="newsletter" name="email">
                 <div class="actions">
-                  <button class="button button-vote" title="Vote" type="submit"><span>Vote</span></button>
+                  <button class="button button-subscribe" title="Submit" type="submit"><span>Subscribe</span></button>
                 </div>
               </div>
             </form>
           </div>
-          <div class="block block-tags">
-            <div class="block-title"> Popular Tags</div>
-            <div class="block-content">
-              <ul class="tags-list">
-                <li><a style="font-size:98.3333333333%;" href="#tagId/23/">Camera</a></li>
-                <li><a style="font-size:86.6666666667%;" href="#tagId/109/">Hohoho</a></li>
-                <li><a style="font-size:145%;" href="#tagId/27/">SEXY</a></li>
-                <li><a style="font-size:75%;" href="#tagId/61/">Tag</a></li>
-                <li><a style="font-size:110%;" href="#tagId/29/">Test</a></li>
-                <li><a style="font-size:86.6666666667%;" href="#tagId/17/">bones</a></li>
-                <li><a style="font-size:110%;" href="#tagId/12/">cool</a></li>
-                <li><a style="font-size:86.6666666667%;" href="#tagId/184/">cool t-shirt</a></li>
-                <li><a style="font-size:86.6666666667%;" href="#tagId/173/">crap</a></li>
-                <li><a style="font-size:86.6666666667%;" href="#tagId/41/">good</a></li>
-                <li><a style="font-size:86.6666666667%;" href="#tagId/16/">green</a></li>
-                <li><a style="font-size:86.6666666667%;" href="#tagId/5/">hip</a></li>
-                <li><a style="font-size:75%;" href="#tagId/51/">laptop</a></li>
-                <li><a style="font-size:75%;" href="#tagId/20/">mobile</a></li>
-                <li><a style="font-size:75%;" href="#tagId/70/">nice</a></li>
-                <li><a style="font-size:86.6666666667%;" href="#tagId/42/">phone</a></li>
-                <li><a style="font-size:98.3333333333%;" href="#tagId/30/">red</a></li>
-                <li><a style="font-size:86.6666666667%;" href="#tagId/28/">tight</a></li>
-                <li><a style="font-size:75%;" href="#tagId/2/">trendy</a></li>
-                <li><a style="font-size:86.6666666667%;" href="#tagId/4/">young</a></li>
-              </ul>
-              <div class="actions"> <a class="view-all" href="#">View All Tags</a> </div>
-            </div>
-          </div>
-          <div class="block block-banner"><a href="#"><img src="images/block-banner.png" alt="block-banner"></a></div>
         </aside>
       </div>
     </div>

@@ -122,7 +122,7 @@ namespace TEST_ASP_ALPHA_1.Models
             return returnList;
         }
 
-        public int GetItemsCount(ItemType type)
+        public int GetItemsCount(ItemType type, Dictionary<string, string> searchCriteria = null)
         {
             int count = 0;
             using (MySqlConnection con = ConnectionManager.GetOpenConnection())
@@ -133,6 +133,10 @@ namespace TEST_ASP_ALPHA_1.Models
                 using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
                 {
                     AppendWhereConditionByItemType(sqlString, type);
+
+                    if (searchCriteria != null)
+                        AppendSearchCriteriatoWhereCondition(sqlString, searchCriteria);
+
                     com.CommandText = sqlString.ToString();
 
                     MySqlDataReader dr = com.ExecuteReader();

@@ -86,9 +86,9 @@ namespace TEST_ASP_ALPHA_1.Common
             return itemSelectedValueControl;
         }
 
-        public static void AddPagination(ItemType pageItemType, int currentPage, int currentViewPerPage, ref HtmlGenericControl paginationCtrl)
+        public static void AddPagination(ItemType pageItemType, int currentPage, int currentViewPerPage, ref HtmlGenericControl paginationCtrl, Dictionary<string, string> searchCriteria)
         {
-            var itemCount = new ItemsModel().GetItemsCount(pageItemType);
+            var itemCount = new ItemsModel().GetItemsCount(pageItemType, searchCriteria);
             var noOfPages = Convert.ToInt32(Math.Ceiling(((double)itemCount / (double)currentViewPerPage)));
             var displayingPages = CommonManager.GetDisplayingPages(currentPage, noOfPages);
 

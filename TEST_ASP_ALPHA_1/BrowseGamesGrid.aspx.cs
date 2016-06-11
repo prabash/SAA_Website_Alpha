@@ -135,7 +135,7 @@ namespace TEST_ASP_ALPHA_1
         {
             CommonHtmlManager.AddViewPerPageList(currentViewPerPage, ref this.viewPerPage);
             CommonHtmlManager.AddSortByList(sortBy, ref this.sortByList);
-            CommonHtmlManager.AddPagination(pageItemType, currentPage, currentViewPerPage, ref this.paginationCtrl);
+            CommonHtmlManager.AddPagination(pageItemType, currentPage, currentViewPerPage, ref this.paginationCtrl, searchCriteria);
         }
 
         #endregion

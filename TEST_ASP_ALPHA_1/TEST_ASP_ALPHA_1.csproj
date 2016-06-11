@@ -169,6 +169,7 @@
     <Content Include="BrowseGiftsGrid.aspx" />
     <Content Include="BrowseMoviesGrid.aspx" />
     <Content Include="BrowseTvSeriesGrid.aspx" />
+    <Content Include="BrowseTvSeriesList.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -425,6 +426,13 @@
     </Compile>
     <Compile Include="BrowseTvSeriesGrid.aspx.designer.cs">
       <DependentUpon>BrowseTvSeriesGrid.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BrowseTvSeriesList.aspx.cs">
+      <DependentUpon>BrowseTvSeriesList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BrowseTvSeriesList.aspx.designer.cs">
+      <DependentUpon>BrowseTvSeriesList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Common\CommonHtmlManager.cs" />
     <Compile Include="Common\CommonManager.cs" />
