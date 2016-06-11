@@ -9,7 +9,7 @@ using TEST_ASP_ALPHA_1.Models;
 
 namespace TEST_ASP_ALPHA_1
 {
-    public partial class BrowseElectronicsGrid : System.Web.UI.Page
+    public partial class BrowseElectronicsList : System.Web.UI.Page
     {
         #region Private Variables
         private int currentViewPerPage = CommonManager.GetDefaultValuePerPage();
@@ -99,7 +99,7 @@ namespace TEST_ASP_ALPHA_1
                 AddSortByOptions();
                 AddSearchByOptions();
 
-                GetGridDetails();
+                GetListDetails();
             }
         }
 
@@ -113,17 +113,19 @@ namespace TEST_ASP_ALPHA_1
             }
         }
 
-        private void GetGridDetails()
+        private void GetListDetails()
         {
             var gridDetails = new ItemsModel().GetItemDetails(pageItemType, EnumsManager.GetSortByOption(sortBy, ascending), currentViewPerPage, (currentPage - 1) * currentViewPerPage, searchCriteria);
             foreach (var item in gridDetails)
             {
-                var liControl = HTMLControlsManager.GetCustomTag("li", new[] { "item col-lg-4", "col-md-3", "col-sm-4", "col-xs-12" });
-                gridItemsList.Controls.Add(liControl);
+                var liControl = HTMLControlsManager.GetCustomTag("li", new[] { "item odd" });
+                productsList.Controls.Add(liControl);
                 {
-                    var itemInnerDivControl = ItemHtmlManager.Get_ItemInner_Grid_DivControl(item);
-                    liControl.Controls.Add(itemInnerDivControl);
+                    var prodImageDivControl = ItemHtmlManager.Get_ProductImage_List_DivControl(item);
+                    liControl.Controls.Add(prodImageDivControl);
 
+                    var prodDetailsDivControl = ItemHtmlManager.Get_ProductDetails_List_DivControl(item);
+                    liControl.Controls.Add(prodDetailsDivControl);
                 }
             }
         }

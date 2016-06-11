@@ -164,6 +164,7 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
     <Content Include="BrowseElectronicsGrid.aspx" />
+    <Content Include="BrowseElectronicsList.aspx" />
     <Content Include="BrowseGamesGrid.aspx" />
     <Content Include="BrowseGamesList.aspx" />
     <Content Include="BrowseGiftsGrid.aspx" />
@@ -393,6 +394,13 @@
     </Compile>
     <Compile Include="BrowseElectronicsGrid.aspx.designer.cs">
       <DependentUpon>BrowseElectronicsGrid.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BrowseElectronicsList.aspx.cs">
+      <DependentUpon>BrowseElectronicsList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BrowseElectronicsList.aspx.designer.cs">
+      <DependentUpon>BrowseElectronicsList.aspx</DependentUpon>
     </Compile>
     <Compile Include="BrowseGamesGrid.aspx.cs">
       <DependentUpon>BrowseGamesGrid.aspx</DependentUpon>
