@@ -141,8 +141,8 @@
               </div>
               <ul style="display:none;" class="submenu">
                 <li>
-                  <ul class="topnav"><li class="level0 nav-6 level-top first parent"> <a class="level-top" href="index.html"> <span>Home</span> </a></li>
-                    <li class="level0 nav-1 level-top first parent"> <a href="grid.html" class="level-top"> <span>Browse</span> </a>
+                  <ul class="topnav"><li class="level0 nav-6 level-top first parent"> <a class="level-top" href="Default.aspx"> <span>Home</span> </a></li>
+                    <li class="level0 nav-1 level-top first parent"> <a href="BrowseGamesGrid.aspx" class="level-top"> <span>Browse</span> </a>
                       <ul class="level0">
                         <li class="level1 nav-1-1 first parent"> <a href="BrowseGamesGrid.aspx"> <span>Games</span> </a></li>
                         <li class="level1 nav-1-2 parent"> <a href="BrowseTvSeriesGrid.aspx"> <span>TV Series</span> </a> </li>
@@ -151,8 +151,8 @@
                         <li class="level1 nav-1-5 parent"> <a href="BrowseElectronicsGrid.aspx"> <span>Electronics</span> </a></li>
                       </ul>
                     </li>
-                    <li class="level0 nav-2 level-top parent"> <a href="grid.html" class="level-top"> <span>About Us</span> </a></li>
-                    <li class="level0 nav-3 level-top parent"> <a href="grid.html" class="level-top"> <span>Contact</span> </a></li>
+                    <li class="level0 nav-2 level-top parent"> <a href="About.aspx" class="level-top"> <span>About Us</span> </a></li>
+                    <li class="level0 nav-3 level-top parent"> <a href="Contact.aspx" class="level-top"> <span>Contact</span> </a></li>
                   </ul>
                 </li>
               </ul>
@@ -162,7 +162,7 @@
         </div>
         <!--End mobile-menu -->
         <ul id="nav" class="hidden-xs">
-          <li id="nav-home" class="level0 parent drop-menu active"><a runat="server" href="~/Default"><span>Home</span> </a></li>
+          <li id="nav-home" class="level0 parent drop-menu active"><a runat="server" href="Default.aspx"><span>Home</span> </a></li>
           <li class="level0 parent drop-menu"><a href="#"><span>Browse</span> </a>
             <ul style="display: none;" class="level1">
               <li class="level1 first"><a href="BrowseGamesGrid.aspx"><span>Games</span></a></li>
@@ -172,8 +172,8 @@
               <li class="level1 first parent"><a href="BrowseElectronicsGrid.aspx"><span>Electronics</span></a></li>
             </ul>
           </li>
-          <li class="level0 nav-5 level-top first"> <a runat="server" href="~/About" class="level-top"> <span>About Us</span> </a> </li>
-          <li class="level0 nav-7 level-top parent"> <a runat="server" href="~/Contact" class="level-top"> <span>Contact</span> </a> </li>
+          <li class="level0 nav-5 level-top first"> <a runat="server" href="About.aspx" class="level-top"> <span>About Us</span> </a> </li>
+          <li class="level0 nav-7 level-top parent"> <a runat="server" href="Contact.aspx" class="level-top"> <span>Contact</span> </a> </li>
         </ul>
         <div id="form-search" class="search-bar">
           <form id="search_mini_form" action="#" method="get">

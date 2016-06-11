@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <ul>
-                    <li class="home"><a title="Go to Home Page" href="http://www.magikcommerce.com/">Home</a><span>&mdash;›</span></li>
+                    <li class="home"><a title="Go to Home Page" href="Default.aspx">Home</a><span>&mdash;›</span></li>
                     <li class="category13"><strong>Contact Us</strong></li>
                 </ul>
             </div>
