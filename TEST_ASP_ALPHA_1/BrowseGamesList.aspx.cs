@@ -23,85 +23,82 @@ namespace TEST_ASP_ALPHA_1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            searchCriteria = CommonManager.GetSearchByDictionary();
+            GetSlideshowDetails();
+
+            #region Sort By
+            var _count = Request.QueryString["count"];
+            if (_count != null)
             {
-                searchCriteria = CommonManager.GetSearchByDictionary();
-                GetSlideshowDetails();
-
-                #region Sort By
-                var _count = Request.QueryString["count"];
-                if (_count != null)
-                {
-                    currentViewPerPage = Convert.ToInt32(_count);
-                }
-
-                var _sortBy = Request.QueryString["sortby"];
-                if (_sortBy != null)
-                {
-                    sortBy = _sortBy;
-                }
-
-                var _asc = Request.QueryString["asc"];
-                if (_asc != null)
-                {
-                    ascending = Convert.ToBoolean(_asc);
-                }
-                #endregion
-
-                #region Search By
-                var _priceRange = Request.QueryString["priceRange"];
-                if (_priceRange != null)
-                {
-                    searchCriteria[CommonManager.GetPriceRangeCriterionName()] = _priceRange;
-                }
-
-                var _year = Request.QueryString["year"];
-                if (_year != null)
-                {
-                    searchCriteria[CommonManager.GetYearCriterionName()] = _year;
-                }
-
-                var _genre = Request.QueryString["genre"];
-                if (_genre != null)
-                {
-                    searchCriteria[CommonManager.GetGenreCriterionName()] = _genre;
-                }
-
-                var _bestSeller = Request.QueryString["bestSeller"];
-                if (_bestSeller != null)
-                {
-                    searchCriteria[CommonManager.GetBestSellerCriterionName()] = _bestSeller;
-                }
-
-                var _onSale = Request.QueryString["onSale"];
-                if (_onSale != null)
-                {
-                    searchCriteria[CommonManager.GetOnSaleCriterionName()] = _onSale;
-                }
-                #endregion
-
-                var _page = Request.QueryString["page"];
-                if (_page != null)
-                {
-                    currentPage = Convert.ToInt32(_page);
-                }
-
-                if (ascending)
-                {
-                    anchorAsc.Attributes["style"] = "color:#33cc99;font-size:11px;";
-                    anchorDesc.Attributes["style"] = "color:#999;font-size:11px;";
-                }
-                else
-                {
-                    anchorAsc.Attributes["style"] = "color:#999;font-size:11px;";
-                    anchorDesc.Attributes["style"] = "color:#33cc99;font-size:11px;";
-                }
-
-                AddSortByOptions();
-                AddSearchByOptions();
-
-                GetListDetails();
+                currentViewPerPage = Convert.ToInt32(_count);
             }
+
+            var _sortBy = Request.QueryString["sortby"];
+            if (_sortBy != null)
+            {
+                sortBy = _sortBy;
+            }
+
+            var _asc = Request.QueryString["asc"];
+            if (_asc != null)
+            {
+                ascending = Convert.ToBoolean(_asc);
+            }
+            #endregion
+
+            #region Search By
+            var _priceRange = Request.QueryString["priceRange"];
+            if (_priceRange != null)
+            {
+                searchCriteria[CommonManager.GetPriceRangeCriterionName()] = _priceRange;
+            }
+
+            var _year = Request.QueryString["year"];
+            if (_year != null)
+            {
+                searchCriteria[CommonManager.GetYearCriterionName()] = _year;
+            }
+
+            var _genre = Request.QueryString["genre"];
+            if (_genre != null)
+            {
+                searchCriteria[CommonManager.GetGenreCriterionName()] = _genre;
+            }
+
+            var _bestSeller = Request.QueryString["bestSeller"];
+            if (_bestSeller != null)
+            {
+                searchCriteria[CommonManager.GetBestSellerCriterionName()] = _bestSeller;
+            }
+
+            var _onSale = Request.QueryString["onSale"];
+            if (_onSale != null)
+            {
+                searchCriteria[CommonManager.GetOnSaleCriterionName()] = _onSale;
+            }
+            #endregion
+
+            var _page = Request.QueryString["page"];
+            if (_page != null)
+            {
+                currentPage = Convert.ToInt32(_page);
+            }
+
+            if (ascending)
+            {
+                anchorAsc.Attributes["style"] = "color:#33cc99;font-size:11px;";
+                anchorDesc.Attributes["style"] = "color:#999;font-size:11px;";
+            }
+            else
+            {
+                anchorAsc.Attributes["style"] = "color:#999;font-size:11px;";
+                anchorDesc.Attributes["style"] = "color:#33cc99;font-size:11px;";
+            }
+
+            AddSortByOptions();
+            AddSearchByOptions();
+
+            GetListDetails();
         }
 
         private void GetSlideshowDetails()
