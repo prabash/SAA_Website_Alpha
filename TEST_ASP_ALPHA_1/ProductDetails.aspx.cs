@@ -19,7 +19,7 @@ namespace TEST_ASP_ALPHA_1
                 if (!String.IsNullOrEmpty(id))
                 {
                     var itemDetails = new ItemsModel().GetItemDetailById(Convert.ToInt32(id));
-                    ItemType currentItemType = (ItemType)Enum.Parse(typeof(ItemType), itemDetails.type, true);
+                    ItemType currentItemType = EnumsManager.GetItemType(itemDetails.type);
                     productTypeBreadcrumb.InnerText = itemDetails.type;
                     switch (currentItemType)
                     {

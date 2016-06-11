@@ -33,5 +33,10 @@ namespace TEST_ASP_ALPHA_1.Common
                 return ItemSortBy.NameAsc;
 
         }
+
+        public static ItemType GetItemType(string type)
+        {
+           return (ItemType)Enum.Parse(typeof(ItemType), type, true);
+        }
     }
 }

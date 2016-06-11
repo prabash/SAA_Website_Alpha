@@ -255,13 +255,23 @@ namespace TEST_ASP_ALPHA_1.Common
                     }
                 }
 
+                var type = EnumsManager.GetItemType(item.type);
+                
                 var descriptionDivControl = HTMLControlsManager.GetDivTag(new[] { "desc std" });
                 productDetailDivControl.Controls.Add(descriptionDivControl);
                 {
                     var paraDescControl = HTMLControlsManager.GetCustomTag("p", null);
-                    paraDescControl.InnerHtml = "<b>Year</b> : " + item.year + "<br/>" + "<b>Genre</b> : " + item.genre + "<br/>" + item.description;
+                    if (type == ItemType.Games || type == ItemType.Movies || type == ItemType.TvSeries)
+                    {
+                        paraDescControl.InnerHtml = "<b>Year</b> : " + item.year + "<br/>" + "<b>Genre</b> : " + item.genre + "<br/>" + item.description;
+                    }
+                    else
+                    {
+                        paraDescControl.InnerHtml = item.description;
+                    }
                     descriptionDivControl.Controls.Add(paraDescControl);
                 }
+                
 
                 var actionsDivControl = HTMLControlsManager.GetDivTag(new[] { "actions" });
                 productDetailDivControl.Controls.Add(actionsDivControl);
