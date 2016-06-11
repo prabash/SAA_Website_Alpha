@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace TEST_ASP_ALPHA_1.Common
@@ -124,6 +125,33 @@ namespace TEST_ASP_ALPHA_1.Common
         {
             var searchCriteria = ConfigurationManager.AppSettings["SearchCriteria"];
             return searchCriteria.Split('|')[4];
+        }
+
+        #endregion
+
+        #region Contact Details
+
+        public static string GetAddress()
+        {
+            string address = ConfigurationManager.AppSettings["Address"];
+            StringBuilder add = new StringBuilder();
+
+            var splitAddress = address.Split(',');
+            for (int i = 0; i < splitAddress.Count(); i++)
+			{
+                if (i < splitAddress.Count() - 1)
+                    add.Append(splitAddress[i] + ", <br/>");
+                else if (i == splitAddress.Count() - 1)
+                    add.Append(splitAddress[i]);
+            }
+
+            return add.ToString();
+        }
+
+        public static string GetTelephoneNo()
+        {
+            string telephone = ConfigurationManager.AppSettings["Telephone"];
+            return telephone;
         }
 
         #endregion

@@ -484,6 +484,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ConnectionManager.cs" />
+    <Compile Include="Models\CustCommentsModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IndexModel.cs" />
     <Compile Include="Models\ItemsModel.cs" />
