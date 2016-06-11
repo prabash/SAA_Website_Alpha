@@ -22,10 +22,10 @@
                             <h2>About Us</h2>
                         </div>
 
-                        <img src="images/about_us.jpg" style="padding-bottom:10px;height:100%;width:100%;"/>
-                        <br/>
+                        <img src="images/about_us.jpg" style="padding-bottom: 10px; height: 100%; width: 100%;" />
+                        <br />
                         <p>We are the market leaders selling latest games, movies and tv series.</p>
-                        <br/>
+                        <br />
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
                     </div>
                 </section>
@@ -39,6 +39,26 @@
                                 <li class="item last"><a href="BrowseGamesGrid.aspx">Browse...</a></li>
                             </ol>
                         </div>
+                    </div>
+                    <div class="block block-subscribe">
+                        <div class="block-title">Newsletter</div>
+                        <form Id="newsLetterForm" method="post" runat="server">
+                            <div class="block-content">
+                                <div class="form-subscribe-header">Sign up for our newsletter:</div>
+                                <input type="email" placeholder="Enter your email address" class="input-text required-entry validate-email" title="" Id="dfnEmailAdd" name="email" runat="server" style="z-index:10;" required>
+                                <div class="success" runat="server" ID="successBox" style="width:210px;height:30px;margin-top:10px;padding:8px;" visible="false">
+                                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                        Thank you!
+                                </div>
+                                <div class="error" runat="server" ID="errorBox" style="width:210px;height:30px;margin-top:10px;padding:8px;" visible="false">
+                                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                        Error Occurred!
+                                </div>
+                                <div class="actions">
+                                    <asp:Button CssClass="button button-subscribe" Text="SUBSCRIBE" runat="server" ID="btnSubscribe" OnClick="btnSubscribe_Click"></asp:Button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </aside>
             </div>

@@ -156,14 +156,22 @@
             </div>
           </div>
           <div class="block block-subscribe">
-            <div class="block-title">Newsletter</div>
-                <form id="newsletter-validate-detail" method="post" action="http://www.magikcommerce.com//newsletter/subscriber/new/">
+                <div class="block-title">Newsletter</div>
+                <form Id="newsLetterForm" method="post" runat="server">
                     <div class="block-content">
-                    <div class="form-subscribe-header"> Sign up for our newsletter:</div>
-                    <input type="text" placeholder="Enter your email address" class="input-text required-entry validate-email" title="" id="newsletter" name="email">
-                    <div class="actions">
-                        <button class="button button-subscribe" title="Submit" type="submit"><span>Subscribe</span></button>
-                    </div>
+                        <div class="form-subscribe-header">Sign up for our newsletter:</div>
+                        <input type="email" placeholder="Enter your email address" class="input-text required-entry validate-email" title="" Id="dfnEmailAdd" name="email" runat="server" style="z-index:10;" required>
+                        <div class="success" runat="server" ID="successBox" style="width:210px;height:30px;margin-top:10px;padding:8px;" visible="false">
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                Thank you!
+                        </div>
+                        <div class="error" runat="server" ID="errorBox" style="width:210px;height:30px;margin-top:10px;padding:8px;" visible="false">
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                Error Occurred!
+                        </div>
+                        <div class="actions">
+                            <asp:Button CssClass="button button-subscribe" Text="SUBSCRIBE" runat="server" ID="btnSubscribe" OnClick="btnSubscribe_Click"></asp:Button>
+                        </div>
                     </div>
                 </form>
             </div>

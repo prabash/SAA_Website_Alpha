@@ -79,11 +79,11 @@
                             </ul>
                             <div class="error" runat="server" ID="errorBox" visible="false">
                               <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                                    An error occurred! Please try again later or give us a call! We are always happy to help you out :).
+                                    An error occurred! Please try again later or give us a call! We are always happy to help you out :)
                             </div>
                             <div class="success" runat="server" ID="successBox" visible="false">
                               <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                                    Thank you for contacting us! Please be patient as we'll get back to you ASAP :).
+                                    Thank you for contacting us! Please be patient as we'll get back to you ASAP :)
                             </div>
                         </form>
                     </div>
@@ -130,36 +130,6 @@
             </div>
         </div>
     </div>
-    <style>
-        .error {
-            padding: 20px;
-            background-color: #f44336; /* Red */
-            color: white;
-            margin-bottom: 15px;
-        } 
-        .success {
-            padding: 20px;
-            background-color: #098BBD; /* Red */
-            color: white;
-            margin-bottom: 15px;
-        }
 
-        /* The close button */
-        .closebtn {
-            margin-left: 15px;
-            color: white;
-            font-weight: bold;
-            float: right;
-            font-size: 22px;
-            line-height: 20px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        /* When moving the mouse over the close button */
-        .closebtn:hover {
-            color: black;
-        }
-    </style>
     <!--End main-container -->
 </asp:Content>

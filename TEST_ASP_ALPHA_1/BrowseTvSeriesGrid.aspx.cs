@@ -128,7 +128,6 @@ namespace TEST_ASP_ALPHA_1
             }
         }
 
-
         #region Sort By
 
         private void AddSortByOptions()
@@ -148,6 +147,29 @@ namespace TEST_ASP_ALPHA_1
             CommonHtmlManager.GetYearSearchByOptions(pageItemType, searchCriteria, ref this.yearSearch);
             CommonHtmlManager.GetGenreSearchByOptions(pageItemType, searchCriteria, ref this.genreSearch);
             CommonHtmlManager.GetSalesSearchByOptions(pageItemType, searchCriteria, ref this.salesSearch);
+        }
+
+        #endregion
+
+        #region Subscription
+
+        protected void btnSubscribe_Click(object sender, EventArgs e)
+        {
+            SubscribeNewsletter();
+        }
+
+        private void SubscribeNewsletter()
+        {
+            try
+            {
+                var email = dfnEmailAdd.Value;
+                new CustCommentsModel().SaveSubscription(email);
+                successBox.Visible = true;
+            }
+            catch (Exception)
+            {
+                errorBox.Visible = true;
+            }
         }
 
         #endregion

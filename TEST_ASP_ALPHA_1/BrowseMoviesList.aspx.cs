@@ -152,5 +152,28 @@ namespace TEST_ASP_ALPHA_1
         }
 
         #endregion
+
+        #region Subscription
+
+        protected void btnSubscribe_Click(object sender, EventArgs e)
+        {
+            SubscribeNewsletter();
+        }
+
+        private void SubscribeNewsletter()
+        {
+            try
+            {
+                var email = dfnEmailAdd.Value;
+                new CustCommentsModel().SaveSubscription(email);
+                successBox.Visible = true;
+            }
+            catch (Exception)
+            {
+                errorBox.Visible = true;
+            }
+        }
+
+        #endregion
     }
 }

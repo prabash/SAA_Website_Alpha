@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %> - SAA Video Entertainments</title>
     <!-- Favicons Icon -->
     <link rel="icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico" type="image/x-icon" />
@@ -29,9 +29,39 @@
     <!-- Google Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-    
+    <style>
+        .error {
+            padding: 20px;
+            background-color: #f44336; /* Red */
+            color: white;
+            margin-bottom: 15px;
+        } 
+        .success {
+            padding: 20px;
+            background-color: #098BBD; /* Red */
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        /* The close button */
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* When moving the mouse over the close button */
+        .closebtn:hover {
+            color: black;
+        }
+    </style>
 </head>
-<body ng-controller="MainController">
+<body>
 <div class="page">
   <!-- Header -->
   <header class="header">
@@ -44,7 +74,7 @@
         </div>
         <div class=" col-lg-7 col-sm-8 col-md-7 col-xs-12">
           <div class="header-top">
-            <div class="welcome-msg hidden-xs"> Default welcome msg! </div>
+            <div class="welcome-msg hidden-xs"> Welcome to SAA Video! </div>
             <!-- Header Language -->
             <div class="dropdown block-language-wrapper"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="images/english.png" alt="language"> English <span class="caret"></span> </a>
               <ul class="dropdown-menu" role="menu">
@@ -190,11 +220,7 @@
       <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-            <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
-            </footer>
-        </div>
+      </div>
   <!-- end Body -->
   <!-- Footer -->
   <footer>
@@ -219,15 +245,6 @@
                 <!-- Item -->
                 <div class="item"> <a href="#x"><img src="images/b-logo5.png" alt="Image"></a> </div>
                 <!-- End Item -->
-                <!-- Item -->
-                <div class="item"> <a href="#x"><img src="images/b-logo6.png" alt="Image"></a> </div>
-                <!-- End Item -->
-                <!-- Item -->
-                <div class="item"> <a href="#x"><img src="images/b-logo1.png" alt="Image"></a> </div>
-                <!-- End Item -->
-                <!-- Item -->
-                <div class="item"> <a href="#x"><img src="images/b-logo4.png" alt="Image"></a> </div>
-                <!-- End Item -->
               </div>
             </div>
           </div>
@@ -235,14 +252,19 @@
         <div class="footer-middle">
           <div class="col-md-3 col-sm-12 col-xs-12">
             <div class="footer-column-1">
-              <div class="footer-logo"><a href="index.html" title="Logo"><img src="images/footer-logo.png" alt="logo" ></a></div>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <div class="footer-logo"><a href="Default.aspx" title="Logo"><img src="images/footer-logo.png" alt="logo" ></a></div>
+              <p>SAA Video Entertainments (Pvt) Ltd.<br />
+                 &nbsp; <br />
+                 &nbsp; <br />
+                 &nbsp; <br />
+                 &nbsp;
+              </p>
               <div class="social">
                 <ul class="link">
                   <li class="fb"><a href="#"></a></li>
                   <li class="tw"><a href="#"></a></li>
                   <li class="googleplus"><a href="#"></a></li>
-                  <li class="rss"><a href="#"></a></li>
+                  <%--<li class="rss"><a href="#"></a></li>--%>
                   <!-- <li class="pintrest"><a href="#"></a></li>-->
                   <li class="linkedin"><a href="#"></a></li>
                   <li class="youtube"><a href="#"></a></li>
@@ -275,36 +297,24 @@
           <div class="col-md-2 col-sm-6 col-xs-12">
             <h4 class="orange">Information</h4>
             <ul class="links">
-              <li class="first"><a href="sitemap.html" title="Site Map">Site Map</a></li>
-              <li><a href="#/" title="Search Terms">Search Terms</a></li>
-              <li><a href="#" title="Advanced Search">Advanced Search</a></li>
-              <li><a href="contact_us.html" title="Contact Us">Contact Us</a></li>
-              <li><a href="#" title="Suppliers">Suppliers</a></li>
-              <li class=" last"><a href="#" title="Our stores" class="link-rss">Our stores</a></li>
+              <li class="first"><a href="About.aspx" title="Site Map">About</a></li>
+              <li><a href="Contact.aspx" title="Contact Us">Contact Us</a></li>
             </ul>
           </div>
           <div class="col-md-3 col-sm-6 col-xs-12">
             <h4 class="blue">Contact Us</h4>
             <div class="contacts-info">
               <address>
-              <i class="add-icon">&nbsp;</i>123 Main Street, Anytown, <br>
-              &nbsp;CA 12345  USA
+              <i class="add-icon">&nbsp;</i>387/E, Galle Road,  <br /> 
+                 &nbsp;Ratmalana.
               </address>
-              <div class="phone-footer"><i class="phone-icon">&nbsp;</i> +1 800 123 1234</div>
-              <div class="email-footer"><i class="email-icon">&nbsp;</i> <a href="mailto:support@magikcommerce.com">support@magikcommerce.com</a>
+              <div class="phone-footer"><i class="phone-icon">&nbsp;</i>+94 11 5929266 / +94 11 5929267</div>
+              <div class="email-footer"><i class="email-icon">&nbsp;</i> <a href="mailto:support.saavideos@gmail.com">support.saavideos@gmail.com</a>
             </div>
           </div>
         </div>
         <div class="footer-bottom">
-          <div class="col-sm-3 col-xs-12 coppyright"> &copy; 2015 Magikcommerce. All Rights Reserved.</div>
-          <div class="col-sm-9 col-xs-12 company-links">
-            <ul class="links">
-              <li><a href="#" title="Magento Themes">Magento Themes</a></li>
-              <li><a href="#" title="Premium Themes">Premium Themes</a></li>
-              <li><a href="#" title="Responsive Themes">Responsive Themes</a></li>
-              <li class="last"><a href="#" title="Magento Extensions">Magento Extensions</a></li>
-            </ul>
-          </div>
+          <div class="col-sm-12 col-xs-12 coppyright"> &copy; <%: DateTime.Now.Year %> - SAA Video Entertainments (Pvt) Ltd. All Rights Reserved.</div>
         </div>
       </div>
     </div></div>
