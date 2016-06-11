@@ -24,7 +24,7 @@
             <h1>Games</h1>
           </div>
           <div class="category-description std">
-            <div class="slider-items-products">
+            <div class="slider-items-products" style="">
               <div id="category-desc-slider" class="product-flexslider hidden-buttons">
                 <div class="slider-items slider-width-col1" runat="server" id="itemSlideShow"> 
                 </div>

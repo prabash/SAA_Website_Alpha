@@ -330,9 +330,9 @@
     });
     //]]>
     </script>
-<script>
-    new UISearch(document.getElementById('form-search'));
-		</script>
+    <script>
+        new UISearch(document.getElementById('form-search'));
+	</script>
 
     
    <script type="text/javascript">

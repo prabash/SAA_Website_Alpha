@@ -136,7 +136,6 @@
               </div>
             </form>
           </div>
-          <div class="block block-banner"><a href="#"><img src="images/block-banner.png" alt="block-banner"></a></div>
         </aside>
       </div>
     </div>

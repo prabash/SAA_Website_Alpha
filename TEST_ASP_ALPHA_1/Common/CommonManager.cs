@@ -42,6 +42,43 @@ namespace TEST_ASP_ALPHA_1.Common
         {
             return ConfigurationManager.AppSettings["DefaultSortBy"];
         }
+        
+        public static List<int> GetDisplayingPages(int currentPage, int noOfPages)
+        {
+            List<int> displayingPages = new List<int>();
+            var calcMaxPage = 0;
+            var calcMinPage = 0;
+
+            if (noOfPages > 5 && currentPage > 3)
+            {
+                calcMaxPage = currentPage + 2;
+                calcMinPage = currentPage - 2;
+
+                var extraPagesForMax = 0;
+
+                if (calcMaxPage > noOfPages)
+                {
+                    extraPagesForMax = calcMaxPage - noOfPages;
+                    calcMinPage = calcMinPage - extraPagesForMax;
+                    calcMaxPage = noOfPages;
+                }
+            }
+            else
+            {
+                calcMinPage = 1;
+
+                if (noOfPages > 5)
+                    calcMaxPage = 5;
+                else
+                    calcMaxPage = noOfPages;
+            }
+
+            for (int i = calcMinPage; i <= calcMaxPage; i++)
+            {
+                displayingPages.Add(i);
+            }
+            return displayingPages;
+        }
 
         #endregion
 
