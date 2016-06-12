@@ -28,4 +28,13 @@ namespace TEST_ASP_ALPHA_1.Common
         BestSellerAsc,
         BestSellerDesc
     }
+
+    public enum CustomerGetType
+    {
+        id,
+        email,
+        name,
+        telephone,
+        registeredDate
+    }
 }

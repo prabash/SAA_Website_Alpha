@@ -102,7 +102,7 @@
                   </ul>
                 </div>
                 <!-- End Header Company -->
-                <div class="login"><a href="login.html"><span class="hidden-xs">Log In</span></a></div>
+                <div class="login"><a href="Login.aspx"><span class="hidden-xs">Log In</span></a></div>
               </div>
             </div>
             <!-- End Header Top Links -->
@@ -309,7 +309,7 @@
                  &nbsp;Ratmalana.
               </address>
               <div class="phone-footer"><i class="phone-icon">&nbsp;</i>+94 11 5929266 / +94 11 5929267</div>
-              <div class="email-footer"><i class="email-icon">&nbsp;</i> <a href="mailto:support.saavideos@gmail.com">support.saavideos@gmail.com</a>
+              <div class="email-footer"><i class="email-icon">&nbsp;</i> <a href="mailto:supprt.saavideos@gmail.com">supprt.saavideos@gmail.com</a>
             </div>
           </div>
         </div>
