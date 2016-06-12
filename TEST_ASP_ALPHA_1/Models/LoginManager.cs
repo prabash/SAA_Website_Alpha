@@ -158,9 +158,12 @@ namespace TEST_ASP_ALPHA_1.Models
             return returnList;
         }
 
-        public bool ValidateLogin(string email, string password)
+        public bool ValidateLogin(string email, string password, out int custId, out string custName)
         {
             bool loginSuccess = false;
+            custId = 0;
+            custName = "";
+
             var custDetail = GetCustomerDetails(CustomerGetType.email, 0, email);
             if (custDetail != null && custDetail.Count > 0)
             {
@@ -169,6 +172,8 @@ namespace TEST_ASP_ALPHA_1.Models
                 {
                     if (password == customer.password)
                     {
+                        custId = customer.Id;
+                        custName = customer.username;
                         loginSuccess = true;
                     }
                 }

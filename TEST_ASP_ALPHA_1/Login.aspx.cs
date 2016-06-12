@@ -20,6 +20,19 @@ namespace TEST_ASP_ALPHA_1
             aesMgr = new AESManager();
             emailMgr = new EmailManager();
             loginMgr = new LoginManager();
+
+            var logout = Request.QueryString["logout"];
+            if (!String.IsNullOrEmpty(logout))
+            {
+                if (logout == "true")
+                {
+                    string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
+                    Session.Remove("CustId");
+                    Session.Remove("CustName");
+                    Session.Remove("CustEmail");
+                    Response.Redirect(baseUrl + "Default.aspx");
+                }
+            }
         }
 
 
@@ -29,8 +42,15 @@ namespace TEST_ASP_ALPHA_1
             var encPassword = aesMgr.EncryptToString(dfnLoginPass.Text);
             string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
 
-            if(loginMgr.ValidateLogin(encEmail, encPassword))
+            int custId;
+            string custUsername;
+
+            if(loginMgr.ValidateLogin(encEmail, encPassword, out custId, out custUsername))
             {
+                Session.Add("CustId", custId);
+                Session.Add("CustName", custUsername);
+                Session.Add("CustEmail", dfnLoginEmail.Text);
+
                 Response.Redirect(baseUrl + "Default.aspx");
             }
         }
