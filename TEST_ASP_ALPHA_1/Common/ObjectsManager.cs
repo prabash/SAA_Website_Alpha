@@ -46,4 +46,17 @@ namespace TEST_ASP_ALPHA_1.Common
         public bool active { get; set; }
     }
 
+    public class PurchaseItemObject
+    {
+        public int PurchId { get; set; }
+        public int PurchCartId { get; set; }
+        public int ItemId { get; set; }
+        public string ItemTitle { get; set; }
+        public int ItemQuantity { get; set; }
+        public double Discount { get; set; }
+        public double CostPerItem { get; set; }
+        public double SubTotal { get; set; }
+        public string Status { get; set; }
+        public DateTime PurchDate { get; set; }
+    }
 }

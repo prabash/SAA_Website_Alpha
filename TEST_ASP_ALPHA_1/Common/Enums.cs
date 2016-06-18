@@ -37,4 +37,18 @@ namespace TEST_ASP_ALPHA_1.Common
         telephone,
         registeredDate
     }
+
+    public enum PurchItemGetType
+    {
+        customerEmail,
+        customerId,
+        purchCartId,
+        purchDate
+    }
+
+    public enum PurchItemOrderBy
+    {
+        purchDateAsc,
+        purchDateDesc
+    }
 }

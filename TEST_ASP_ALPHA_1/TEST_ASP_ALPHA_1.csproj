@@ -510,6 +510,7 @@
     <Compile Include="Models\AESManager.cs" />
     <Compile Include="Models\ConnectionManager.cs" />
     <Compile Include="Models\CustCommentsModel.cs" />
+    <Compile Include="Models\PurchItemModel.cs" />
     <Compile Include="Models\EmailManager.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IndexModel.cs" />

@@ -37,6 +37,10 @@
                                     <asp:TextBox TextMode="Password" title="Password" class="input-text required-entry validate-password" ID="dfnLoginPass" runat="server" required/>
                                 </li>
                             </ul>
+                            <div class="error" runat="server" ID="regErrorBox" visible="false" style="height:30px;margin-top:10px;padding:8px;">
+                                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                    <p runat="server" ID="regErrMsg"></p> 
+                            </div>
                             <p class="required">* Required Fields</p>
                             <div class="buttons-set">
                                 <asp:Button CssClass="button login" ID="btnLogin" Text="LOGIN" runat="server" OnClick="btnLogin_Click"/>

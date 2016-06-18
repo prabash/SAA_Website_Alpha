@@ -10,6 +10,8 @@ namespace TEST_ASP_ALPHA_1.Models
 {
     public class CustomerManager
     {
+        #region Set
+
         public void RegisterUser(string email, string username, string password)
         {
             try
@@ -129,6 +131,10 @@ namespace TEST_ASP_ALPHA_1.Models
                 throw ex;
             }
         }
+        
+        #endregion
+
+        #region Get
 
         public List<CustomerObject> GetCustomerDetails(CustomerGetType getType, int id = 0, string email = null, string name = null, string tel = null, DateTime? fromRegDate = null, DateTime? toRegDate = null)
         {
@@ -213,12 +219,18 @@ namespace TEST_ASP_ALPHA_1.Models
                         custName = customer.username;
                         loginSuccess = true;
                     }
+                    else
+                    {
+                        throw new Exception("The email or password you have entered is incorrect!");
+                    }
                 }
                 else
                 {
                     throw new Exception("Your account has not been activated yet!");
                 }
             }
+            else
+                throw new Exception("The email or password you have entered is incorrect!");
 
             return loginSuccess;
         }
@@ -245,7 +257,11 @@ namespace TEST_ASP_ALPHA_1.Models
 
             return validateSuccess;
         }
+        
+        #endregion
 
+        #region Objects
+       
         public CustomerObject GetInfoAddedCustomerObject(MySqlDataReader dr)
         {
             return new CustomerObject
@@ -264,6 +280,8 @@ namespace TEST_ASP_ALPHA_1.Models
                 active = Convert.ToBoolean(Convert.ToInt32(dr["active"].ToString()))
             };
         }
+        
+        #endregion
 
     }
 }

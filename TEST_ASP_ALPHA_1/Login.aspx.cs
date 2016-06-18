@@ -39,20 +39,30 @@ namespace TEST_ASP_ALPHA_1
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            var encEmail = aesMgr.EncryptToString(dfnLoginEmail.Text);
-            var encPassword = aesMgr.EncryptToString(dfnLoginPass.Text);
-            string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
-
-            int custId;
-            string custUsername;
-
-            if(loginMgr.ValidateLogin(encEmail, encPassword, out custId, out custUsername))
+            try
             {
-                Session.Add(CommonManager.GetCustIdSessionName(), custId);
-                Session.Add(CommonManager.GetCustNameSessionName(), custUsername);
-                Session.Add(CommonManager.GetCustEmailSessionName(), dfnLoginEmail.Text);
+                var encEmail = aesMgr.EncryptToString(dfnLoginEmail.Text);
+                var encPassword = aesMgr.EncryptToString(dfnLoginPass.Text);
+                string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
 
-                Response.Redirect(baseUrl + "Default.aspx");
+                int custId;
+                string custUsername;
+
+                if (loginMgr.ValidateLogin(encEmail, encPassword, out custId, out custUsername))
+                {
+                    regErrorBox.Visible = false;
+
+                    Session.Add(CommonManager.GetCustIdSessionName(), custId);
+                    Session.Add(CommonManager.GetCustNameSessionName(), custUsername);
+                    Session.Add(CommonManager.GetCustEmailSessionName(), dfnLoginEmail.Text);
+
+                    Response.Redirect(baseUrl + "Default.aspx");
+                }
+            }
+            catch (Exception ex)
+            {
+                regErrMsg.InnerText = ex.Message;
+                regErrorBox.Visible = true;
             }
         }
     }
