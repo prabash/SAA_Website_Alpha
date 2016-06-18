@@ -43,13 +43,20 @@ namespace TEST_ASP_ALPHA_1.Models
             }
         }
 
-        public void ResetPassword(string email, string newPassword)
+        public void ResetPassword(string email, string newPassword, string oldPassword = null)
         {
             try
             {
                 var custDetail = GetCustomerDetails(CustomerGetType.email, 0, email);
                 if (custDetail.Count == 1)
                 {
+                    //This check is used ONLY when the user knows the current password
+                    if(oldPassword != null)
+                    {
+                        if (custDetail.First().password != oldPassword)
+                            throw new Exception("The current password you entered is incorrect!");
+                    }
+
                     using (MySqlConnection con = ConnectionManager.GetOpenConnection())
                     {
                         string sqlString = @"UPDATE customers SET password = @password WHERE id= @id AND email_address = @emailAdd";
