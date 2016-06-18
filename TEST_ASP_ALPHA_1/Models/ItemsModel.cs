@@ -510,6 +510,13 @@ namespace TEST_ASP_ALPHA_1.Models
                                 sqlString.Append("AND on_sale = " + criterion.Value + " ");
                             }
                         }
+                        else if (criterion.Key == CommonManager.GetIdCriterionName())
+                        {
+                            if (!String.IsNullOrEmpty(criterion.Value))
+                            {
+                                sqlString.Append("AND id IN (" + criterion.Value + ") ");
+                            }
+                        }
                     }
                 }
             }

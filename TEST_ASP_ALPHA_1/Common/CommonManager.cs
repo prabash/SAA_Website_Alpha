@@ -136,6 +136,12 @@ namespace TEST_ASP_ALPHA_1.Common
             return searchCriteria.Split('|')[4];
         }
 
+        public static string GetIdCriterionName()
+        {
+            var searchCriteria = ConfigurationManager.AppSettings["SearchCriteria"];
+            return searchCriteria.Split('|')[5];
+        }
+
         #endregion
 
         #region Contact Details

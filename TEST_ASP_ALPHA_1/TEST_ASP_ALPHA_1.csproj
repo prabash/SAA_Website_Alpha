@@ -281,6 +281,7 @@
     <Content Include="MyAccountDashboard.aspx" />
     <Content Include="MyAccountInformation.aspx" />
     <Content Include="MyAccountOrders.aspx" />
+    <Content Include="MyAccountWishlist.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -511,6 +512,7 @@
     <Compile Include="Common\AESManager.cs" />
     <Compile Include="Common\ConnectionManager.cs" />
     <Compile Include="Models\CustCommentsModel.cs" />
+    <Compile Include="Models\CustWishlistModel.cs" />
     <Compile Include="Models\PurchItemModel.cs" />
     <Compile Include="Common\EmailManager.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -544,6 +546,13 @@
     </Compile>
     <Compile Include="MyAccountOrders.aspx.designer.cs">
       <DependentUpon>MyAccountOrders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyAccountWishlist.aspx.cs">
+      <DependentUpon>MyAccountWishlist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyAccountWishlist.aspx.designer.cs">
+      <DependentUpon>MyAccountWishlist.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProductDetails.aspx.cs">
       <DependentUpon>ProductDetails.aspx</DependentUpon>

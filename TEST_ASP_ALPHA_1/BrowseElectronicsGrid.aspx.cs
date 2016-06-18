@@ -43,6 +43,23 @@ namespace TEST_ASP_ALPHA_1
             {
                 ascending = Convert.ToBoolean(_asc);
             }
+
+            var _page = Request.QueryString["page"];
+            if (_page != null)
+            {
+                currentPage = Convert.ToInt32(_page);
+            }
+
+            if (ascending)
+            {
+                anchorAsc.Attributes["style"] = "color:#33cc99;font-size:11px;";
+                anchorDesc.Attributes["style"] = "color:#999;font-size:11px;";
+            }
+            else
+            {
+                anchorAsc.Attributes["style"] = "color:#999;font-size:11px;";
+                anchorDesc.Attributes["style"] = "color:#33cc99;font-size:11px;";
+            }
             #endregion
 
             #region Search By
@@ -76,23 +93,6 @@ namespace TEST_ASP_ALPHA_1
                 searchCriteria[CommonManager.GetOnSaleCriterionName()] = _onSale;
             }
             #endregion
-
-            var _page = Request.QueryString["page"];
-            if (_page != null)
-            {
-                currentPage = Convert.ToInt32(_page);
-            }
-
-            if (ascending)
-            {
-                anchorAsc.Attributes["style"] = "color:#33cc99;font-size:11px;";
-                anchorDesc.Attributes["style"] = "color:#999;font-size:11px;";
-            }
-            else
-            {
-                anchorAsc.Attributes["style"] = "color:#999;font-size:11px;";
-                anchorDesc.Attributes["style"] = "color:#33cc99;font-size:11px;";
-            }
 
             AddSortByOptions();
             AddSearchByOptions();
