@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using TEST_ASP_ALPHA_1.Common;
 using TEST_ASP_ALPHA_1.Models;
 
 namespace TEST_ASP_ALPHA_1
@@ -13,13 +14,13 @@ namespace TEST_ASP_ALPHA_1
     {
         AESManager aesMgr;
         EmailManager emailMgr;
-        LoginManager loginMgr;
+        CustomerManager loginMgr;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             aesMgr = new AESManager();
             emailMgr = new EmailManager();
-            loginMgr = new LoginManager();
+            loginMgr = new CustomerManager();
 
             var logout = Request.QueryString["logout"];
             if (!String.IsNullOrEmpty(logout))
@@ -27,9 +28,9 @@ namespace TEST_ASP_ALPHA_1
                 if (logout == "true")
                 {
                     string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
-                    Session.Remove("CustId");
-                    Session.Remove("CustName");
-                    Session.Remove("CustEmail");
+                    Session.Remove(CommonManager.GetCustIdSessionName());
+                    Session.Remove(CommonManager.GetCustNameSessionName());
+                    Session.Remove(CommonManager.GetCustEmailSessionName());
                     Response.Redirect(baseUrl + "Default.aspx");
                 }
             }
@@ -47,9 +48,9 @@ namespace TEST_ASP_ALPHA_1
 
             if(loginMgr.ValidateLogin(encEmail, encPassword, out custId, out custUsername))
             {
-                Session.Add("CustId", custId);
-                Session.Add("CustName", custUsername);
-                Session.Add("CustEmail", dfnLoginEmail.Text);
+                Session.Add(CommonManager.GetCustIdSessionName(), custId);
+                Session.Add(CommonManager.GetCustNameSessionName(), custUsername);
+                Session.Add(CommonManager.GetCustEmailSessionName(), dfnLoginEmail.Text);
 
                 Response.Redirect(baseUrl + "Default.aspx");
             }

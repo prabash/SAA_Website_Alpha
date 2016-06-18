@@ -277,6 +277,8 @@
     <Content Include="js\owl.carousel.min.js" />
     <Content Include="js\slider.js" />
     <Content Include="Login.aspx" />
+    <Content Include="MyAccountDashboard.aspx" />
+    <Content Include="MyAccountInformation.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -511,7 +513,21 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IndexModel.cs" />
     <Compile Include="Models\ItemsModel.cs" />
-    <Compile Include="Models\LoginManager.cs" />
+    <Compile Include="Models\CustomerManager.cs" />
+    <Compile Include="MyAccountDashboard.aspx.cs">
+      <DependentUpon>MyAccountDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyAccountDashboard.aspx.designer.cs">
+      <DependentUpon>MyAccountDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyAccountInformation.aspx.cs">
+      <DependentUpon>MyAccountInformation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyAccountInformation.aspx.designer.cs">
+      <DependentUpon>MyAccountInformation.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProductDetails.aspx.cs">
       <DependentUpon>ProductDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

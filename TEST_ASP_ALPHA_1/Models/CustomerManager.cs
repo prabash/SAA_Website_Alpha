@@ -8,7 +8,7 @@ using TEST_ASP_ALPHA_1.Common;
 
 namespace TEST_ASP_ALPHA_1.Models
 {
-    public class LoginManager
+    public class CustomerManager
     {
         public void RegisterUser(string email, string username, string password)
         {
@@ -244,11 +244,13 @@ namespace TEST_ASP_ALPHA_1.Models
             return new CustomerObject
             {
                 Id = Convert.ToInt32(dr["id"]),
-                nicNo = dr["nic_no"].ToString(),
-                name = dr["name"].ToString(),
+                nicNo = dr["nic_no"] != null ? dr["nic_no"].ToString() : "",
+                name = dr["name"] != null ? dr["name"].ToString() : "",
                 emailAddress = dr["email_address"].ToString(),
-                telephoneNo = dr["telephone_no"].ToString(),
-                address = dr["address"].ToString(),
+                telephoneNo = dr["telephone_no"] != null ? dr["telephone_no"].ToString() : "",
+                addressLine1 = dr["address"] != null ? dr["address"].ToString().Split('|')[0] : "",
+                addressLine2 = dr["address"] != null ? dr["address"].ToString().Split('|')[1] : "",
+                city = dr["address"] != null ? dr["address"].ToString().Split('|')[2] : "",
                 username = dr["username"].ToString(),
                 password = dr["password"].ToString(),
                 registeredDate = Convert.ToDateTime(dr["registered_date"]),

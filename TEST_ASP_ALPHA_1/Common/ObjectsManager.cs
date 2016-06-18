@@ -37,7 +37,9 @@ namespace TEST_ASP_ALPHA_1.Common
         public string name { get; set; }
         public string emailAddress { get; set; }
         public string telephoneNo { get; set; }
-        public string address { get; set; }
+        public string addressLine1 { get; set; }
+        public string addressLine2 { get; set; }
+        public string city { get; set; }
         public string username { get; set; }
         public string password { get; set; }
         public DateTime registeredDate { get; set; }

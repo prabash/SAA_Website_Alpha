@@ -12,13 +12,13 @@ namespace TEST_ASP_ALPHA_1
     {
         AESManager aesMgr;
         EmailManager emailMgr;
-        LoginManager loginMgr;
+        CustomerManager loginMgr;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             aesMgr = new AESManager();
             emailMgr = new EmailManager();
-            loginMgr = new LoginManager();
+            loginMgr = new CustomerManager();
         }
 
         protected void btnRegCreateAccount_Click(object sender, EventArgs e)

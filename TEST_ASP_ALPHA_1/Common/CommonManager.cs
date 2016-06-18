@@ -9,6 +9,10 @@ namespace TEST_ASP_ALPHA_1.Common
 {
     public class CommonManager
     {
+        const string custId = "CustId";
+        const string custEmail = "CustEmail";
+        const string custName = "CustName";
+
         #region Web Config Manager
 
         #region Sort By
@@ -162,6 +166,25 @@ namespace TEST_ASP_ALPHA_1.Common
         {
             string reqTimeOutMins = ConfigurationManager.AppSettings["ReqTimeoutMinutes"];
             return Convert.ToInt32(reqTimeOutMins);
+        }
+
+        #endregion
+
+        #region Sessions
+
+        public static string GetCustIdSessionName()
+        {
+            return custId;
+        }
+
+        public static string GetCustEmailSessionName()
+        {
+            return custEmail;
+        }
+
+        public static string GetCustNameSessionName()
+        {
+            return custName;
         }
 
         #endregion

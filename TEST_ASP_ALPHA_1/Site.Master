@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="TEST_ASP_ALPHA_1.SiteMaster" %>
+<%@ Import Namespace="TEST_ASP_ALPHA_1.Common" %>
 
 <!DOCTYPE html>
 <html ng-app="MyApp" lang="en">
@@ -74,10 +75,13 @@
         </div>
         <div class=" col-lg-7 col-sm-8 col-md-7 col-xs-12">
           <div class="header-top">
-              <% if (Session["CustName"] == null) { %>
+              <% if (Session[CommonManager.GetCustNameSessionName()] == null)
+                 { %>
                     <div class="welcome-msg hidden-xs"> Welcome to SAA Video! </div>
-              <% } else { %>
-                    <div class="welcome-msg hidden-xs"> Hello there, <%=Session["CustName"].ToString()%>! </div>
+              <% } 
+                 else 
+                 { %>
+                    <div class="welcome-msg hidden-xs"> Hello there, <%=Session[CommonManager.GetCustNameSessionName()].ToString()%>! </div>
               <% } %>
             <!-- Header Language -->
             <div class="dropdown block-language-wrapper"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="images/english.png" alt="language"> English <span class="caret"></span> </a>
@@ -91,12 +95,13 @@
             <!-- Header Top Links -->
             <div class="toplinks">
               <div class="links">
-                <% if (Session["CustId"] == null) { %>
+                <% if (Session[CommonManager.GetCustIdSessionName()] == null)
+                   { %>
                 <div class="myaccount"><a title="My Account" href="Login.aspx"><span class="hidden-xs">My Account</span></a></div>
                 <div class="wishlist"><a title="My Wishlist" href="Login.aspx"><span class="hidden-xs">Wishlist</span></a></div>
                 <% } else { %>
-                <div class="myaccount"><a title="My Account" href="Login.aspx"><span class="hidden-xs">My Account</span></a></div>
-                <div class="wishlist"><a title="My Wishlist" href="Login.aspx"><span class="hidden-xs">Wishlist</span></a></div>
+                <div class="myaccount"><a title="My Account" href="MyAccountDashboard.aspx"><span class="hidden-xs">My Account</span></a></div>
+                <div class="wishlist"><a title="My Wishlist" href="MyAccountWishlist.aspx"><span class="hidden-xs">Wishlist</span></a></div>
                 <% } %>
                 <!-- Header Company -->
                 <div class="dropdown block-company-wrapper hidden-xs"> <a role="button" data-toggle="dropdown" data-target="#" class="dropdown-toggle" href="#"> Company <span class="caret"></span></a>
@@ -109,9 +114,12 @@
                   </ul>
                 </div>
                 <!-- End Header Company -->
-                <% if (Session["CustId"] == null) { %>
+                <% if (Session[CommonManager.GetCustIdSessionName()] == null)
+                   { %>
                 <div class="login"><a href="Login.aspx"><span class="hidden-xs">Log In</span></a></div>
-                <% } else { %>
+                <% } 
+                   else
+                   { %>
                 <div class="login"><a href="Login.aspx?logout=true"><span class="hidden-xs">Log Out</span></a></div>
                 <% } %>
               </div>
