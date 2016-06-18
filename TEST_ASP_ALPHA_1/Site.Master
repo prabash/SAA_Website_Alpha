@@ -416,6 +416,12 @@
            window.location.replace(url);
            return false; //cancel default behaviour of the href
        };
+
+       function redirect(currentPage, goToPage) {
+           var uri = window.location.href;
+           uri = uri.replace(currentPage, goToPage)
+           window.location.replace(uri);
+       };
    </script>
 </body>
 </html>

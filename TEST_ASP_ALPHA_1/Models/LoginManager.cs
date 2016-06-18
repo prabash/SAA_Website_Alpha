@@ -35,7 +35,37 @@ namespace TEST_ASP_ALPHA_1.Models
                     }
                 }
                 else
-                    throw new Exception("Email already exists in the database");
+                    throw new Exception("Email already exists in the database!");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void ResetPassword(string email, string newPassword)
+        {
+            try
+            {
+                var custDetail = GetCustomerDetails(CustomerGetType.email, 0, email);
+                if (custDetail.Count == 1)
+                {
+                    using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+                    {
+                        string sqlString = @"UPDATE customers SET password = @password WHERE id= @id AND email_address = @emailAdd";
+
+                        using (MySqlCommand com = new MySqlCommand(sqlString, con))
+                        {
+                            com.Parameters.AddWithValue("@password", newPassword);
+                            com.Parameters.AddWithValue("@id", custDetail.First().Id);
+                            com.Parameters.AddWithValue("@emailAdd", email);
+
+                            com.ExecuteNonQuery();
+                        }
+                    }
+                }
+                else
+                    throw new Exception("Your email is not registered yet!");
             }
             catch (Exception ex)
             {
@@ -184,6 +214,29 @@ namespace TEST_ASP_ALPHA_1.Models
             }
 
             return loginSuccess;
+        }
+
+        public bool ValidateEmail(string email, out string custName)
+        {
+            bool validateSuccess = false;
+            custName = "";
+
+            var custDetail = GetCustomerDetails(CustomerGetType.email, 0, email);
+            if (custDetail != null && custDetail.Count > 0)
+            {
+                var customer = custDetail.First();
+                if (customer.active)
+                {
+                    custName = customer.username;
+                    validateSuccess = true;
+                }
+                else
+                {
+                    throw new Exception("Your account has not been activated yet!");
+                }
+            }
+
+            return validateSuccess;
         }
 
         public CustomerObject GetInfoAddedCustomerObject(MySqlDataReader dr)

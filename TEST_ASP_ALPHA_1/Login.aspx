@@ -1,7 +1,18 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="TEST_ASP_ALPHA_1.Login" MasterPageFile="~/Site.Master"%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs" style="margin-left: -15px">
+        <div class="container">
+            <div class="row">
+                <ul>
+                    <li class="home"><a title="Go to Home Page" href="Default.aspx">Home</a><span>&raquo;</span></li>
+                    <li class="category13"><strong>Login</strong></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
     <section class="main-container col1-layout" style="margin-left: -15px">
         <div class="main container">
             <div class="account-login">
@@ -29,7 +40,7 @@
                             <p class="required">* Required Fields</p>
                             <div class="buttons-set">
                                 <asp:Button CssClass="button login" ID="btnLogin" Text="LOGIN" runat="server" OnClick="btnLogin_Click"/>
-                                <a class="forgot-word" href="http://demo.magentomagik.com/computerstore/customer/account/forgotpassword/">Forgot Your Password?</a>
+                                <a class="forgot-word" href="ResetPassword.aspx">Forgot Your Password?</a>
                             </div>
                         </form>
                     </div>
@@ -39,7 +50,7 @@
                             <p>Are you new to SAA Videos? If so, please register with us.</p>
                             
                             <div class="buttons-set">
-                                <button class="button create-account" type="button" ID="btnRegCreateAccount" onclick="redirect();"> <span>Create an Account</span></button>
+                                <button class="button create-account" type="button" ID="btnRegCreateAccount" onclick="redirect('Login','Register');"> <span>Create an Account</span></button>
                             </div>
                         </form>
                     </div>
@@ -47,12 +58,6 @@
             </div>
         </div>
     </section>
-    <script type="text/javascript">
-        function redirect() {
-            var uri = window.location.href;
-            window.location.replace(uri.replace('Login', 'Register'));
-        }
-    </script>
 </asp:Content>
 
 

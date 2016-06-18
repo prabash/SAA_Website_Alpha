@@ -1,7 +1,18 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="TEST_ASP_ALPHA_1.Register" MasterPageFile="~/Site.Master" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs" style="margin-left: -15px">
+        <div class="container">
+            <div class="row">
+                <ul>
+                    <li class="home"><a title="Go to Home Page" href="Default.aspx">Home</a><span>&raquo;</span></li>
+                    <li class="category13"><strong>Register</strong></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
     <section class="main-container col1-layout" style="margin-left: -15px">
         <div class="main container">
             <div class="account-login">
@@ -68,7 +79,7 @@
                         <form class="content" ID="form2">
                             <p>Do you already have an account with us? If so, please log in.</p>
                             <div class="buttons-set">
-                                <button type="button" class="button login" onclick="redirect();" id="btnLogin"><span>Login</span></button>
+                                <button type="button" class="button login" onclick="redirect('Register', 'Login');" id="btnLogin"><span>Login</span></button>
                             </div>
                         </form>
                     </div>
@@ -76,11 +87,4 @@
             </div>
         </div>
     </section>
-
-    <script type="text/javascript">
-        function redirect() {
-            var uri = window.location.href;
-            window.location.replace(uri.replace('Register', 'Login'));
-        }
-    </script>
 </asp:Content>

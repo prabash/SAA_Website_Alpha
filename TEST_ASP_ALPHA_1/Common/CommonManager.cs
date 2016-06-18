@@ -156,6 +156,16 @@ namespace TEST_ASP_ALPHA_1.Common
 
         #endregion
 
+        #region Login
+
+        public static int GetRequestTimeoutMins()
+        {
+            string reqTimeOutMins = ConfigurationManager.AppSettings["ReqTimeoutMinutes"];
+            return Convert.ToInt32(reqTimeOutMins);
+        }
+
+        #endregion
+
         #endregion
     }
 }
