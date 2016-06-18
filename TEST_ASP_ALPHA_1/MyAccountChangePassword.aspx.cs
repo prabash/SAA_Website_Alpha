@@ -13,13 +13,13 @@ namespace TEST_ASP_ALPHA_1
     {
         AESManager aesMgr;
         EmailManager emailMgr;
-        CustomerManager custMgr;
+        CustomerModel custMgr;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             aesMgr = new AESManager();
             emailMgr = new EmailManager();
-            custMgr = new CustomerManager();
+            custMgr = new CustomerModel();
 
             if (!IsPostBack)
             {

@@ -17,7 +17,7 @@ namespace TEST_ASP_ALPHA_1
                 var activationCode = Request.QueryString["ActivationCode"];
                 if (!String.IsNullOrEmpty(activationCode))
                 {
-                    new CustomerManager().ActivateUser(activationCode);
+                    new CustomerModel().ActivateUser(activationCode);
 
                     successActMsgBox.Visible = true;
                     errorActMsgBox.Visible = false;

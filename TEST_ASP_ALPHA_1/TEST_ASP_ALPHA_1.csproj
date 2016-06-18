@@ -515,7 +515,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IndexModel.cs" />
     <Compile Include="Models\ItemsModel.cs" />
-    <Compile Include="Models\CustomerManager.cs" />
+    <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="MyAccountChangePassword.aspx.cs">
       <DependentUpon>MyAccountChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

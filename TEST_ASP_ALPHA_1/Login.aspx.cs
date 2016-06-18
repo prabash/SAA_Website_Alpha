@@ -14,13 +14,13 @@ namespace TEST_ASP_ALPHA_1
     {
         AESManager aesMgr;
         EmailManager emailMgr;
-        CustomerManager loginMgr;
+        CustomerModel loginMgr;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             aesMgr = new AESManager();
             emailMgr = new EmailManager();
-            loginMgr = new CustomerManager();
+            loginMgr = new CustomerModel();
 
             var logout = Request.QueryString["logout"];
             if (!String.IsNullOrEmpty(logout))

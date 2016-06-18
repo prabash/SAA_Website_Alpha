@@ -8,7 +8,7 @@ using TEST_ASP_ALPHA_1.Common;
 
 namespace TEST_ASP_ALPHA_1.Models
 {
-    public class CustomerManager
+    public class CustomerModel
     {
         #region Set
 

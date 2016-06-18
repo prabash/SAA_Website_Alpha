@@ -24,6 +24,7 @@ namespace TEST_ASP_ALPHA_1.Common
         public bool onSale { get; set; }
         public string description { get; set; }
         public string overview { get; set; }
+        public bool bestSeller { get; set; }
         public string year { get; set; }
         public string type { get; set; }
         public DateTime dateAdded { get; set; }

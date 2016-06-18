@@ -10,6 +10,52 @@ namespace TEST_ASP_ALPHA_1.Models
 {
     public class ItemsModel
     {
+        #region Set
+        public void SaveItems(List<ItemObject> items)
+        {
+            try
+            {
+                using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+                {
+                    string sqlString = @"INSERT INTO items (title, location_default, location_alt, regular_price, current_price, rating, on_sale, type, overview, description, best_seller, year, date_added, genre) 
+                                    VALUES (@title, @defLocation, @altLocation, @regPrice, @curPrice, @rating, @onSale, @type, @overview, @description, @bestSeller, @year, @dateAdded, @genre)";
+
+                    using (MySqlCommand com = new MySqlCommand(sqlString, con))
+                    {
+                        foreach (var item in items)
+                        {
+                            com.Parameters.AddWithValue("@title", item.title);
+                            com.Parameters.AddWithValue("@defLocation", item.defaultLocation);
+                            com.Parameters.AddWithValue("@altLocation", item.altLocation);
+                            com.Parameters.AddWithValue("@regPrice", item.regularPrice);
+                            com.Parameters.AddWithValue("@curPrice", item.currentPrice);
+                            com.Parameters.AddWithValue("@rating", item.rating);
+                            com.Parameters.AddWithValue("@onSale", Convert.ToInt32(item.onSale));
+                            com.Parameters.AddWithValue("@type", item.type);
+                            com.Parameters.AddWithValue("@overview", item.overview);
+                            com.Parameters.AddWithValue("@description", item.description);
+                            com.Parameters.AddWithValue("@bestSeller", item.bestSeller);
+                            com.Parameters.AddWithValue("@year", item.year);
+                            com.Parameters.AddWithValue("@dateAdded", DateTime.Now);
+                            com.Parameters.AddWithValue("@genre", item.genre);
+
+                        }
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
+
+        #region Get
+
+        #region General
         public List<SlideShowObj> GetSlideShowDetails(ItemType type)
         {
             List<SlideShowObj> returnList = new List<SlideShowObj>();
@@ -169,26 +215,7 @@ namespace TEST_ASP_ALPHA_1.Models
             return returnObj;
         }
 
-        public ItemObject GetInfoAddedItemObject(MySqlDataReader dr)
-        {
-            return new ItemObject
-            {
-                Id = Convert.ToInt32(dr["id"]),
-                title = dr["title"].ToString(),
-                defaultLocation = dr["location_default"].ToString(),
-                altLocation = dr["location_alt"].ToString(),
-                regularPrice = dr["regular_price"] == null ? 0 : Convert.ToDouble(dr["regular_price"]),
-                currentPrice = dr["current_price"] == null ? 0 : Convert.ToDouble(dr["current_price"]),
-                rating = dr["rating"] == null ? 0 : Convert.ToDouble(dr["rating"]),
-                onSale = dr["on_sale"] == null ? false : Convert.ToBoolean(dr["on_sale"]),
-                year = dr["year"].ToString(),
-                description = dr["description"].ToString(),
-                overview = dr["overview"].ToString(),
-                type = dr["type"].ToString(),
-                dateAdded = Convert.ToDateTime(dr["date_added"]),
-                genre = dr["genre"].ToString()
-            };
-        }
+        #endregion
 
         #region Search Criteria
 
@@ -486,6 +513,34 @@ namespace TEST_ASP_ALPHA_1.Models
                     }
                 }
             }
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Objects
+
+        public ItemObject GetInfoAddedItemObject(MySqlDataReader dr)
+        {
+            return new ItemObject
+            {
+                Id = Convert.ToInt32(dr["id"]),
+                title = dr["title"].ToString(),
+                defaultLocation = dr["location_default"].ToString(),
+                altLocation = dr["location_alt"].ToString(),
+                regularPrice = dr["regular_price"] == null ? 0 : Convert.ToDouble(dr["regular_price"]),
+                currentPrice = dr["current_price"] == null ? 0 : Convert.ToDouble(dr["current_price"]),
+                rating = dr["rating"] == null ? 0 : Convert.ToDouble(dr["rating"]),
+                onSale = dr["on_sale"] == null ? false : Convert.ToBoolean(dr["on_sale"]),
+                year = dr["year"].ToString(),
+                description = dr["description"].ToString(),
+                bestSeller = dr["best_seller"] == null ? false : Convert.ToBoolean(dr["best_seller"]),
+                overview = dr["overview"].ToString(),
+                type = dr["type"].ToString(),
+                dateAdded = Convert.ToDateTime(dr["date_added"]),
+                genre = dr["genre"].ToString()
+            };
         }
 
         #endregion

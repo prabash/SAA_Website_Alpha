@@ -13,7 +13,7 @@ namespace TEST_ASP_ALPHA_1
     {
         AESManager aesMgr;
         EmailManager emailMgr;
-        CustomerManager loginMgr;
+        CustomerModel loginMgr;
         string resetEmail = "";
         DateTime reqDate;
 
@@ -21,7 +21,7 @@ namespace TEST_ASP_ALPHA_1
         {
             aesMgr = new AESManager();
             emailMgr = new EmailManager();
-            loginMgr = new CustomerManager();
+            loginMgr = new CustomerModel();
 
             var resetReq = Request.QueryString["RE"];
             if (!String.IsNullOrEmpty(resetReq))
