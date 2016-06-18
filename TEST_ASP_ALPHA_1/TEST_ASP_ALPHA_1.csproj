@@ -280,6 +280,7 @@
     <Content Include="MyAccountChangePassword.aspx" />
     <Content Include="MyAccountDashboard.aspx" />
     <Content Include="MyAccountInformation.aspx" />
+    <Content Include="MyAccountOrders.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -536,6 +537,13 @@
     </Compile>
     <Compile Include="MyAccountInformation.aspx.designer.cs">
       <DependentUpon>MyAccountInformation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyAccountOrders.aspx.cs">
+      <DependentUpon>MyAccountOrders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyAccountOrders.aspx.designer.cs">
+      <DependentUpon>MyAccountOrders.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProductDetails.aspx.cs">
       <DependentUpon>ProductDetails.aspx</DependentUpon>

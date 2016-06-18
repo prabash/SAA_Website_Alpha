@@ -126,7 +126,16 @@ namespace TEST_ASP_ALPHA_1.Models
 
             return returnList;
         }
-        
+
+        public int GetPurchItemCount(PurchItemGetType getType, int custId = 0, string custEmail = null, int purchCartId = 0, DateTime? fromPurchDate = null, DateTime? toPurchDate = null)
+        {
+            var purchItems = GetPurchItemDetails(getType, custId, custEmail, purchCartId, fromPurchDate, toPurchDate);
+            if (purchItems != null)
+                return purchItems.Count();
+            else
+                return 0;
+        }
+
         #endregion
 
         #region Objects

@@ -85,6 +85,11 @@ namespace TEST_ASP_ALPHA_1.Common
             return displayingPages;
         }
 
+        public static int GetDefaultValuePerTable()
+        {
+            return Convert.ToInt32(ConfigurationManager.AppSettings["DefaultValuePerTable"]);
+        }
+
         #endregion
 
         #region Search By

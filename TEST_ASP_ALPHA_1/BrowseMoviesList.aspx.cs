@@ -131,9 +131,9 @@ namespace TEST_ASP_ALPHA_1
 
         private void AddSortByOptions()
         {
-            CommonHtmlManager.AddViewPerPageList(currentViewPerPage, ref this.viewPerPage);
-            CommonHtmlManager.AddSortByList(sortBy, ref this.sortByList);
-            CommonHtmlManager.AddPagination(pageItemType, currentPage, currentViewPerPage, ref this.paginationCtrl, searchCriteria);
+            CommonHtmlManager.AddItemViewPerPageList(currentViewPerPage, ref this.viewPerPage);
+            CommonHtmlManager.AddItemSortByList(sortBy, ref this.sortByList);
+            CommonHtmlManager.AddItemPagination(pageItemType, currentPage, currentViewPerPage, ref this.paginationCtrl, searchCriteria);
         }
 
         #endregion
@@ -142,10 +142,10 @@ namespace TEST_ASP_ALPHA_1
 
         private void AddSearchByOptions()
         {
-            CommonHtmlManager.GetPriceSearchByOptions(pageItemType, searchCriteria, ref this.priceRangeSearch);
-            CommonHtmlManager.GetYearSearchByOptions(pageItemType, searchCriteria, ref this.yearSearch);
-            CommonHtmlManager.GetGenreSearchByOptions(pageItemType, searchCriteria, ref this.genreSearch);
-            CommonHtmlManager.GetSalesSearchByOptions(pageItemType, searchCriteria, ref this.salesSearch);
+            CommonHtmlManager.GetItemPriceSearchByOptions(pageItemType, searchCriteria, ref this.priceRangeSearch);
+            CommonHtmlManager.GetItemYearSearchByOptions(pageItemType, searchCriteria, ref this.yearSearch);
+            CommonHtmlManager.GetItemGenreSearchByOptions(pageItemType, searchCriteria, ref this.genreSearch);
+            CommonHtmlManager.GetItemSalesSearchByOptions(pageItemType, searchCriteria, ref this.salesSearch);
         }
 
         #endregion
