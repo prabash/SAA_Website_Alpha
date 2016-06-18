@@ -3,7 +3,7 @@ using System.Data;
 using System.Security.Cryptography;
 using System.IO;
 
-namespace TEST_ASP_ALPHA_1.Models
+namespace TEST_ASP_ALPHA_1.Common
 {
     public class AESManager
     {

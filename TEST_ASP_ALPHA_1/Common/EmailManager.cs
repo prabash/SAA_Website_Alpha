@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 
-namespace TEST_ASP_ALPHA_1.Models
+namespace TEST_ASP_ALPHA_1.Common
 {
     public class EmailManager
     {
