@@ -12,6 +12,7 @@ namespace TEST_ASP_ALPHA_1.Common
         const string custId = "CustId";
         const string custEmail = "CustEmail";
         const string custName = "CustName";
+        const string cartItems = "CartItems";
 
         #region Web Config Manager
 
@@ -142,6 +143,18 @@ namespace TEST_ASP_ALPHA_1.Common
             return searchCriteria.Split('|')[5];
         }
 
+        public static string GetSearchByIdCriterion(List<int> items)
+        {
+            StringBuilder searchCriterion = new StringBuilder();
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (i < items.Count - 1)
+                    searchCriterion.Append(items[i] + ",");
+                else if (i == items.Count - 1)
+                    searchCriterion.Append(items[i]);
+            }
+            return searchCriterion.ToString();
+        }
         #endregion
 
         #region Contact Details
@@ -196,6 +209,11 @@ namespace TEST_ASP_ALPHA_1.Common
         public static string GetCustNameSessionName()
         {
             return custName;
+        }
+
+        public static string GetCartItemsSessionName()
+        {
+            return cartItems;
         }
 
         #endregion

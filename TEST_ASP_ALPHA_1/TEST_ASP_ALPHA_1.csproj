@@ -486,6 +486,7 @@
     <Compile Include="Common\ItemHtmlManager.cs" />
     <Compile Include="Common\NumberManager.cs" />
     <Compile Include="Common\ObjectsManager.cs" />
+    <Compile Include="Common\ShoppingCartManager.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

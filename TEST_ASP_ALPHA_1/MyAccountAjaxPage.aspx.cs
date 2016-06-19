@@ -41,5 +41,54 @@ namespace TEST_ASP_ALPHA_1
                 return ex.Message;
             }
         }
+
+        [System.Web.Services.WebMethod(EnableSession = true)]
+        public static string AddToCartSession(int itemId, string itemTitle)
+        {
+            try
+            {
+                var cartSession = HttpContext.Current.Session[CommonManager.GetCartItemsSessionName()];
+                if (cartSession == null)
+                {
+                    HttpContext.Current.Session.Add(CommonManager.GetCartItemsSessionName(), new List<int>());
+                    cartSession = HttpContext.Current.Session[CommonManager.GetCartItemsSessionName()];
+                }
+
+                var cart = (List<int>)cartSession;
+                if (!cart.Contains(itemId))
+                {
+                    cart.Add(itemId);
+                    HttpContext.Current.Session[CommonManager.GetCartItemsSessionName()] = cart;
+                    return "Successfully added " + itemTitle + " to your cart!";
+                }
+                else
+                    return "The item already exists in your cart!";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        [System.Web.Services.WebMethod(EnableSession = true)]
+        public static string RemoveFromCartSession(int itemId)
+        {
+            try
+            {
+                var cartSession = HttpContext.Current.Session[CommonManager.GetCartItemsSessionName()];
+                var cart = (List<int>)cartSession;
+                if (cart.Contains(itemId))
+                {
+                    cart.Remove(itemId);
+                    HttpContext.Current.Session[CommonManager.GetCartItemsSessionName()] = cart;
+                    return "Successfully removed item from your cart!";
+                }
+                return "";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
     }
 }

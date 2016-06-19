@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="TEST_ASP_ALPHA_1.SiteMaster" %>
+
 <%@ Import Namespace="TEST_ASP_ALPHA_1.Common" %>
 
 <!DOCTYPE html>
@@ -36,7 +37,8 @@
             background-color: #f44336; /* Red */
             color: white;
             margin-bottom: 15px;
-        } 
+        }
+
         .success {
             padding: 20px;
             background-color: #098BBD; /* Red */
@@ -56,382 +58,465 @@
             transition: 0.3s;
         }
 
-        /* When moving the mouse over the close button */
-        .closebtn:hover {
-            color: black;
-        }
+            /* When moving the mouse over the close button */
+            .closebtn:hover {
+                color: black;
+            }
     </style>
 </head>
 <body>
-<div class="page">
-  <!-- Header -->
-  <header class="header">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-5 col-sm-4 col-md-5">
-          <!-- Header Logo -->
-          <a class="logo" title="SAA Video" href="index.html"><img alt="SAA Video" src="images/logo.png"></a>
-          <!-- End Header Logo -->
-        </div>
-        <div class=" col-lg-7 col-sm-8 col-md-7 col-xs-12">
-          <div class="header-top">
-              <% if (Session[CommonManager.GetCustNameSessionName()] == null)
-                 { %>
-                    <div class="welcome-msg hidden-xs"> Welcome to SAA Video! </div>
-              <% } 
-                 else 
-                 { %>
-                    <div class="welcome-msg hidden-xs"> Hello there, <%=Session[CommonManager.GetCustNameSessionName()].ToString()%>! </div>
-              <% } %>
-            <!-- Header Language -->
-            <div class="dropdown block-language-wrapper"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="images/english.png" alt="language"> English <span class="caret"></span> </a>
-              <ul class="dropdown-menu" role="menu">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><img src="images/english.png" alt="language"> English </a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><img src="images/francais.png" alt="language"> French </a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><img src="images/german.png" alt="language"> German </a></li>
-              </ul>
-            </div>
-            <!-- End Header Language -->
-            <!-- Header Top Links -->
-            <div class="toplinks">
-              <div class="links">
-                <% if (Session[CommonManager.GetCustIdSessionName()] == null)
-                   { %>
-                <div class="myaccount"><a title="My Account" href="Login.aspx"><span class="hidden-xs">My Account</span></a></div>
-                <div class="wishlist"><a title="My Wishlist" href="Login.aspx"><span class="hidden-xs">Wishlist</span></a></div>
-                <% } else { %>
-                <div class="myaccount"><a title="My Account" href="MyAccountDashboard.aspx"><span class="hidden-xs">My Account</span></a></div>
-                <div class="wishlist"><a title="My Wishlist" href="MyAccountWishlist.aspx"><span class="hidden-xs">Wishlist</span></a></div>
-                <% } %>
-                <!-- Header Company -->
-                <div class="dropdown block-company-wrapper hidden-xs"> <a role="button" data-toggle="dropdown" data-target="#" class="dropdown-toggle" href="#"> Company <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="About.aspx"> About Us </a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="Contact.aspx"> Contact Us </a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="Register"> Register </a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="sitemap.html">Site Map </a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Search Terms </a></li>
-                  </ul>
-                </div>
-                <!-- End Header Company -->
-                <% if (Session[CommonManager.GetCustIdSessionName()] == null)
-                   { %>
-                <div class="login"><a href="Login.aspx"><span class="hidden-xs">Log In</span></a></div>
-                <% } 
-                   else
-                   { %>
-                <div class="login"><a href="Login.aspx?logout=true"><span class="hidden-xs">Log Out</span></a></div>
-                <% } %>
-              </div>
-            </div>
-            <!-- End Header Top Links -->
-          </div>
-          <div class="cart_cur_block">
-            <!-- Header Currency -->
-            <div class="dropdown block-currency-wrapper"> <a role="button" data-toggle="dropdown" data-target="#" class="block-currency dropdown-toggle" href="#"> USD <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#"> $ - Dollar </a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#"> £ - Pound </a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#"> € - Euro </a></li>
-              </ul>
-            </div>
-            <!-- End Header Currency -->
-            <!-- Top Cart -->
-            <div class="top-cart-contain">
-              <div class="mini-cart">
-                <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="#"><span class="hidden-xs">shopping cart (3)</span></a></div>
-                <div>
-                  <div style="display: none;" class="top-cart-content arrow_box">
-                    <div class="block-subtitle">Recently added item(s)</div>
-                    <ul id="cart-sidebar" class="mini-products-list">
-                      <li class="item odd"> <a href="product_detail.html" title="Skater Dress In Leaf Print" class="product-image"><img src="products_images/product1.jpg" alt="Product image" width="55"></a>
-                        <div class="product-details"> <a href="#" title="Remove This Item" onClick="" class="btn-remove1">Remove This Item</a> <a class="btn-edit" title="Edit item" href="#">Edit item</a>
-                          <p class="product-name"><a href="product_detail.html">Sample Product</a> </p>
-                          <strong>1</strong> x <span class="price">$20.00</span> </div>
-                      </li>
-                      <li class="item even"> <a href="product_detail.html" title="Product layout: large content" class="product-image"><img src="products_images/product1.jpg" alt="Product image" width="55"></a>
-                        <div class="product-details"> <a href="#" title="Remove This Item" onClick="" class="btn-remove1">Remove This Item</a> <a class="btn-edit" title="Edit item" href="#">Edit item</a>
-                          <p class="product-name"><a href="product_detail.html">Sample Product</a> </p>
-                          <strong>1</strong> x <span class="price">$230.00</span> </div>
-                      </li>
-                      <li class="item last odd"> <a href="product_detail.html" title="Skater Dress In Leaf Print" class="product-image"><img src="products_images/product1.jpg" alt="Product image" width="55"></a>
-                        <div class="product-details"> <a href="#" title="Remove This Item" onClick="" class="btn-remove1">Remove This Item</a><a class="btn-edit" title="Edit item" href="#">Edit item</a>
-                          <p class="product-name"><a href="product_detail.html">Sample Product</a> </p>
-                          <strong>2</strong> x <span class="price">$420.00</span> </div>
-                      </li>
-                    </ul>
-                    <div class="top-subtotal">Subtotal: <span class="price">$520.00</span></div>
-                    <div class="actions">
-                      <button class="btn-checkout" type="button"><span>Checkout</span></button>
-                      <button class="view-cart" type="button"><span>View Cart</span></button>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-sm-4 col-md-5">
+                        <!-- Header Logo -->
+                        <a class="logo" title="SAA Video" href="Default.aspx">
+                            <img alt="SAA Video" src="images/logo.png"></a>
+                        <!-- End Header Logo -->
                     </div>
-                  </div>
+                    <div class=" col-lg-7 col-sm-8 col-md-7 col-xs-12">
+                        <div class="header-top">
+                            <% if (Session[CommonManager.GetCustNameSessionName()] == null)
+                               { %>
+                            <div class="welcome-msg hidden-xs">Welcome to SAA Video! </div>
+                            <% }
+                               else
+                               { %>
+                            <div class="welcome-msg hidden-xs">Hello there, <%=Session[CommonManager.GetCustNameSessionName()].ToString()%>! </div>
+                            <% } %>
+                            <!-- Header Language -->
+                            <div class="dropdown block-language-wrapper">
+                                <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#">
+                                    <img src="images/english.png" alt="language">
+                                    English <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">
+                                        <img src="images/english.png" alt="language">
+                                        English </a></li>
+                                </ul>
+                            </div>
+                            <!-- End Header Language -->
+                            <!-- Header Top Links -->
+                            <div class="toplinks">
+                                <div class="links">
+                                    <% if (Session[CommonManager.GetCustIdSessionName()] == null)
+                                       { %>
+                                    <div class="myaccount"><a title="My Account" href="Login.aspx"><span class="hidden-xs">My Account</span></a></div>
+                                    <div class="wishlist"><a title="My Wishlist" href="Login.aspx"><span class="hidden-xs">Wishlist</span></a></div>
+                                    <% }
+                                       else
+                                       { %>
+                                    <div class="myaccount"><a title="My Account" href="MyAccountDashboard.aspx"><span class="hidden-xs">My Account</span></a></div>
+                                    <div class="wishlist"><a title="My Wishlist" href="MyAccountWishlist.aspx"><span class="hidden-xs">Wishlist</span></a></div>
+                                    <% } %>
+                                    <!-- Header Company -->
+                                    <div class="dropdown block-company-wrapper hidden-xs">
+                                        <a role="button" data-toggle="dropdown" data-target="#" class="dropdown-toggle" href="#">Company <span class="caret"></span></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="About.aspx">About Us </a></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="Contact.aspx">Contact Us </a></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="Register.aspx">Register </a></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Search Terms </a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- End Header Company -->
+                                    <% if (Session[CommonManager.GetCustIdSessionName()] == null)
+                                       { %>
+                                    <div class="login"><a href="Login.aspx"><span class="hidden-xs">Log In</span></a></div>
+                                    <% }
+                                       else
+                                       { %>
+                                    <div class="login"><a href="Login.aspx?logout=true"><span class="hidden-xs">Log Out</span></a></div>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <!-- End Header Top Links -->
+                        </div>
+                        <div class="cart_cur_block">
+                            <!-- Header Currency -->
+                            <div class="dropdown block-currency-wrapper">
+                                <a role="button" data-toggle="dropdown" data-target="#" class="block-currency dropdown-toggle" href="#">LKR <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">LKR </a></li>
+                                </ul>
+                            </div>
+                            <!-- End Header Currency -->
+                            <!-- Top Cart -->
+                            <div class="top-cart-contain">
+                                <div class="mini-cart">
+                                    <%var cartSession = Session[CommonManager.GetCartItemsSessionName()];
+                                      if (cartSession != null)
+                                      {
+                                          var cart = (List<int>)cartSession;
+                                          if (cart.Count > 0)
+                                          {%>
+                                    <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"><a href="#"><span class="hidden-xs">shopping cart (<%=cart.Count%>)</span></a></div>
+                                    <div>
+                                        <div style="display: none;" class="top-cart-content arrow_box">
+                                            <div class="block-subtitle">Recently added item(s)</div>
+                                            <ul id="cart-sidebar" class="mini-products-list">
+
+                                                <% 
+                                              var searchCriteria = new Dictionary<string, string>();
+                                              searchCriteria.Add(CommonManager.GetIdCriterionName(), CommonManager.GetSearchByIdCriterion(cart));
+                                              var itemDetails = new TEST_ASP_ALPHA_1.Models.ItemsModel().GetItemDetails(ItemType.All, ItemSortBy.NameAsc, 5, 0, searchCriteria);
+
+                                              foreach (var item in itemDetails)
+                                              {
+                                                %>
+                                                <li>
+                                                    <a href="ProductDetails.aspx?itemId=<%=item.Id%>" title="<%=item.title%>" class="product-image">
+                                                        <img src="<%=item.defaultLocation%>" alt="Product image" width="55"></a>
+                                                    <div class="product-details">
+                                                        <a href="#" title="Remove This Item" onclick="RemoveFromCart(<%=item.Id%>);" class="btn-remove1">Remove This Item</a>
+                                                        <p class="product-name"><a href="ProductDetails.aspx?itemId=<%=item.Id%>"><%=item.title%></a> </p>
+                                                        <strong>1</strong> x <span class="price"><%=item.currentPrice.FormatCurrency("LKR").ToString()%></span>
+                                                    </div>
+                                                </li>
+                                                <%
+                                                   }
+                                                %>
+                                            </ul>
+                                            <div class="top-subtotal">Subtotal: <span class="price"><%=itemDetails.Sum(rec => rec.currentPrice).FormatCurrency("LKR").ToString()%></span></div>
+                                            <div class="actions">
+                                                <button class="btn-checkout" type="button"><span>Checkout</span></button>
+                                                <button class="view-cart" type="button"><span>View Cart</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%
+                                          }
+                                          else
+                                          {
+                                    %>
+                                    <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"><a href="#"><span class="hidden-xs">shopping cart (0)</span></a></div>
+                                    <div>
+
+                                        <div style="display: none;" class="top-cart-content arrow_box">
+                                            <div class="block-subtitle">Recently added item(s)</div>
+                                            <ul id="cart-sidebar" class="mini-products-list">
+                                            </ul>
+                                            <div class="top-subtotal">Subtotal: <span class="price">00.00</span></div>
+                                            <div class="actions">
+                                                <button class="btn-checkout" type="button" disabled><span>Checkout</span></button>
+                                                <button class="view-cart" type="button" disabled><span>View Cart</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%
+                                           }
+                                      }
+                                      else
+                                      {%>
+                                    <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"><a href="#"><span class="hidden-xs">shopping cart (0)</span></a></div>
+                                    <div>
+
+                                        <div style="display: none;" class="top-cart-content arrow_box">
+                                            <div class="block-subtitle">Recently added item(s)</div>
+                                            <ul id="cart-sidebar" class="mini-products-list">
+                                            </ul>
+                                            <div class="top-subtotal">Subtotal: <span class="price">00.00</span></div>
+                                            <div class="actions">
+                                                <button class="btn-checkout" type="button" disabled><span>Checkout</span></button>
+                                                <button class="view-cart" type="button" disabled><span>View Cart</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%
+                                   }
+                                    %>
+                                </div>
+                            </div>
+                            <!-- End Top Cart -->
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-            <!-- End Top Cart -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-  <!-- end header -->
-  <!-- Navbar -->
-  <nav>
-    <div class="container">
-      <div class="nav-inner">
-        <!-- mobile-menu -->
-        <div class="hidden-desktop" id="mobile-menu">
-          <ul class="navmenu">
-            <li>
-              <div class="menutop">
-                <div class="toggle"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></div>
-                <h2>Menu</h2>
-              </div>
-              <ul style="display:none;" class="submenu">
-                <li>
-                  <ul class="topnav"><li class="level0 nav-6 level-top first parent"> <a class="level-top" href="Default.aspx"> <span>Home</span> </a></li>
-                    <li class="level0 nav-1 level-top first parent"> <a href="BrowseGamesGrid.aspx" class="level-top"> <span>Browse</span> </a>
-                      <ul class="level0">
-                        <li class="level1 nav-1-1 first parent"> <a href="BrowseGamesGrid.aspx"> <span>Games</span> </a></li>
-                        <li class="level1 nav-1-2 parent"> <a href="BrowseTvSeriesGrid.aspx"> <span>TV Series</span> </a> </li>
-                        <li class="level1 nav-1-3 parent"> <a href="BrowseMoviesGrid.aspx"> <span>Movies</span> </a></li>
-                        <li class="level1 nav-1-4 parent"> <a href="BrowseGiftsGrid.aspx"> <span>Gifts</span> </a> </li>
-                        <li class="level1 nav-1-5 parent"> <a href="BrowseElectronicsGrid.aspx"> <span>Electronics</span> </a></li>
-                      </ul>
-                    </li>
-                    <li class="level0 nav-2 level-top parent"> <a href="About.aspx" class="level-top"> <span>About Us</span> </a></li>
-                    <li class="level0 nav-3 level-top parent"> <a href="Contact.aspx" class="level-top"> <span>Contact</span> </a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <!--navmenu-->
-        </div>
-        <!--End mobile-menu -->
-        <ul id="nav" class="hidden-xs">
-          <li id="nav-home" class="level0 parent drop-menu active"><a runat="server" href="Default.aspx"><span>Home</span> </a></li>
-          <li class="level0 parent drop-menu"><a href="#"><span>Browse</span> </a>
-            <ul style="display: none;" class="level1">
-              <li class="level1 first"><a href="BrowseGamesGrid.aspx"><span>Games</span></a></li>
-              <li class="level1 nav-10-2"> <a href="BrowseTvSeriesGrid.aspx"> <span>TV Series</span> </a> </li>
-              <li class="level1 nav-10-3"> <a href="BrowseMoviesGrid.aspx"> <span>Movies</span> </a> </li>
-              <li class="level1 nav-10-4"> <a href="BrowseGiftsGrid.aspx"> <span>Gifts</span> </a> </li>
-              <li class="level1 first parent"><a href="BrowseElectronicsGrid.aspx"><span>Electronics</span></a></li>
-            </ul>
-          </li>
-          <li class="level0 nav-5 level-top first"> <a runat="server" href="About.aspx" class="level-top"> <span>About Us</span> </a> </li>
-          <li class="level0 nav-7 level-top parent"> <a runat="server" href="Contact.aspx" class="level-top"> <span>Contact</span> </a> </li>
-        </ul>
-        <div id="form-search" class="search-bar">
-          <form id="search_mini_form" action="#" method="get">
-            <input class="search-bar-input" placeholder="Search entire store here..." type="text" value="" name="search" id="search">
-            <input class="search-bar-submit" type="submit" value="">
-            <span class="search-icon"><img src="images/search-icon.png" alt="search-icon"></span>
-          </form>
-        </div>
-      </div>
-    </div>
-  </nav>
-  <!-- end nav -->
-  <!-- Body -->
-      <div class="container body-content">
+        </header>
+        <!-- end header -->
+        <!-- Navbar -->
+        <nav>
+            <div class="container">
+                <div class="nav-inner">
+                    <!-- mobile-menu -->
+                    <div class="hidden-desktop" id="mobile-menu">
+                        <ul class="navmenu">
+                            <li>
+                                <div class="menutop">
+                                    <div class="toggle"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></div>
+                                    <h2>Menu</h2>
+                                </div>
+                                <ul style="display: none;" class="submenu">
+                                    <li>
+                                        <ul class="topnav">
+                                            <li class="level0 nav-6 level-top first parent"><a class="level-top" href="Default.aspx"><span>Home</span> </a></li>
+                                            <li class="level0 nav-1 level-top first parent"><a href="BrowseGamesGrid.aspx" class="level-top"><span>Browse</span> </a>
+                                                <ul class="level0">
+                                                    <li class="level1 nav-1-1 first parent"><a href="BrowseGamesGrid.aspx"><span>Games</span> </a></li>
+                                                    <li class="level1 nav-1-2 parent"><a href="BrowseTvSeriesGrid.aspx"><span>TV Series</span> </a></li>
+                                                    <li class="level1 nav-1-3 parent"><a href="BrowseMoviesGrid.aspx"><span>Movies</span> </a></li>
+                                                    <li class="level1 nav-1-4 parent"><a href="BrowseGiftsGrid.aspx"><span>Gifts</span> </a></li>
+                                                    <li class="level1 nav-1-5 parent"><a href="BrowseElectronicsGrid.aspx"><span>Electronics</span> </a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="level0 nav-2 level-top parent"><a href="About.aspx" class="level-top"><span>About Us</span> </a></li>
+                                            <li class="level0 nav-3 level-top parent"><a href="Contact.aspx" class="level-top"><span>Contact</span> </a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <!--navmenu-->
+                    </div>
+                    <!--End mobile-menu -->
+                    <ul id="nav" class="hidden-xs">
+                        <li id="nav-home" class="level0 parent drop-menu active"><a runat="server" href="Default.aspx"><span>Home</span> </a></li>
+                        <li class="level0 parent drop-menu"><a href="#"><span>Browse</span> </a>
+                            <ul style="display: none;" class="level1">
+                                <li class="level1 first"><a href="BrowseGamesGrid.aspx"><span>Games</span></a></li>
+                                <li class="level1 nav-10-2"><a href="BrowseTvSeriesGrid.aspx"><span>TV Series</span> </a></li>
+                                <li class="level1 nav-10-3"><a href="BrowseMoviesGrid.aspx"><span>Movies</span> </a></li>
+                                <li class="level1 nav-10-4"><a href="BrowseGiftsGrid.aspx"><span>Gifts</span> </a></li>
+                                <li class="level1 first parent"><a href="BrowseElectronicsGrid.aspx"><span>Electronics</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="level0 nav-5 level-top first"><a runat="server" href="About.aspx" class="level-top"><span>About Us</span> </a></li>
+                        <li class="level0 nav-7 level-top parent"><a runat="server" href="Contact.aspx" class="level-top"><span>Contact</span> </a></li>
+                    </ul>
+                    <div id="form-search" class="search-bar">
+                        <form id="search_mini_form" action="#" method="get">
+                            <input class="search-bar-input" placeholder="Search entire store here..." type="text" value="" name="search" id="search">
+                            <input class="search-bar-submit" type="submit" value="">
+                            <span class="search-icon">
+                                <img src="images/search-icon.png" alt="search-icon"></span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- end nav -->
+        <!-- Body -->
+        <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-      </div>
-  <!-- end Body -->
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="inner">
-        <div class="brand-logo">
-          <div class="slider-items-products">
-            <div id="brand-logo-slider" class="product-flexslider hidden-buttons">
-              <div class="slider-items slider-width-col6">
-                <!-- Item -->
-                <div class="item"> <a href="#x"><img src="images/b-logo1.png" alt="Image"></a> </div>
-                <!-- End Item -->
-                <!-- Item -->
-                <div class="item"> <a href="#x"><img src="images/b-logo2.png" alt="Image"></a> </div>
-                <!-- End Item -->
-                <!-- Item -->
-                <div class="item"> <a href="#x"><img src="images/b-logo3.png" alt="Image"></a> </div>
-                <!-- End Item -->
-                <!-- Item -->
-                <div class="item"> <a href="#x"><img src="images/b-logo4.png" alt="Image"></a> </div>
-                <!-- End Item -->
-                <!-- Item -->
-                <div class="item"> <a href="#x"><img src="images/b-logo5.png" alt="Image"></a> </div>
-                <!-- End Item -->
-              </div>
-            </div>
-          </div>
         </div>
-        <div class="footer-middle">
-          <div class="col-md-3 col-sm-12 col-xs-12">
-            <div class="footer-column-1">
-              <div class="footer-logo"><a href="Default.aspx" title="Logo"><img src="images/footer-logo.png" alt="logo" ></a></div>
-              <p>SAA Video Entertainments (Pvt) Ltd.<br />
-                 &nbsp; <br />
-                 &nbsp; <br />
-                 &nbsp; <br />
-                 &nbsp;
-              </p>
-              <div class="social">
-                <ul class="link">
-                  <li class="fb"><a href="#"></a></li>
-                  <li class="tw"><a href="#"></a></li>
-                  <li class="googleplus"><a href="#"></a></li>
-                  <%--<li class="rss"><a href="#"></a></li>--%>
-                  <!-- <li class="pintrest"><a href="#"></a></li>-->
-                  <li class="linkedin"><a href="#"></a></li>
-                  <li class="youtube"><a href="#"></a></li>
-                </ul>
-              </div>
+        <!-- end Body -->
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="inner">
+                    <div class="brand-logo">
+                        <div class="slider-items-products">
+                            <div id="brand-logo-slider" class="product-flexslider hidden-buttons">
+                                <div class="slider-items slider-width-col6">
+                                    <!-- Item -->
+                                    <div class="item">
+                                        <a href="#x">
+                                            <img src="images/b-logo1.png" alt="Image"></a>
+                                    </div>
+                                    <!-- End Item -->
+                                    <!-- Item -->
+                                    <div class="item">
+                                        <a href="#x">
+                                            <img src="images/b-logo2.png" alt="Image"></a>
+                                    </div>
+                                    <!-- End Item -->
+                                    <!-- Item -->
+                                    <div class="item">
+                                        <a href="#x">
+                                            <img src="images/b-logo3.png" alt="Image"></a>
+                                    </div>
+                                    <!-- End Item -->
+                                    <!-- Item -->
+                                    <div class="item">
+                                        <a href="#x">
+                                            <img src="images/b-logo4.png" alt="Image"></a>
+                                    </div>
+                                    <!-- End Item -->
+                                    <!-- Item -->
+                                    <div class="item">
+                                        <a href="#x">
+                                            <img src="images/b-logo5.png" alt="Image"></a>
+                                    </div>
+                                    <!-- End Item -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-middle">
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            <div class="footer-column-1">
+                                <div class="footer-logo">
+                                    <a href="Default.aspx" title="Logo">
+                                        <img src="images/footer-logo.png" alt="logo"></a>
+                                </div>
+                                <p>
+                                    SAA Video Entertainments (Pvt) Ltd.<br />
+                                    &nbsp;
+                                    <br />
+                                    &nbsp;
+                                    <br />
+                                    &nbsp;
+                                    <br />
+                                    &nbsp;
+                                </p>
+                                <div class="social">
+                                    <ul class="link">
+                                        <li class="fb"><a href="#"></a></li>
+                                        <li class="tw"><a href="#"></a></li>
+                                        <li class="googleplus"><a href="#"></a></li>
+                                        <%--<li class="rss"><a href="#"></a></li>--%>
+                                        <!-- <li class="pintrest"><a href="#"></a></li>-->
+                                        <li class="linkedin"><a href="#"></a></li>
+                                        <li class="youtube"><a href="#"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <h4 class="green">Shopping Guide</h4>
+                            <ul class="links">
+                                <li class="first"><a href="About.aspx">About us</a></li>
+                                <li><a href="faq.html" title="FAQs">FAQs</a></li>
+                                <li><a href="#" title="Payment">Payment</a></li>
+                                <li><a href="#" title="Shipment&lt;/a&gt;">Shipment</a></li>
+                                <li><a href="#" title="Where is my order?">Where is my order?</a></li>
+                                <li class="last"><a href="#" title="Return policy">Return policy</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <h4 class="yellow">Style Advisor</h4>
+                            <ul class="links">
+                                <li class="first"><a title="Your Account" href="MyAccountDashboard.aspx">Your Account</a></li>
+                                <li><a title="Information" href="#">Information</a></li>
+                                <li><a title="Addresses" href="#">Addresses</a></li>
+                                <li><a title="Addresses" href="#">Discount</a></li>
+                                <li><a title="Orders History" href="#">Orders History</a></li>
+                                <li class="last"><a title=" Additional Information" href="#">Additional Information</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <h4 class="orange">Information</h4>
+                            <ul class="links">
+                                <li class="first"><a href="About.aspx" title="Site Map">About</a></li>
+                                <li><a href="Contact.aspx" title="Contact Us">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <h4 class="blue">Contact Us</h4>
+                            <div class="contacts-info">
+                                <address>
+                                    <i class="add-icon">&nbsp;</i>387/E, Galle Road, 
+                                    <br />
+                                    &nbsp;Ratmalana.
+                                </address>
+                                <div class="phone-footer"><i class="phone-icon">&nbsp;</i>+94 11 5929266 / +94 11 5929267</div>
+                                <div class="email-footer">
+                                    <i class="email-icon">&nbsp;</i> <a href="mailto:supprt.saavideos@gmail.com">supprt.saavideos@gmail.com</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-bottom">
+                            <div class="col-sm-12 col-xs-12 coppyright">&copy; <%: DateTime.Now.Year %> - SAA Video Entertainments (Pvt) Ltd. All Rights Reserved.</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md-2 col-sm-6 col-xs-12">
-            <h4 class="green">Shopping Guide</h4>
-            <ul class="links">
-              <li class="first"><a href="about_us.html" title="How to buy">About us</a></li>
-              <li><a href="faq.html" title="FAQs">FAQs</a></li>
-              <li><a href="#" title="Payment">Payment</a></li>
-              <li><a href="#" title="Shipment&lt;/a&gt;">Shipment</a></li>
-              <li><a href="#" title="Where is my order?">Where is my order?</a></li>
-              <li class="last"><a href="#" title="Return policy">Return policy</a></li>
-            </ul>
-          </div>
-          <div class="col-md-2 col-sm-6 col-xs-12">
-            <h4 class="yellow">Style Advisor</h4>
-            <ul class="links">
-              <li class="first"><a title="Your Account" href="login.html">Your Account</a></li>
-              <li><a title="Information" href="#">Information</a></li>
-              <li><a title="Addresses" href="#">Addresses</a></li>
-              <li><a title="Addresses" href="#">Discount</a></li>
-              <li><a title="Orders History" href="#">Orders History</a></li>
-              <li class="last"><a title=" Additional Information" href="#">Additional Information</a></li>
-            </ul>
-          </div>
-          <div class="col-md-2 col-sm-6 col-xs-12">
-            <h4 class="orange">Information</h4>
-            <ul class="links">
-              <li class="first"><a href="About.aspx" title="Site Map">About</a></li>
-              <li><a href="Contact.aspx" title="Contact Us">Contact Us</a></li>
-            </ul>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <h4 class="blue">Contact Us</h4>
-            <div class="contacts-info">
-              <address>
-              <i class="add-icon">&nbsp;</i>387/E, Galle Road,  <br /> 
-                 &nbsp;Ratmalana.
-              </address>
-              <div class="phone-footer"><i class="phone-icon">&nbsp;</i>+94 11 5929266 / +94 11 5929267</div>
-              <div class="email-footer"><i class="email-icon">&nbsp;</i> <a href="mailto:supprt.saavideos@gmail.com">supprt.saavideos@gmail.com</a>
-            </div>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <div class="col-sm-12 col-xs-12 coppyright"> &copy; <%: DateTime.Now.Year %> - SAA Video Entertainments (Pvt) Ltd. All Rights Reserved.</div>
-        </div>
-      </div>
-    </div></div>
-  </footer>
-  <!-- End Footer -->
-</div>
-<!-- JavaScript -->
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/common.js"></script>
-<script type="text/javascript" src="js/slider.js"></script>
-<script type="text/javascript" src="js/owl.carousel.min.js"></script>
-<script type="text/javascript" src="js/jquery.flexslider.js"></script>
-<script type="text/javascript" src="js/cloud-zoom.js"></script>
-<script type="text/javascript">
-    //<![CDATA[
-    jQuery(function () {
-        jQuery(".slideshow").cycle({
-            fx: 'scrollHorz', easing: 'easeInOutCubic', timeout: 10000, speedOut: 800, speedIn: 800, sync: 1, pause: 1, fit: 0, pager: '#home-slides-pager',
-            prev: '#home-slides-prev',
-            next: '#home-slides-next'
+        </footer>
+        <!-- End Footer -->
+    </div>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/slider.js"></script>
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="js/jquery.flexslider.js"></script>
+    <script type="text/javascript" src="js/cloud-zoom.js"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+        jQuery(function () {
+            jQuery(".slideshow").cycle({
+                fx: 'scrollHorz', easing: 'easeInOutCubic', timeout: 10000, speedOut: 800, speedIn: 800, sync: 1, pause: 1, fit: 0, pager: '#home-slides-pager',
+                prev: '#home-slides-prev',
+                next: '#home-slides-next'
+            });
         });
-    });
-    //]]>
+        //]]>
     </script>
     <script>
         new UISearch(document.getElementById('form-search'));
-	</script>
+    </script>
 
-    
-   <script type="text/javascript">
-       function insertParam(key, value) {
-           var uri = window.location.href;
-           var substring = "|";
-           var valueDivided = false;
-           var splittedValues;
 
-           if (key.indexOf(substring) == -1)
-           {
-               var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
-               var separator = uri.indexOf('?') !== -1 ? "&" : "?";
-               if (uri.match(re)) {
-                   window.location.replace(uri.replace(re, '$1' + key + "=" + value + '$2'));
-               }
-               else {
-                   window.location.replace(uri + separator + key + "=" + value);
-               }
-           }
-           else
-           {
-               splittedKeys = key.split('|');
-               var arrayLength = splittedKeys.length;
+    <script type="text/javascript">
+        function insertParam(key, value) {
+            var uri = window.location.href;
+            var substring = "|";
+            var valueDivided = false;
+            var splittedValues;
 
-               if (value.indexOf(substring) > -1) {
-                   valueDivided = true;
-                   splittedValues = value.split('|');
-               }
+            if (key.indexOf(substring) == -1) {
+                var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+                var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+                if (uri.match(re)) {
+                    window.location.replace(uri.replace(re, '$1' + key + "=" + value + '$2'));
+                }
+                else {
+                    window.location.replace(uri + separator + key + "=" + value);
+                }
+            }
+            else {
+                splittedKeys = key.split('|');
+                var arrayLength = splittedKeys.length;
 
-               for (var i = 0; i < arrayLength; i++) {
-                   var re = new RegExp("([?&])" + splittedKeys[i] + "=.*?(&|$)", "i");
-                   var separator = uri.indexOf('?') !== -1 ? "&" : "?";
-                   if (uri.match(re)) {
-                       if (valueDivided)                       {
-                           uri = uri.replace(re, '$1' + splittedKeys[i] + "=" + splittedValues[i] + '$2');
-                       }
-                       else {
-                           uri = uri.replace(re, '$1' + splittedKeys[i] + "=" + value + '$2');
-                       }
-                   }
-                   else {
-                       if (valueDivided) {
-                           uri = uri + separator + splittedKeys[i] + "=" + splittedValues[i];
-                       }
-                       else {
-                           uri = uri + separator + splittedKeys[i] + "=" + value;
-                       }
-                       
-                   }
-               }
-               window.location.replace(uri);
-           }
-           
-       };
+                if (value.indexOf(substring) > -1) {
+                    valueDivided = true;
+                    splittedValues = value.split('|');
+                }
 
-       function navigateWithParam(currentLocation, nextLocation) {
-           var url = window.location.href;
-           url = url.replace(currentLocation, nextLocation);
-           window.location.replace(url);
-           return false; //cancel default behaviour of the href
-       };
+                for (var i = 0; i < arrayLength; i++) {
+                    var re = new RegExp("([?&])" + splittedKeys[i] + "=.*?(&|$)", "i");
+                    var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+                    if (uri.match(re)) {
+                        if (valueDivided) {
+                            uri = uri.replace(re, '$1' + splittedKeys[i] + "=" + splittedValues[i] + '$2');
+                        }
+                        else {
+                            uri = uri.replace(re, '$1' + splittedKeys[i] + "=" + value + '$2');
+                        }
+                    }
+                    else {
+                        if (valueDivided) {
+                            uri = uri + separator + splittedKeys[i] + "=" + splittedValues[i];
+                        }
+                        else {
+                            uri = uri + separator + splittedKeys[i] + "=" + value;
+                        }
 
-       function redirect(currentPage, goToPage) {
-           var uri = window.location.href;
-           uri = uri.replace(currentPage, goToPage)
-           window.location.replace(uri);
-       };
-   </script>
-    <script type = "text/javascript">
+                    }
+                }
+                window.location.replace(uri);
+            }
+
+        };
+
+        function navigateWithParam(currentLocation, nextLocation) {
+            var url = window.location.href;
+            url = url.replace(currentLocation, nextLocation);
+            window.location.replace(url);
+            return false; //cancel default behaviour of the href
+        };
+
+        function redirect(currentPage, goToPage) {
+            var uri = window.location.href;
+            uri = uri.replace(currentPage, goToPage)
+            window.location.replace(uri);
+        };
+    </script>
+    <script type="text/javascript">
         function AddRemovetoWishList(itemId, itemTitle) {
             $.ajax({
                 type: "POST",
@@ -444,7 +529,7 @@
                     alert(response.d);
                 }
             });
-         }
+        }
         function OnSuccess(response) {
             if (response.d == "Login") {
                 window.location.href = "Login.aspx";
@@ -453,6 +538,42 @@
                 alert(response.d);
             }
         }
-    </script> 
+    </script>
+    <script type="text/javascript">
+        function AddToCart(itemId, itemTitle) {
+            $.ajax({
+                type: "POST",
+                url: "MyAccountAjaxPage.aspx/AddToCartSession",
+                data: '{itemId: "' + itemId + '", itemTitle: "' + itemTitle + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccess,
+                failure: function (response) {
+                    alert(response.d);
+                }
+            });
+        }
+        function OnSuccess(response) {
+            window.location.reload();
+        }
+    </script>
+    <script type="text/javascript">
+        function RemoveFromCart(itemId) {
+            $.ajax({
+                type: "POST",
+                url: "MyAccountAjaxPage.aspx/RemoveFromCartSession",
+                data: '{itemId: "' + itemId + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccess,
+                failure: function (response) {
+                    alert(response.d);
+                }
+            });
+        }
+        function OnSuccess(response) {
+            window.location.reload();
+        }
+    </script>
 </body>
 </html>

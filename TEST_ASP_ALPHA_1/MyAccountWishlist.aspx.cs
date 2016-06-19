@@ -91,15 +91,7 @@ namespace TEST_ASP_ALPHA_1
         private void GetWishList()
         {
             var items = custWishListMgr.GetWishlistItems(Convert.ToInt32(Session[CommonManager.GetCustIdSessionName()]));
-            StringBuilder searchCriterion = new StringBuilder();
-            for (int i = 0; i < items.Count; i++)
-            {
-                if (i < items.Count - 1)
-                    searchCriterion.Append(items[i] + ",");
-                else if (i == items.Count -1)
-                    searchCriterion.Append(items[i]);
-            }
-            searchCriteria[CommonManager.GetIdCriterionName()] = searchCriterion.ToString();
+            searchCriteria[CommonManager.GetIdCriterionName()] = CommonManager.GetSearchByIdCriterion(items);
         }
 
         private void GetGridDetails()
