@@ -88,8 +88,6 @@
                                                                 <option value="Ratmalana">Ratmalana</option>
                                                             </select>
                                                         </div>
-                                                    </li>
-                                                    <li>
                                                         <div class="input-box">
                                                             <label for="billing:telephone">Telephone <span class="required">*</span></label>
                                                             <br />

@@ -277,7 +277,7 @@
     <Content Include="js\owl.carousel.min.js" />
     <Content Include="js\slider.js" />
     <Content Include="Login.aspx" />
-    <Content Include="MyAccountAddToWishlist.aspx" />
+    <Content Include="MyAccountAjaxPage.aspx" />
     <Content Include="MyAccountChangePassword.aspx" />
     <Content Include="MyAccountDashboard.aspx" />
     <Content Include="MyAccountInformation.aspx" />
@@ -520,12 +520,12 @@
     <Compile Include="Models\IndexModel.cs" />
     <Compile Include="Models\ItemsModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
-    <Compile Include="MyAccountAddToWishlist.aspx.cs">
-      <DependentUpon>MyAccountAddToWishlist.aspx</DependentUpon>
+    <Compile Include="MyAccountAjaxPage.aspx.cs">
+      <DependentUpon>MyAccountAjaxPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MyAccountAddToWishlist.aspx.designer.cs">
-      <DependentUpon>MyAccountAddToWishlist.aspx</DependentUpon>
+    <Compile Include="MyAccountAjaxPage.aspx.designer.cs">
+      <DependentUpon>MyAccountAjaxPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="MyAccountChangePassword.aspx.cs">
       <DependentUpon>MyAccountChangePassword.aspx</DependentUpon>

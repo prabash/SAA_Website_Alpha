@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MyAccountAddToWishlist.aspx.cs" Inherits="TEST_ASP_ALPHA_1.MyAccountAddToWishlist" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MyAccountAjaxPage.aspx.cs" Inherits="TEST_ASP_ALPHA_1.MyAccountAjaxPage" %>
 
 <!DOCTYPE html>
 

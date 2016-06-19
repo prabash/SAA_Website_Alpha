@@ -9,14 +9,14 @@ using TEST_ASP_ALPHA_1.Models;
 
 namespace TEST_ASP_ALPHA_1
 {
-    public partial class MyAccountAddToWishlist : System.Web.UI.Page
+    public partial class MyAccountAjaxPage : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
-        [System.Web.Services.WebMethod(EnableSession=true)]
+        [System.Web.Services.WebMethod(EnableSession = true)]
         public static string AddRemoveToMyWishlist(int itemId, string itemTitle)
         {
             try

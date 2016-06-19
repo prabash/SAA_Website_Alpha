@@ -435,7 +435,7 @@
         function AddRemovetoWishList(itemId, itemTitle) {
             $.ajax({
                 type: "POST",
-                url: "MyAccountAddToWishlist.aspx/AddRemoveToMyWishlist",
+                url: "MyAccountAjaxPage.aspx/AddRemoveToMyWishlist",
                 data: '{itemId: "' + itemId + '", itemTitle: "' + itemTitle + '" }',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",

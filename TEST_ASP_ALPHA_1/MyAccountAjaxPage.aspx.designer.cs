@@ -11,7 +11,7 @@ namespace TEST_ASP_ALPHA_1
 {
 
 
-    public partial class MyAccountAddToWishlist
+    public partial class MyAccountAjaxPage
     {
 
         /// <summary>
