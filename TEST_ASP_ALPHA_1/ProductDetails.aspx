@@ -60,11 +60,9 @@
                     <div class="price-box">
                       <p class="old-price" runat="server" id="regularPriceBox"> 
                           <span class="price-label" runat="server" id="regularPriceLabel">Regular Price:</span> 
-                          <%--<span id="old-price-48 " class="price" >$315.99</span>--%>
                       </p>
                       <p class="special-price" runat="server" id="specialPriceBox">
                            <span class="price-label" runat="server" id="specialPriceLabel">Special Price</span> 
-                          <%--<span id="product-price-48" class="price">$309.99 </span> --%>
                       </p>
                     </div>
                   </div>
@@ -82,7 +80,7 @@
                     </div>
                     <div class="email-addto-box">
                       <ul class="add-to-links">
-                        <li> <a class="link-wishlist" href="wishlist.html"><span>Add to Wishlist</span></a></li>
+                        <li> <a class="link-wishlist" href="javascript:void(0);" runat="server" ID="addToWishlist"><span>Add/Remove from Wishlist</span></a></li>
                         <li style="visibility:collapse;width:0px;"><span class="separator">|</span> <a class="link-compare" href="compare.html"><span></span></a></li>
                       </ul>
                       <p style="margin-left:-30px;" class="email-friend"><a href="#" class=""><span>Email to a Friend</span></a></p>

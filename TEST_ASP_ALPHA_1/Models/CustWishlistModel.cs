@@ -18,7 +18,7 @@ namespace TEST_ASP_ALPHA_1.Models
                 using (MySqlConnection con = ConnectionManager.GetOpenConnection())
                 {
                     string sqlString = @"INSERT INTO customer_wishlist (customer_id, item_id, added_date) 
-                                    VALUES (@custId, @itemId, @date, @registerDate, @active)";
+                                    VALUES (@custId, @itemId, @date)";
 
                     using (MySqlCommand com = new MySqlCommand(sqlString, con))
                     {
@@ -30,6 +30,52 @@ namespace TEST_ASP_ALPHA_1.Models
                     }
                 }
 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void RemoveFromWishList(int custId, int itemId)
+        {
+            try
+            {
+                using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+                {
+                    string sqlString = @"DELETE FROM customer_wishlist WHERE customer_id=@custId AND item_id=@itemId";
+
+                    using (MySqlCommand com = new MySqlCommand(sqlString, con))
+                    {
+                        com.Parameters.AddWithValue("@custId", custId);
+                        com.Parameters.AddWithValue("@itemId", itemId);
+
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void AddOrRemoveToWishList(int custId, int itemId, out bool added)
+        {
+            try
+            {
+                var items = GetWishlistItems(custId);
+                if (items.Contains(itemId))
+                {
+                    added = false;
+                    RemoveFromWishList(custId, itemId);
+                }
+                else
+                {
+                    added = true;
+                    AddToWishList(custId, itemId);
+                }
             }
             catch (Exception ex)
             {

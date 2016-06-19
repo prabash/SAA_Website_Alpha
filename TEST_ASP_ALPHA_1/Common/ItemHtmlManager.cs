@@ -59,7 +59,9 @@ namespace TEST_ASP_ALPHA_1.Common
                             }
                             productActionDivControl.Controls.Add(addCartAnchorControl);
 
-                            var wishlistAnchorControl = HTMLControlsManager.GetAnchorTag("wishlist.html", new[] { "wishlist" });
+                            Dictionary<string, string> addAtt = new Dictionary<string, string>();
+                            addAtt.Add("onclick", "AddRemovetoWishList(" + item.Id + ",'" + item.title + "');");
+                            var wishlistAnchorControl = HTMLControlsManager.GetAnchorTag("javascript:void(0)", new[] { "wishlist" }, null, null, null, addAtt);
                             productActionDivControl.Controls.Add(wishlistAnchorControl);
                             {
                                 var italicControl = HTMLControlsManager.GetCustomTag("i", new[] { "icon-heart" });
@@ -286,7 +288,9 @@ namespace TEST_ASP_ALPHA_1.Common
                     var spanAddtoWishlistLinks = HTMLControlsManager.GetCustomTag("span", new[] { "add-to-links" });
                     actionsDivControl.Controls.Add(spanAddtoWishlistLinks);
                     {
-                        var anchorAddToWish = HTMLControlsManager.GetAnchorTag("wishlist.html", new[] { "button", "link-wishlist" }, "", "Add to Wishlist");
+                        Dictionary<string, string> addAtt = new Dictionary<string, string>();
+                        addAtt.Add("onclick", "AddRemovetoWishList(" + item.Id + ",'" + item.title + "');");
+                        var anchorAddToWish = HTMLControlsManager.GetAnchorTag("javascript:void(0)", new[] { "button", "link-wishlist" }, "", "Add to Wishlist", null, addAtt);
                         spanAddtoWishlistLinks.Controls.Add(anchorAddToWish);
                         {
                             var spanAddtoWishlist = HTMLControlsManager.GetCustomTag("span", null, "Add to Wishlist");

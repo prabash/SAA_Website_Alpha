@@ -23,7 +23,8 @@
                             <h1>Account Information</h1>
                         </div>
                         <div class="welcome-msg">
-                            <p>Hey, <strong><%=Session[CommonManager.GetCustNameSessionName()].ToString()%></strong>, You can edit your account information here. This will make your life easier when shopping at SAA Video Entertainments</p>
+                            <strong>Hello there, <%=Session[CommonManager.GetCustNameSessionName()].ToString()%>!</strong>
+                            <p>You can edit your account information here.</p>
                         </div>
                         <div id="checkout-step-billing" class="step a-item" style="">
                             <form runat="server" ID="frmAccountInfo" method="post">

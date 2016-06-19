@@ -38,6 +38,7 @@ namespace TEST_ASP_ALPHA_1
                     }
 
                     productTitle.InnerText = productTitleBreadcrumb.InnerText = itemDetails.title;
+                    addToWishlist.Attributes.Add("onclick", "AddRemovetoWishList(" + itemDetails.Id + ",'" + itemDetails.title + "');");
 
                     largeImage.Src = zoom1.HRef = itemDetails.defaultLocation;
                     ratingBox.Attributes["style"] = "width:" + itemDetails.rating + "%";

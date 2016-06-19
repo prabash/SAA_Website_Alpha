@@ -24,7 +24,8 @@
                             <h1>Change Password</h1>
                         </div>
                         <div class="welcome-msg">
-                            <p>Hey, <strong><%=Session[CommonManager.GetCustNameSessionName()].ToString()%></strong>, change your current password here.</p>
+                            <strong>Hello there, <%=Session[CommonManager.GetCustNameSessionName()].ToString()%>!</strong>
+                            <p>You can change your current password here.</p>
                         </div>
                         <div id="checkout-step-billing" class="step a-item" style="">
                             <form runat="server" id="frmAccountInfo" method="post">

@@ -22,12 +22,12 @@
                 <section class="col-main col-sm-9 wow bounceInUp animated">
                     <div class="my-account">
                         <div class="page-title new_page_title">
-                            <h2>My Dashboard</h2>
+                            <h2>My Wishlist</h2>
                         </div>
                         <div class="dashboard">
                             <div class="welcome-msg">
                                 <strong>Hello there, <%=Session[CommonManager.GetCustNameSessionName()].ToString()%>!</strong>
-                                <p>From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information.</p>
+                                <p>Here you can see your wishlist!</p>
                             </div>
                             <div class="category-products">
                             <div class="toolbar">

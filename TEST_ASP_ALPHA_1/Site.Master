@@ -431,5 +431,28 @@
            window.location.replace(uri);
        };
    </script>
+    <script type = "text/javascript">
+        function AddRemovetoWishList(itemId, itemTitle) {
+            $.ajax({
+                type: "POST",
+                url: "MyAccountAddToWishlist.aspx/AddRemoveToMyWishlist",
+                data: '{itemId: "' + itemId + '", itemTitle: "' + itemTitle + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccess,
+                failure: function (response) {
+                    alert(response.d);
+                }
+            });
+         }
+        function OnSuccess(response) {
+            if (response.d == "Login") {
+                window.location.href = "Login.aspx";
+            }
+            else {
+                alert(response.d);
+            }
+        }
+    </script> 
 </body>
 </html>
