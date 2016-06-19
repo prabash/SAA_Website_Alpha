@@ -182,7 +182,7 @@
                                             <div class="top-subtotal">Subtotal: <span class="price"><%=itemDetails.Sum(rec => rec.currentPrice).FormatCurrency("LKR").ToString()%></span></div>
                                             <div class="actions">
                                                 <button class="btn-checkout" type="button"><span>Checkout</span></button>
-                                                <button class="view-cart" type="button"><span>View Cart</span></button>
+                                                <button class="view-cart" type="button" onclick="window.location.href = 'Cart.aspx';"><span>View Cart</span></button>
                                             </div>
                                         </div>
                                     </div>

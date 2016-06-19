@@ -168,6 +168,75 @@ namespace TEST_ASP_ALPHA_1.Models
             return returnList;
         }
 
+        public List<ItemObject> GetRelatedItems(ItemType type, List<int> itemIds)
+        {
+            List<ItemObject> relatedItems = new List<ItemObject>();
+            Dictionary<string, string> searchCriteria = new Dictionary<string, string>();
+
+            double lowestPrice = 0;
+            double highestPrice = 0;
+
+            Dictionary<string, int> candidateGenres = new Dictionary<string, int>();
+            string selectedGenre = "";
+
+            searchCriteria.Add(CommonManager.GetIdCriterionName(), CommonManager.GetSearchByIdCriterion(itemIds));
+            var items = GetItemDetails(type, ItemSortBy.NameAsc, itemIds.Count, 0, searchCriteria);
+
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (i == 0)
+                {
+                    if (items.Count > 1)
+                        lowestPrice = items[i].currentPrice;
+                    highestPrice = items[i].currentPrice;
+                }
+                else
+                {
+                    if (lowestPrice > items[i].currentPrice)
+                        lowestPrice = items[i].currentPrice;
+                    else if (highestPrice < items[i].currentPrice)
+                        highestPrice = items[i].currentPrice;
+                }
+
+                var genres = items[i].genre.Split(',');
+                foreach (var genre in genres)
+                {
+                    if (!candidateGenres.ContainsKey(genre))
+                        candidateGenres.Add(genre, 1);
+                    else
+                    {
+                        var currentCount = candidateGenres[genre];
+                        candidateGenres[genre] = currentCount + 1;
+                    }
+                }
+            }
+
+            var genreCounter = 0;
+            foreach (var candGenre in candidateGenres)
+            {
+                int noOfItems = 0;
+                if (genreCounter == 0)
+                {
+                    noOfItems = candGenre.Value;
+                    selectedGenre = candGenre.Key;
+                }
+                else
+                {
+                    if (candGenre.Value > noOfItems)
+                        selectedGenre = candGenre.Key;
+                }
+            }
+
+            searchCriteria = new Dictionary<string, string>();
+            if (lowestPrice == 0)
+                searchCriteria.Add(CommonManager.GetPriceRangeCriterionName(), lowestPrice + "|" + (highestPrice + ((highestPrice + lowestPrice) / 2)));
+            else
+                searchCriteria.Add(CommonManager.GetPriceRangeCriterionName(), (lowestPrice - ((highestPrice + lowestPrice) / 2)) + "|" + (highestPrice + ((highestPrice + lowestPrice) / 2)));
+            searchCriteria.Add(CommonManager.GetGenreCriterionName(), selectedGenre);
+            relatedItems = GetItemDetails(type, ItemSortBy.NameAsc, 6, 0, searchCriteria);
+            return relatedItems;
+        }
+
         public int GetItemsCount(ItemType type, Dictionary<string, string> searchCriteria = null)
         {
             int count = 0;
