@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Cart.aspx.cs" Inherits="TEST_ASP_ALPHA_1.Cart" MasterPageFile="~/Site.Master" %>
-
+<%@ Import Namespace="TEST_ASP_ALPHA_1.Models" %>
 <%@ Import Namespace="TEST_ASP_ALPHA_1.Common" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -51,7 +51,7 @@
                                                       dfSubTotal.InnerText = subTotal.FormatCurrency("LKR").ToString();
                                                       dfHidSubTotal.Value = subTotal.ToString();
 
-                                                      double discount = 250.00;
+                                                      double discount = new ItemsModel().GetItemDiscount();
                                                       dfDiscount.InnerText = discount.FormatCurrency("LKR").ToString();
                                                       dfHidDiscount.Value = discount.ToString();
 

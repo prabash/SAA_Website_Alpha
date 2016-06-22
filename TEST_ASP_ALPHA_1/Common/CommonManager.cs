@@ -9,10 +9,11 @@ namespace TEST_ASP_ALPHA_1.Common
 {
     public class CommonManager
     {
-        const string custId = "CustId";
-        const string custEmail = "CustEmail";
-        const string custName = "CustName";
-        const string cartItems = "CartItems";
+        const string ses_custId = "CustId";
+        const string ses_custEmail = "CustEmail";
+        const string ses_custName = "CustName";
+        const string ses_cartItems = "CartItems";
+        const string ses_checkoutEligible = "CheckoutEligible";
 
         #region Web Config Manager
 
@@ -198,22 +199,27 @@ namespace TEST_ASP_ALPHA_1.Common
 
         public static string GetCustIdSessionName()
         {
-            return custId;
+            return ses_custId;
         }
 
         public static string GetCustEmailSessionName()
         {
-            return custEmail;
+            return ses_custEmail;
         }
 
         public static string GetCustNameSessionName()
         {
-            return custName;
+            return ses_custName;
         }
 
         public static string GetCartItemsSessionName()
         {
-            return cartItems;
+            return ses_cartItems;
+        }
+
+        public static string GetCheckoutEligibleSessionName()
+        {
+            return ses_checkoutEligible;
         }
 
         #endregion

@@ -284,6 +284,11 @@ namespace TEST_ASP_ALPHA_1.Models
             return returnObj;
         }
 
+        public double GetItemDiscount()
+        {
+            return 0;
+        }
+
         #endregion
 
         #region Search Criteria

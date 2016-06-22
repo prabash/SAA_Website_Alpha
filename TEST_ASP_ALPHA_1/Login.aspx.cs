@@ -31,6 +31,7 @@ namespace TEST_ASP_ALPHA_1
                     Session.Remove(CommonManager.GetCustIdSessionName());
                     Session.Remove(CommonManager.GetCustNameSessionName());
                     Session.Remove(CommonManager.GetCustEmailSessionName());
+                    Session.Remove(CommonManager.GetCheckoutEligibleSessionName());
                     Response.Redirect(baseUrl + "Default.aspx");
                 }
             }
@@ -47,14 +48,16 @@ namespace TEST_ASP_ALPHA_1
 
                 int custId;
                 string custUsername;
+                bool checkoutEligible;
 
-                if (loginMgr.ValidateLogin(encEmail, encPassword, out custId, out custUsername))
+                if (loginMgr.ValidateLogin(encEmail, encPassword, out custId, out custUsername, out checkoutEligible))
                 {
                     regErrorBox.Visible = false;
 
                     Session.Add(CommonManager.GetCustIdSessionName(), custId);
                     Session.Add(CommonManager.GetCustNameSessionName(), custUsername);
                     Session.Add(CommonManager.GetCustEmailSessionName(), dfnLoginEmail.Text);
+                    Session.Add(CommonManager.GetCheckoutEligibleSessionName(), checkoutEligible);
 
                     Response.Redirect(baseUrl + "Default.aspx");
                 }

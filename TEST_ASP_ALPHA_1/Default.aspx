@@ -17,19 +17,19 @@
             <li>
             <div><img src="images/games-img.png" alt="games image" /></div>
             <h2>Games</h2>
-            <a href="#">Buy Now</a></li>
+            <a href="BrowseGamesGrid.aspx">Buy Now</a></li>
             <li>
             <div><img src="images/movies-img.png" alt="movies image" /></div>
             <h2>Movies</h2>
-            <a href="#">Buy Now</a></li>
+            <a href="BrowseMoviesGrid.aspx">Buy Now</a></li>
             <li>
-            <div><img src="images/electronics-img.png" alt="Electronics image" /></div>
-            <h2>Electronics</h2>
-            <a href="#">Buy Now</a></li>
+            <div><img src="images/tvseries-img.png" alt="Electronics image" /></div>
+            <h2>TV Series</h2>
+            <a href="BrowseTvSeriesGrid.aspx">Buy Now</a></li>
             <li>
             <div><img src="images/gift-img.png" alt="gifts image" /></div>
             <h2>Gifts</h2>
-            <a href="#">Buy Now</a></li>
+            <a href="BrowseGiftsGrid.aspx">Buy Now</a></li>
             </ul>
             </div>
             </div>

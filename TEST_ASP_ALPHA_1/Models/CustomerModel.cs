@@ -201,11 +201,12 @@ namespace TEST_ASP_ALPHA_1.Models
             return returnList;
         }
 
-        public bool ValidateLogin(string email, string password, out int custId, out string custName)
+        public bool ValidateLogin(string email, string password, out int custId, out string custName, out bool checkoutElgible)
         {
             bool loginSuccess = false;
             custId = 0;
             custName = "";
+            checkoutElgible = false;
 
             var custDetail = GetCustomerDetails(CustomerGetType.email, 0, email);
             if (custDetail != null && custDetail.Count > 0)
@@ -217,6 +218,9 @@ namespace TEST_ASP_ALPHA_1.Models
                     {
                         custId = customer.Id;
                         custName = customer.username;
+                        if (customer.nicNo != null && ((customer.addressLine1 != null || customer.addressLine2 != null) && customer.city != null))
+                            checkoutElgible = true;
+
                         loginSuccess = true;
                     }
                     else

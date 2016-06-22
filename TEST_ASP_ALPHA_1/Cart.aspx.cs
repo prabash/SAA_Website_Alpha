@@ -13,7 +13,31 @@ namespace TEST_ASP_ALPHA_1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            GetRelatedItemsGridDetails(new List<int> { 1, 2, 5 }, ItemType.All);
+            var checkoutEligibleSession = Session[CommonManager.GetCheckoutEligibleSessionName()];
+            if (checkoutEligibleSession != null)
+            {
+                var checkoutEligible = (bool)checkoutEligibleSession;
+                if (!checkoutEligible)
+                    Response.Redirect("MyAccountInformation.aspx");
+                else
+                {
+                    var customerId = Session[CommonManager.GetCustIdSessionName()];
+                    var customerDetails = new CustomerModel().GetCustomerDetails(CustomerGetType.id, Convert.ToInt32(customerId));
+                    if (customerDetails != null)
+                    {
+                        addLine1.Value = customerDetails.First().addressLine1;
+                        addLine2.Value = customerDetails.First().addressLine2;
+                        city.Value = customerDetails.First().city;
+                    }
+                }
+            }
+
+            var cartSession = Session[CommonManager.GetCartItemsSessionName()];
+            if (cartSession != null)
+            {
+                var cart = (List<int>)cartSession;
+                GetRelatedItemsGridDetails(cart, ItemType.All);
+            }
         }
 
         private void GetRelatedItemsGridDetails(List<int> itemIds, ItemType currentItemType)
