@@ -13,24 +13,6 @@ namespace TEST_ASP_ALPHA_1 {
     public partial class CheckoutOrderReview {
         
         /// <summary>
-        /// dfGrandTotal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dfGrandTotal;
-        
-        /// <summary>
-        /// dfHidGrandTotal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden dfHidGrandTotal;
-        
-        /// <summary>
         /// dfSubTotal control.
         /// </summary>
         /// <remarks>
@@ -38,15 +20,6 @@ namespace TEST_ASP_ALPHA_1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl dfSubTotal;
-        
-        /// <summary>
-        /// dfHidSubTotal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden dfHidSubTotal;
         
         /// <summary>
         /// dfDiscount control.
@@ -58,12 +31,12 @@ namespace TEST_ASP_ALPHA_1 {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl dfDiscount;
         
         /// <summary>
-        /// dfHidDiscount control.
+        /// dfGrandTotal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden dfHidDiscount;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dfGrandTotal;
     }
 }

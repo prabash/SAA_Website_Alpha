@@ -79,5 +79,40 @@ namespace TEST_ASP_ALPHA_1
                 return ex.Message;
             }
         }
+
+        [System.Web.Services.WebMethod(EnableSession = true)]
+        public static string ProceedToCheckout(string itemQtyString, string discount)
+        {
+            try
+            {
+                var cartOb = new CartObject();
+
+                if (!String.IsNullOrEmpty(itemQtyString))
+                {
+                    cartOb.Items = new List<PurchaseItemObject>();
+                    var splitQuery = itemQtyString.Split('|');
+                    foreach (var item in splitQuery)
+                    {
+                        var splitItem = item.Split(',');
+                        if (splitItem != null)
+                        {
+                            var purchOb = new PurchaseItemObject();
+                            purchOb.ItemId = Convert.ToInt32(splitItem[0]);
+                            purchOb.ItemQuantity = Convert.ToInt32(splitItem[1]);
+
+                            cartOb.Items.Add(purchOb);
+                        }
+                    }
+                }
+
+                cartOb.CartDiscount = Convert.ToDouble(discount);
+                HttpContext.Current.Session.Add(CommonManager.GetCartItemsWithQtySessionName(), cartOb);
+                return "success";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
     }
 }

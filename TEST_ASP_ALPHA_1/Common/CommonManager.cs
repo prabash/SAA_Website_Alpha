@@ -13,6 +13,7 @@ namespace TEST_ASP_ALPHA_1.Common
         const string ses_custEmail = "CustEmail";
         const string ses_custName = "CustName";
         const string ses_cartItems = "CartItems";
+        const string ses_cartItemsWithQty = "CartItemsWithQty";
         const string ses_checkoutEligible = "CheckoutEligible";
 
         #region Web Config Manager
@@ -215,6 +216,11 @@ namespace TEST_ASP_ALPHA_1.Common
         public static string GetCartItemsSessionName()
         {
             return ses_cartItems;
+        }
+
+        public static string GetCartItemsWithQtySessionName()
+        {
+            return ses_cartItemsWithQty;
         }
 
         public static string GetCheckoutEligibleSessionName()

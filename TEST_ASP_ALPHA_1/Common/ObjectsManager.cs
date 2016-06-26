@@ -59,4 +59,12 @@ namespace TEST_ASP_ALPHA_1.Common
         public string Status { get; set; }
         public DateTime PurchDate { get; set; }
     }
+
+    public class CartObject
+    {
+        public List<PurchaseItemObject> Items { get; set; }
+        public double CartDiscount { get; set; }
+        public double CartDelivery { get; set; }
+        public double CartTotal { get; set; }
+    }
 }

@@ -33,6 +33,25 @@
                                               var cart = (List<int>)cartSession;
                                               if (cart.Count > 0)
                                               {
+                                                  var sbItemQtyIds = new StringBuilder();
+                                                  var sbItemIds = new StringBuilder();
+
+                                                  for (int i = 0; i < cart.Count; i++)
+                                                  {
+                                                      if (i == cart.Count - 1)
+                                                      {
+                                                          sbItemQtyIds.Append("item" + cart[i] + "Qty");
+                                                          sbItemIds.Append(cart[i]);
+                                                      }
+                                                      else
+                                                      {
+                                                          sbItemQtyIds.Append("item" + cart[i] + "Qty" + "|");
+                                                          sbItemIds.Append(cart[i] + "|");
+                                                      }
+                                                          
+                                                  }
+                                                  btnProceedToCheckout.Attributes.Add("onclick", "checkout('" + sbItemQtyIds.ToString() + "', '" + sbItemIds.ToString() + "');");
+
                                                   var searchCriteria = new Dictionary<string, string>();
                                                   searchCriteria.Add(CommonManager.GetIdCriterionName(), CommonManager.GetSearchByIdCriterion(cart));
                                                   var itemDetails = new TEST_ASP_ALPHA_1.Models.ItemsModel().GetItemDetails(ItemType.All, ItemSortBy.NameAsc, 5, 0, searchCriteria);
@@ -140,17 +159,17 @@
                                     <tbody>
                                         <tr>
                                             <td colspan="1" class="a-left" style="">Subtotal </td>
-                                            <td class="a-right" style=""><span class="dfSubTotal" id="dfSubTotal" runat="server">00.00</span><input type="hidden" id="dfHidSubTotal" class="dfHidSubTotal" runat="server"></td>
+                                            <td class="a-right" style=""><span class="dfSubTotal" id="dfSubTotal" runat="server">00.00</span><input type="hidden" ID="dfHidSubTotal" class="dfHidSubTotal" runat="server"></td>
                                         </tr>
                                         <tr>
                                             <td colspan="1" class="a-left" style="">Discount </td>
-                                            <td class="a-right" style=""><span class="dfDiscount" id="dfDiscount" runat="server">00.00</span><input type="hidden" id="dfHidDiscount" class="dfHidDiscount" runat="server"></td>
+                                            <td class="a-right" style=""><span class="dfDiscount" id="dfDiscount" runat="server">00.00</span><input type="hidden" ID="dfHidDiscount" class="dfHidDiscount" runat="server"></td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <ul class="checkout">
                                     <li>
-                                        <button onclick="window.location.href='CheckoutMethod.aspx';" class="button btn-proceed-checkout" title="Proceed to Checkout" type="button"><span>Proceed to Checkout</span></button>
+                                        <button id="btnProceedToCheckout" class="button btn-proceed-checkout" title="Proceed to Checkout" type="button" runat="server"><span>Proceed to Checkout</span></button>
                                     </li>
                                     <li>
                                         <br>
@@ -247,6 +266,41 @@
                 }
             });
         };
+
+        function checkout(itemQtyIds, itemIds)
+        {
+            var qtyIdList = itemQtyIds.split('|');
+            var idList = itemIds.split('|');
+            var itemQtyString = "";
+            var discount = $('.dfHidDiscount').val();
+
+            var arrayLength = qtyIdList.length;
+            for (var i = 0; i < arrayLength; i++) {
+                var itemQty = document.getElementById(qtyIdList[i]).value;
+                var itemId = idList[i];
+
+                if (i == arrayLength - 1) {
+                    itemQtyString += itemId + "," + itemQty;
+                }
+                else {
+                    itemQtyString += itemId + "," + itemQty + "|";
+                }
+            }
+            
+            $.ajax({
+                type: "POST",
+                url: "Cart.aspx/ProceedToCheckout",
+                data: '{itemQtyString: "' + itemQtyString + '", discount: "' + discount + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    window.location.href = 'CheckoutMethod.aspx';
+                },
+                failure: function (response) {
+                    alert(response.d);
+                }
+            });
+        }
     </script>
 </asp:Content>
 
