@@ -13,34 +13,53 @@ namespace TEST_ASP_ALPHA_1.Models
         #region Set
         public void SaveItems(List<ItemObject> items)
         {
+            MySqlTransaction transaction = null;
             try
             {
                 using (MySqlConnection con = ConnectionManager.GetOpenConnection())
                 {
+                    transaction = con.BeginTransaction();
                     string sqlString = @"INSERT INTO items (title, location_default, location_alt, regular_price, current_price, rating, on_sale, type, overview, description, best_seller, year, date_added, genre) 
                                     VALUES (@title, @defLocation, @altLocation, @regPrice, @curPrice, @rating, @onSale, @type, @overview, @description, @bestSeller, @year, @dateAdded, @genre)";
 
                     using (MySqlCommand com = new MySqlCommand(sqlString, con))
                     {
+                        com.Transaction = transaction;
+                        com.Parameters.AddWithValue("@title", "");
+                        com.Parameters.AddWithValue("@defLocation", "");
+                        com.Parameters.AddWithValue("@altLocation", "");
+                        com.Parameters.AddWithValue("@regPrice", 0.00);
+                        com.Parameters.AddWithValue("@curPrice", 0.00);
+                        com.Parameters.AddWithValue("@rating", 0.00);
+                        com.Parameters.AddWithValue("@onSale", 0);
+                        com.Parameters.AddWithValue("@type", "");
+                        com.Parameters.AddWithValue("@overview", "");
+                        com.Parameters.AddWithValue("@description", "");
+                        com.Parameters.AddWithValue("@bestSeller", false);
+                        com.Parameters.AddWithValue("@year", "");
+                        com.Parameters.AddWithValue("@dateAdded", DateTime.Now);
+                        com.Parameters.AddWithValue("@genre", "");
+
                         foreach (var item in items)
                         {
-                            com.Parameters.AddWithValue("@title", item.title);
-                            com.Parameters.AddWithValue("@defLocation", item.defaultLocation);
-                            com.Parameters.AddWithValue("@altLocation", item.altLocation);
-                            com.Parameters.AddWithValue("@regPrice", item.regularPrice);
-                            com.Parameters.AddWithValue("@curPrice", item.currentPrice);
-                            com.Parameters.AddWithValue("@rating", item.rating);
-                            com.Parameters.AddWithValue("@onSale", Convert.ToInt32(item.onSale));
-                            com.Parameters.AddWithValue("@type", item.type);
-                            com.Parameters.AddWithValue("@overview", item.overview);
-                            com.Parameters.AddWithValue("@description", item.description);
-                            com.Parameters.AddWithValue("@bestSeller", item.bestSeller);
-                            com.Parameters.AddWithValue("@year", item.year);
-                            com.Parameters.AddWithValue("@dateAdded", DateTime.Now);
-                            com.Parameters.AddWithValue("@genre", item.genre);
+                            com.Parameters["@title"].Value = item.title;
+                            com.Parameters["@defLocation"].Value = item.defaultLocation;
+                            com.Parameters["@altLocation"].Value = item.altLocation;
+                            com.Parameters["@regPrice"].Value= item.regularPrice;
+                            com.Parameters["@curPrice"].Value = item.currentPrice;
+                            com.Parameters["@rating"].Value = item.rating;
+                            com.Parameters["@onSale"].Value =Convert.ToInt32(item.onSale);
+                            com.Parameters["@type"].Value = item.type;
+                            com.Parameters["@overview"].Value = item.overview;
+                            com.Parameters["@description"].Value = item.description;
+                            com.Parameters["@bestSeller"].Value = item.bestSeller;
+                            com.Parameters["@year"].Value = item.year;
+                            com.Parameters["@dateAdded"].Value = DateTime.Now;
+                            com.Parameters["@genre"].Value = item.genre;
 
+                            com.ExecuteNonQuery();
                         }
-                        com.ExecuteNonQuery();
+                        transaction.Commit();
                     }
                 }
 
@@ -101,7 +120,7 @@ namespace TEST_ASP_ALPHA_1.Models
             return returnList;
         }
 
-        public List<ItemObject> GetItemDetails(ItemType type, ItemSortBy sortBy, int limit, int currentPage = 0, Dictionary<string, string> searchCriteria = null)
+        public List<ItemObject> GetItemDetails(ItemType type, ItemSortBy sortBy, int limit = 0, int currentPage = 0, Dictionary<string, string> searchCriteria = null)
         {
             List<ItemObject> returnList = new List<ItemObject>();
             using (MySqlConnection con = ConnectionManager.GetOpenConnection())
@@ -155,7 +174,9 @@ namespace TEST_ASP_ALPHA_1.Models
                             break;
                     }
 
-                    sqlString.Append(" LIMIT " + currentPage + "," + limit);
+                    if (limit > 0)
+                        sqlString.Append(" LIMIT " + currentPage + "," + limit);
+
                     com.CommandText = sqlString.ToString();
 
                     MySqlDataReader dr = com.ExecuteReader();

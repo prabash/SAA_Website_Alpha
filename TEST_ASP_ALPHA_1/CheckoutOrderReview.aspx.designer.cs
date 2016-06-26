@@ -13,6 +13,15 @@ namespace TEST_ASP_ALPHA_1 {
     public partial class CheckoutOrderReview {
         
         /// <summary>
+        /// formCompleteCheckout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm formCompleteCheckout;
+        
+        /// <summary>
         /// dfSubTotal control.
         /// </summary>
         /// <remarks>
@@ -38,5 +47,14 @@ namespace TEST_ASP_ALPHA_1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl dfGrandTotal;
+        
+        /// <summary>
+        /// btnCompleteCheckout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCompleteCheckout;
     }
 }

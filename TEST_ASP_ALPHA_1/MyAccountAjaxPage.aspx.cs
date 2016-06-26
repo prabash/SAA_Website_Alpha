@@ -112,5 +112,18 @@ namespace TEST_ASP_ALPHA_1
                 throw ex;
             }
         }
+
+        [System.Web.Services.WebMethod(EnableSession = true)]
+        public static void CancelOrder(string purchId)
+        {
+            try
+            {
+                new PurchItemModel().CancelOrder(Convert.ToInt32(purchId));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

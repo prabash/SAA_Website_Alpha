@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -13,27 +14,67 @@ namespace TEST_ASP_ALPHA_1.Models
         #region Set
         public void SavePurchaseItems(List<PurchaseItemObject> purchItems)
         {
+            MySqlTransaction transaction = null;
             try
             {
                 using (MySqlConnection con = ConnectionManager.GetOpenConnection())
                 {
+                    transaction = con.BeginTransaction();
                     string sqlString = @"INSERT INTO purchase_items (purchase_cart_id, item_id, item_quantity, discount, cost_per_item, sub_total, status) 
                                     VALUES (@purchCartId, @itemId, @itemQty, @discount, @costPerItem, @subTotal, @status)";
 
                     using (MySqlCommand com = new MySqlCommand(sqlString, con))
                     {
+                        com.Transaction = transaction;
+                        com.Parameters.AddWithValue("@purchCartId", 0);
+                        com.Parameters.AddWithValue("@itemId", 0);
+                        com.Parameters.AddWithValue("@itemQty", 0);
+                        com.Parameters.AddWithValue("@discount", 0.00);
+                        com.Parameters.AddWithValue("@costPerItem", 0.00);
+                        com.Parameters.AddWithValue("@subTotal", 0.00);
+                        com.Parameters.AddWithValue("@status", "");
+
                         foreach (var item in purchItems)
                         {
-                            com.Parameters.AddWithValue("@purchCartId", item.PurchCartId);
-                            com.Parameters.AddWithValue("@itemId", item.ItemId);
-                            com.Parameters.AddWithValue("@itemQty", item.ItemQuantity);
-                            com.Parameters.AddWithValue("@discount", item.Discount);
-                            com.Parameters.AddWithValue("@costPerItem", item.CostPerItem);
-                            com.Parameters.AddWithValue("@subTotal", item.SubTotal);
-                            com.Parameters.AddWithValue("@status", item.Status);
-
+                            com.Parameters["@purchCartId"].Value = item.PurchCartId;
+                            com.Parameters["@itemId"].Value = item.ItemId;
+                            com.Parameters["@itemQty"].Value = item.ItemQuantity;
+                            com.Parameters["@discount"].Value = item.Discount;
+                            com.Parameters["@costPerItem"].Value = item.CostPerItem;
+                            com.Parameters["@subTotal"].Value = item.SubTotal;
+                            com.Parameters["@status"].Value = item.Status;
+                            com.ExecuteNonQuery();
                         }
+                        transaction.Commit();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void CancelOrder(int id)
+        {
+            MySqlTransaction transaction = null;
+            try
+            {
+                using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+                {
+                    transaction = con.BeginTransaction();
+                    string sqlString = @"UPDATE purchase_items SET status=@status WHERE id=@id";
+
+                    using (MySqlCommand com = new MySqlCommand(sqlString, con))
+                    {
+                        com.Transaction = transaction;
+
+                        com.Parameters.AddWithValue("@status", CommonManager.Status_GetCancelledItemName());
+                        com.Parameters.AddWithValue("@id", id);
                         com.ExecuteNonQuery();
+
+                        transaction.Commit();
                     }
                 }
 
@@ -85,6 +126,12 @@ namespace TEST_ASP_ALPHA_1.Models
                         break;
                     case PurchItemOrderBy.purchDateDesc:
                         sbSqlString.Append("ORDER BY pc.purchased_date DESC ");
+                        break;
+                    case PurchItemOrderBy.OrderIdAsc:
+                        sbSqlString.Append("ORDER BY pi.id ASC ");
+                        break;
+                    case PurchItemOrderBy.OrderIdDesc:
+                        sbSqlString.Append("ORDER BY pi.id DESC ");
                         break;
                     default:
                         break;
@@ -142,19 +189,18 @@ namespace TEST_ASP_ALPHA_1.Models
 
         private PurchaseItemObject GetInfoAddedPurchItemObject(MySqlDataReader dr)
         {
-            return new PurchaseItemObject
-            {
-                PurchId = dr["id"] != null ? Convert.ToInt32(dr["id"]) : 0,
-                PurchCartId = dr["purchase_cart_id"] != null ? Convert.ToInt32(dr["purchase_cart_id"]) : 0,
-                ItemId = dr["item_id"] != null ? Convert.ToInt32(dr["item_id"]) : 0,
-                ItemTitle = dr["title"] != null ? dr["title"].ToString() : "",
-                ItemQuantity = dr["item_quantity"] != null ? Convert.ToInt32(dr["item_quantity"]) : 0,
-                Discount = dr["discount"] != null ? Convert.ToDouble(dr["discount"]) : 0,
-                CostPerItem = dr["cost_per_item"] != null ? Convert.ToDouble(dr["cost_per_item"]) : 0,
-                SubTotal = dr["sub_total"] != null ? Convert.ToDouble(dr["sub_total"]) : 0,
-                Status = dr["status"] != null ? dr["status"].ToString() : "",
-                PurchDate = dr["purchased_date"] != null ? Convert.ToDateTime(dr["purchased_date"]) : Convert.ToDateTime("00/00/0000")
-            };
+            var purchItemOb = new PurchaseItemObject();
+            purchItemOb.PurchId = dr["id"] != null ? Convert.ToInt32(dr["id"]) : 0;
+            purchItemOb.PurchCartId = dr["purchase_cart_id"] != null ? Convert.ToInt32(dr["purchase_cart_id"]) : 0;
+            purchItemOb.ItemId = dr["item_id"] != null ? Convert.ToInt32(dr["item_id"]) : 0;
+            purchItemOb.ItemQuantity = dr["item_quantity"] != null ? Convert.ToInt32(dr["item_quantity"]) : 0;
+            purchItemOb.Discount = dr["discount"] != null ? Convert.ToDouble(dr["discount"]) : 0;
+            purchItemOb.CostPerItem = dr["cost_per_item"] != null ? Convert.ToDouble(dr["cost_per_item"]) : 0;
+            purchItemOb.SubTotal = dr["sub_total"] != null ? Convert.ToDouble(dr["sub_total"]) : 0;
+            purchItemOb.Status = dr["status"] != null ? dr["status"].ToString() : "";
+            purchItemOb.PurchDate = dr["purchased_date"] != null ? Convert.ToDateTime(dr["purchased_date"]) : Convert.ToDateTime("00/00/0000");
+            purchItemOb.ItemTitle = dr["title"] != null ? dr["title"].ToString() : "";
+            return purchItemOb;
         }
 
         #endregion

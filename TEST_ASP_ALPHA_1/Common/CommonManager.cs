@@ -230,6 +230,28 @@ namespace TEST_ASP_ALPHA_1.Common
 
         #endregion
 
+        #region Item Status
+        public static string Status_GetNewItemName()
+        {
+            var searchCriteria = ConfigurationManager.AppSettings["ItemStatuses"];
+            return searchCriteria.Split('|')[0];
+        }
+
+        public static string Status_GetDeliveredItemName()
+        {
+            var searchCriteria = ConfigurationManager.AppSettings["ItemStatuses"];
+            return searchCriteria.Split('|')[1];
+        }
+
+        public static string Status_GetCancelledItemName()
+        {
+            var searchCriteria = ConfigurationManager.AppSettings["ItemStatuses"];
+            return searchCriteria.Split('|')[2];
+        }
+
+
+        #endregion
+
         #endregion
     }
 }

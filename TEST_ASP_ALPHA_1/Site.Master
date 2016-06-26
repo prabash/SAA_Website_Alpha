@@ -161,7 +161,7 @@
                                                 <% 
                                               var searchCriteria = new Dictionary<string, string>();
                                               searchCriteria.Add(CommonManager.GetIdCriterionName(), CommonManager.GetSearchByIdCriterion(cart));
-                                              var itemDetails = new TEST_ASP_ALPHA_1.Models.ItemsModel().GetItemDetails(ItemType.All, ItemSortBy.NameAsc, 5, 0, searchCriteria);
+                                              var itemDetails = new TEST_ASP_ALPHA_1.Models.ItemsModel().GetItemDetails(ItemType.All, ItemSortBy.NameAsc, 0, 0, searchCriteria);
 
                                               foreach (var item in itemDetails)
                                               {
@@ -580,6 +580,24 @@
             $.ajax({
                 type: "POST",
                 url: "MyAccountAjaxPage.aspx/ClearCart",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccess,
+                failure: function (response) {
+                    alert(response.d);
+                }
+            });
+        }
+        function OnSuccess(response) {
+            window.location.reload();
+        }
+    </script>
+    <script type="text/javascript">
+        function CancelOrder(purchId) {
+            $.ajax({
+                type: "POST",
+                url: "MyAccountAjaxPage.aspx/CancelOrder",
+                data: '{purchId: "' + purchId + '"}',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: OnSuccess,

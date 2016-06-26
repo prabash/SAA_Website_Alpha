@@ -39,7 +39,8 @@ namespace TEST_ASP_ALPHA_1
                 currentPage = Convert.ToInt32(_page);
             }
 
-            CommonHtmlManager.AddPurchItemPagination(currentPage, currentViewPerPage, ref this.paginationCtrl, PurchItemGetType.customerEmail, 0, Session[CommonManager.GetCustEmailSessionName()].ToString());
+            CommonHtmlManager.AddPurchItemPagination(currentPage, currentViewPerPage, ref this.paginationCtrl, PurchItemGetType.customerEmail, 0, 
+                new AESManager().EncryptToString(Session[CommonManager.GetCustEmailSessionName()].ToString()));
         }
     }
 }

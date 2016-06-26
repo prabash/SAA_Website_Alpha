@@ -62,9 +62,14 @@ namespace TEST_ASP_ALPHA_1.Common
 
     public class CartObject
     {
+        public int CartId { get; set; }
         public List<PurchaseItemObject> Items { get; set; }
+        public int CustId { get; set; }
+        public string CustEmailAddress { get; set; }
+        public DateTime PurchaseDate { get; set; }
         public double CartDiscount { get; set; }
         public double CartDelivery { get; set; }
         public double CartTotal { get; set; }
+        public string CartStatus { get; set; }
     }
 }

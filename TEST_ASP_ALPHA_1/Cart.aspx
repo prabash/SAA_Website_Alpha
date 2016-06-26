@@ -54,7 +54,7 @@
 
                                                   var searchCriteria = new Dictionary<string, string>();
                                                   searchCriteria.Add(CommonManager.GetIdCriterionName(), CommonManager.GetSearchByIdCriterion(cart));
-                                                  var itemDetails = new TEST_ASP_ALPHA_1.Models.ItemsModel().GetItemDetails(ItemType.All, ItemSortBy.NameAsc, 5, 0, searchCriteria);
+                                                  var itemDetails = new TEST_ASP_ALPHA_1.Models.ItemsModel().GetItemDetails(ItemType.All, ItemSortBy.NameAsc, 0, 0, searchCriteria);
                                                   foreach (var item in itemDetails)
                                                   {
                                                       subTotal = itemDetails.Sum(rec => rec.currentPrice);

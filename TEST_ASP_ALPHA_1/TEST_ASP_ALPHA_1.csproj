@@ -176,6 +176,7 @@
     <Content Include="BrowseTvSeriesList.aspx" />
     <Content Include="Cart.aspx" />
     <Content Include="CheckoutBillingInfoReg.aspx" />
+    <Content Include="CheckoutComplete.aspx" />
     <Content Include="CheckoutMethod.aspx" />
     <Content Include="CheckoutBillingInfoUpdate.aspx" />
     <Content Include="CheckoutOrderReview.aspx" />
@@ -498,6 +499,13 @@
     <Compile Include="CheckoutBillingInfoReg.aspx.designer.cs">
       <DependentUpon>CheckoutBillingInfoReg.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CheckoutComplete.aspx.cs">
+      <DependentUpon>CheckoutComplete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CheckoutComplete.aspx.designer.cs">
+      <DependentUpon>CheckoutComplete.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CheckoutMethod.aspx.cs">
       <DependentUpon>CheckoutMethod.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -563,6 +571,7 @@
     <Compile Include="Common\ConnectionManager.cs" />
     <Compile Include="Models\CustCommentsModel.cs" />
     <Compile Include="Models\CustWishlistModel.cs" />
+    <Compile Include="Models\PurchCartModel.cs" />
     <Compile Include="Models\PurchItemModel.cs" />
     <Compile Include="Common\EmailManager.cs" />
     <Compile Include="Models\IdentityModels.cs" />

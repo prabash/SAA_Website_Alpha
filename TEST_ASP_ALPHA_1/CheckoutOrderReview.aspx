@@ -39,96 +39,98 @@
                                 </div>
                                 <div id="checkout-step-review" class="step a-item">
                                     <div class="order-review" id="checkout-review-load"></div>
-                                    <div class="buttons-set13" id="review-buttons-container">
-                                        <fieldset>
-                                            <table class="data-table cart-table" id="shopping-cart-table">
-                                                <thead>
-                                                    <tr class="first last">
-                                                        <th rowspan="1">&nbsp;</th>
-                                                        <th rowspan="1"><span class="nobr">Product Name</span></th>
-                                                        <th colspan="1" class="a-center"><span class="nobr">Unit Price</span></th>
-                                                        <th class="a-center" rowspan="1">Qty</th>
-                                                        <th colspan="1" class="a-center">Unit total</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <%var cartSession = Session[CommonManager.GetCartItemsWithQtySessionName()];
-                                                      if (cartSession != null)
-                                                      {
-                                                          var subTotal = 0.0;
-                                                          var cart = (CartObject)cartSession;
-                                                          if (cart != null)
+                                    <form id="formCompleteCheckout" runat="server" method="post"> 
+                                        <div class="buttons-set13" id="review-buttons-container">
+                                            <fieldset>
+                                                <table class="data-table cart-table" id="shopping-cart-table">
+                                                    <thead>
+                                                        <tr class="first last">
+                                                            <th rowspan="1">&nbsp;</th>
+                                                            <th rowspan="1"><span class="nobr">Product Name</span></th>
+                                                            <th colspan="1" class="a-center"><span class="nobr">Unit Price</span></th>
+                                                            <th class="a-center" rowspan="1">Qty</th>
+                                                            <th colspan="1" class="a-center">Unit total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <%var cartSession = Session[CommonManager.GetCartItemsWithQtySessionName()];
+                                                          if (cartSession != null)
                                                           {
-                                                              var cartIds = new List<int>();
-                                                              foreach (var item in cart.Items)
+                                                              var subTotal = 0.0;
+                                                              var cart = (CartObject)cartSession;
+                                                              if (cart != null)
                                                               {
-                                                                  cartIds.Add(item.ItemId);
-                                                              }
+                                                                  var cartIds = new List<int>();
+                                                                  foreach (var item in cart.Items)
+                                                                  {
+                                                                      cartIds.Add(item.ItemId);
+                                                                  }
 
-                                                              var searchCriteria = new Dictionary<string, string>();
-                                                              searchCriteria.Add(CommonManager.GetIdCriterionName(), CommonManager.GetSearchByIdCriterion(cartIds));
-                                                              var itemDetails = new TEST_ASP_ALPHA_1.Models.ItemsModel().GetItemDetails(ItemType.All, ItemSortBy.NameAsc, 5, 0, searchCriteria);
-                                                              foreach (var item in itemDetails)
-                                                              {
-                                                                  var itemQty = cart.Items.First(rec => rec.ItemId == item.Id).ItemQuantity;
-                                                                  var unitTotal = (item.currentPrice * itemQty);
-                                                                  subTotal += unitTotal;
+                                                                  var searchCriteria = new Dictionary<string, string>();
+                                                                  searchCriteria.Add(CommonManager.GetIdCriterionName(), CommonManager.GetSearchByIdCriterion(cartIds));
+                                                                  var itemDetails = new TEST_ASP_ALPHA_1.Models.ItemsModel().GetItemDetails(ItemType.All, ItemSortBy.NameAsc, 0, 0, searchCriteria);
+                                                                  foreach (var item in itemDetails)
+                                                                  {
+                                                                      var itemQty = cart.Items.First(rec => rec.ItemId == item.Id).ItemQuantity;
+                                                                      var unitTotal = (item.currentPrice * itemQty);
+                                                                      subTotal += unitTotal;
                                                                  
-                                                    %>
-                                                    <tr class="first odd">
-                                                        <td class="image"><a class="product-image" title="<%=item.title%>" href="ProductDetails.aspx?itemId=<%=item.Id%>">
-                                                            <img width="75" alt="Sample Product" src="<%=item.defaultLocation%>"></a>
+                                                        %>
+                                                        <tr class="first odd">
+                                                            <td class="image"><a class="product-image" title="<%=item.title%>" href="ProductDetails.aspx?itemId=<%=item.Id%>">
+                                                                <img width="75" alt="Sample Product" src="<%=item.defaultLocation%>"></a>
 
-                                                        </td>
-                                                        <td>
-                                                            <h4 class="product-name"><a href="product_detail.html"><%=item.title%></a> </h4>
-                                                        </td>
-                                                        <td class="a-right"><span class="cart-price"><span class="price"><%=item.currentPrice.FormatCurrency("LKR").ToString()%></span> </span></td>
-                                                        <td class="a-center movewishlist"><%=itemQty%></td>
-                                                        <td class="a-right movewishlist"><span class="cart-price"><span class="price" id="span<%=item.Id%>"><%=unitTotal.FormatCurrency("LKR").ToString()%></span> </span>
-                                                            <input type="hidden" id="hidItemSubTot<%=item.Id%>" value="<%=item.currentPrice%>"></td>
-                                                    </tr>
-                                                    <%
+                                                            </td>
+                                                            <td>
+                                                                <h4 class="product-name"><a href="product_detail.html"><%=item.title%></a> </h4>
+                                                            </td>
+                                                            <td class="a-right"><span class="cart-price"><span class="price"><%=item.currentPrice.FormatCurrency("LKR").ToString()%></span> </span></td>
+                                                            <td class="a-center movewishlist"><%=itemQty%></td>
+                                                            <td class="a-right movewishlist"><span class="cart-price"><span class="price" id="span<%=item.Id%>"><%=unitTotal.FormatCurrency("LKR").ToString()%></span> </span>
+                                                                <input type="hidden" id="hidItemSubTot<%=item.Id%>" value="<%=item.currentPrice%>"></td>
+                                                        </tr>
+                                                        <%
                                                               }
 
                                                               dfSubTotal.InnerText = subTotal.FormatCurrency("LKR").ToString();
                                                               dfDiscount.InnerText = cart.CartDiscount.FormatCurrency("LKR").ToString();
                                                               dfGrandTotal.InnerText = (subTotal - cart.CartDiscount + cart.CartDelivery).FormatCurrency("LKR").ToString();
 
-                                                    %>
-                                                    <tr class="first odd">
-                                                        <td>&nbsp; </td>
-                                                        <td>&nbsp; </td>
-                                                        <td>&nbsp; </td>
-                                                        <td colspan="1" class="a-left" style="">Subtotal </td>
-                                                        <td class="a-right" style=""><span class="dfSubTotal" id="dfSubTotal" runat="server">00.00</span></td>
-                                                    </tr>
-                                                    <tr class="first odd">
-                                                        <td>&nbsp; </td>
-                                                        <td>&nbsp; </td>
-                                                        <td>&nbsp; </td>
-                                                        <td colspan="1" class="a-left" style="">Discount </td>
-                                                        <td class="a-right" style=""><span class="dfDiscount" id="dfDiscount" runat="server">00.00</span></td>
-                                                    </tr>
-                                                    <tr class="first odd">
-                                                        <td>&nbsp; </td>
-                                                        <td>&nbsp; </td>
-                                                        <td>&nbsp; </td>
-                                                        <td colspan="1" class="a-left" style=""><strong>Grand Total</strong></td>
-                                                        <td class="a-right" style=""><strong><span class="dfGrandTotal" id="dfGrandTotal" runat="server">00.00</span></strong></td>
-                                                    </tr>
-                                                    <%
+                                                        %>
+                                                        <tr class="first odd">
+                                                            <td>&nbsp; </td>
+                                                            <td>&nbsp; </td>
+                                                            <td>&nbsp; </td>
+                                                            <td colspan="1" class="a-left" style="">Subtotal </td>
+                                                            <td class="a-right" style=""><span class="dfSubTotal" id="dfSubTotal" runat="server">00.00</span></td>
+                                                        </tr>
+                                                        <tr class="first odd">
+                                                            <td>&nbsp; </td>
+                                                            <td>&nbsp; </td>
+                                                            <td>&nbsp; </td>
+                                                            <td colspan="1" class="a-left" style="">Discount </td>
+                                                            <td class="a-right" style=""><span class="dfDiscount" id="dfDiscount" runat="server">00.00</span></td>
+                                                        </tr>
+                                                        <tr class="first odd">
+                                                            <td>&nbsp; </td>
+                                                            <td>&nbsp; </td>
+                                                            <td>&nbsp; </td>
+                                                            <td colspan="1" class="a-left" style=""><strong>Grand Total</strong></td>
+                                                            <td class="a-right" style=""><strong><span class="dfGrandTotal" id="dfGrandTotal" runat="server">00.00</span></strong></td>
+                                                        </tr>
+                                                        <%
                                                             
                                                           }
                                                       }
-                                                    %>
-                                                </tbody>
-                                            </table>
-                                        </fieldset>
-                                        <br />
-                                        <p class="f-left">Forgot an Item? <b><a href="Cart.aspx">Edit Your Cart</a></b> </p>
-                                        <button type="submit" class="button" onclick="review.save();"><span>Place Order</span></button>
-                                    </div>
+                                                        %>
+                                                    </tbody>
+                                                </table>
+                                            </fieldset>
+                                            <br />
+                                            <p class="f-left">Forgot an Item? <b><a href="Cart.aspx">Edit Your Cart</a></b> </p>
+                                            <asp:Button type="submit" CssClass="button" runat="server" ID="btnCompleteCheckout" Text="COMPLETE CHECKOUT" OnClick="btnCompleteCheckout_Click"></asp:Button>
+                                        </div>
+                                    </form>
                                 </div>
                             </li>
                         </ol>

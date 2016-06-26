@@ -49,6 +49,24 @@ namespace TEST_ASP_ALPHA_1.Common
     public enum PurchItemOrderBy
     {
         purchDateAsc,
-        purchDateDesc
+        purchDateDesc,
+        OrderIdAsc,
+        OrderIdDesc
+    }
+
+    public enum CartGetType
+    {
+        customerEmail,
+        customerId,
+        purchDate,
+        totalValue
+    }
+
+    public enum CartOrderBy
+    {
+        purchDateAsc,
+        purchDateDesc,
+        OrderIdAsc,
+        OrderIdDesc
     }
 }

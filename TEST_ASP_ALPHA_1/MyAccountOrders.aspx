@@ -49,23 +49,34 @@
                                                 <th>Item</th>
                                                 <th><span class="nobr">Sub Total</span></th>
                                                 <th>Status</th>
-                                                <th>&nbsp;</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <%var purchItems = new PurchItemModel().GetPurchItemDetails(PurchItemGetType.customerEmail, 0, new AESManager().EncryptToString(Session[CommonManager.GetCustEmailSessionName()].ToString()), 0, null, null, PurchItemOrderBy.purchDateDesc, currentViewPerPage, currentPage);
+                                            <%var purchItems = new PurchItemModel().GetPurchItemDetails(PurchItemGetType.customerEmail, 0, new AESManager().EncryptToString(Session[CommonManager.GetCustEmailSessionName()].ToString()), 0, null, null, PurchItemOrderBy.OrderIdDesc, currentViewPerPage, (currentPage - 1) * currentViewPerPage);
                                               if (purchItems.Count > 0)
                                               {
+                                                  var colorYellow = "#ffed81";
+                                                  var colorRed = "#ff6c6c";
+                                                  var colorBlue = "#5dbbff";
+                                                  var selectColor = "";
                                                   foreach (var item in purchItems)
                                                   {
+                                                      if (item.Status == CommonManager.Status_GetNewItemName())
+                                                          selectColor = colorYellow;
+                                                      else if (item.Status == CommonManager.Status_GetDeliveredItemName())
+                                                          selectColor = colorBlue;
+                                                      else if (item.Status == CommonManager.Status_GetCancelledItemName())
+                                                          selectColor = colorRed;
                                             %>
-                                            <tr>
-                                                <td><%=item.PurchCartId %></td>
+                                            <tr style="background-color:<%=selectColor%>">
+                                                <td><%=item.PurchId %></td>
                                                 <td><%=item.PurchDate %></td>
                                                 <td><%=item.ItemTitle %></td>
                                                 <td><%=item.SubTotal %></td>
                                                 <td><%=item.Status %></td>
-                                                <tr />
+                                                <td><a href="javascript:void(0);" onclick="CancelOrder('<%=item.PurchId%>');"><%=item.Status == CommonManager.Status_GetNewItemName()? "cancel" : ""%></a></td>
+                                             <tr />
                                             <%
                                                   }
                                               }
