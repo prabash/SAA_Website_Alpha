@@ -12,7 +12,7 @@ namespace TEST_ASP_ALPHA_1.Models
     {
         #region Set
 
-        public void RegisterUser(string email, string username, string password)
+        public void RegisterUser(string email, string username, string password, bool activateUserOnReg = false)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace TEST_ASP_ALPHA_1.Models
                             com.Parameters.AddWithValue("@username", username);
                             com.Parameters.AddWithValue("@password", password);
                             com.Parameters.AddWithValue("@registerDate", DateTime.Now);
-                            com.Parameters.AddWithValue("@active", Convert.ToInt32(false));
+                            com.Parameters.AddWithValue("@active", Convert.ToInt32(activateUserOnReg));
 
                             com.ExecuteNonQuery();
                         }
@@ -82,16 +82,15 @@ namespace TEST_ASP_ALPHA_1.Models
             }
         }
 
-        public void UpdateUserData(int id, string email, string name, string nicNo, string tel, string address)
+        public void UpdateUserData(int id, string email, string name, string tel, string address)
         {
             using (MySqlConnection con = ConnectionManager.GetOpenConnection())
             {
-                string sqlString = @"UPDATE customers SET nic_no = @nicNo, name = @name, telephone_no = @telephonNo, address = @address
+                string sqlString = @"UPDATE customers SET name = @name, telephone_no = @telephonNo, address = @address
                                      WHERE id= @id AND email_address = @emailAdd";
 
                 using (MySqlCommand com = new MySqlCommand(sqlString, con))
                 {
-                    com.Parameters.AddWithValue("@nicNo", nicNo);
                     com.Parameters.AddWithValue("@name", name);
                     com.Parameters.AddWithValue("@telephonNo", tel);
                     com.Parameters.AddWithValue("@address", address);
@@ -218,7 +217,7 @@ namespace TEST_ASP_ALPHA_1.Models
                     {
                         custId = customer.Id;
                         custName = customer.username;
-                        if (customer.nicNo != null && ((customer.addressLine1 != null || customer.addressLine2 != null) && customer.city != null))
+                        if ((customer.addressLine1 != null || customer.addressLine2 != null) && customer.city != null)
                             checkoutElgible = true;
 
                         loginSuccess = true;
@@ -268,21 +267,28 @@ namespace TEST_ASP_ALPHA_1.Models
        
         public CustomerObject GetInfoAddedCustomerObject(MySqlDataReader dr)
         {
-            return new CustomerObject
+            var returnOb = new CustomerObject();
+            returnOb.Id = Convert.ToInt32(dr["id"]);
+            returnOb.name = dr["name"] != null ? dr["name"].ToString() : "";
+            returnOb.emailAddress = dr["email_address"].ToString();
+            returnOb.telephoneNo = dr["telephone_no"] != null ? dr["telephone_no"].ToString() : "";
+            var add = dr["address"] != null ? dr["address"].ToString().Split('|') : null;
+            if (add != null)
             {
-                Id = Convert.ToInt32(dr["id"]),
-                nicNo = dr["nic_no"] != null ? dr["nic_no"].ToString() : "",
-                name = dr["name"] != null ? dr["name"].ToString() : "",
-                emailAddress = dr["email_address"].ToString(),
-                telephoneNo = dr["telephone_no"] != null ? dr["telephone_no"].ToString() : "",
-                addressLine1 = dr["address"] != null ? dr["address"].ToString().Split('|')[0] : "",
-                addressLine2 = dr["address"] != null ? dr["address"].ToString().Split('|')[1] : "",
-                city = dr["address"] != null ? dr["address"].ToString().Split('|')[2] : "",
-                username = dr["username"].ToString(),
-                password = dr["password"].ToString(),
-                registeredDate = Convert.ToDateTime(dr["registered_date"]),
-                active = Convert.ToBoolean(Convert.ToInt32(dr["active"].ToString()))
-            };
+                if (add.Count() > 2)
+                {
+                    returnOb.addressLine1 = add[0];
+                    returnOb.addressLine2 = add[1];
+                    returnOb.city = add[2];
+                }
+            }
+            
+            returnOb.username = dr["username"].ToString();
+            returnOb.password = dr["password"].ToString();
+            returnOb.registeredDate = Convert.ToDateTime(dr["registered_date"]);
+            returnOb.active = Convert.ToBoolean(Convert.ToInt32(dr["active"].ToString()));
+
+            return returnOb;
         }
         
         #endregion

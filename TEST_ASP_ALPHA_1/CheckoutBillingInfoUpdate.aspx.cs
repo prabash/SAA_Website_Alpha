@@ -9,7 +9,7 @@ using TEST_ASP_ALPHA_1.Models;
 
 namespace TEST_ASP_ALPHA_1
 {
-    public partial class MyAccountInformation : System.Web.UI.Page
+    public partial class CheckoutMethodUpdate : System.Web.UI.Page
     {
         AESManager aesMgr;
         EmailManager emailMgr;
@@ -26,7 +26,7 @@ namespace TEST_ASP_ALPHA_1
                 if (Session[CommonManager.GetCustEmailSessionName()] == null)
                 {
                     string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
-                    Response.Redirect("Login.aspx");
+                    Response.Redirect("CheckoutMethod.aspx");
                 }
                 else
                 {
@@ -34,6 +34,25 @@ namespace TEST_ASP_ALPHA_1
                 }
             }
         }
+
+        protected void btnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var id = Convert.ToInt32(Session[CommonManager.GetCustIdSessionName()]);
+                var email = Session[CommonManager.GetCustEmailSessionName()].ToString();
+
+                custMgr.UpdateUserData(id, aesMgr.EncryptToString(email), dfName.Value, dfTelephone.Value, dfAddLine1.Value + "|" + dfAddLine2.Value + "|" + cmbCity.Value);
+
+                regErrorBox.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                regErrMsg.InnerText = ex.Message;
+                regErrorBox.Visible = true;
+            }
+        }
+
 
         void LoadCurrentDetails()
         {
@@ -54,28 +73,6 @@ namespace TEST_ASP_ALPHA_1
             catch (Exception ex)
             {
                 regErrMsg.InnerText = ex.Message;
-                regSuccessBox.Visible = false;
-                regErrorBox.Visible = true;
-            }
-        }
-
-        protected void btnUpdate_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var id = Convert.ToInt32(Session[CommonManager.GetCustIdSessionName()]);
-                var email = Session[CommonManager.GetCustEmailSessionName()].ToString();
-
-                custMgr.UpdateUserData(id, aesMgr.EncryptToString(email), dfName.Value, dfTelephone.Value, dfAddLine1.Value + "|" + dfAddLine2.Value + "|" + cmbCity.Value);
-                Session[CommonManager.GetCheckoutEligibleSessionName()] = true;
-
-                regSuccessBox.Visible = true;
-                regErrorBox.Visible = false;
-            }
-            catch (Exception ex)
-            {
-                regErrMsg.InnerText = ex.Message;
-                regSuccessBox.Visible = false;
                 regErrorBox.Visible = true;
             }
         }

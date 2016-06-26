@@ -34,7 +34,6 @@ namespace TEST_ASP_ALPHA_1.Common
     public class CustomerObject
     {
         public int Id { get; set; }
-        public string nicNo { get; set; }
         public string name { get; set; }
         public string emailAddress { get; set; }
         public string telephoneNo { get; set; }

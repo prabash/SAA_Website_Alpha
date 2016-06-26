@@ -15,7 +15,6 @@
                             <input type="hidden" value="Vwww7itR3zQFe86m" name="form_key">
                             <fieldset>
                                 <table class="data-table cart-table" id="shopping-cart-table">
-
                                     <thead>
                                         <tr class="first last">
                                             <th rowspan="1">&nbsp;</th>
@@ -26,14 +25,6 @@
                                             <th class="a-center" rowspan="1">&nbsp;</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr class="first last">
-                                            <td class="a-right last" colspan="50">
-                                                <button onclick="setLocation('#')" class="button btn-continue" title="Continue Shopping" type="button"><span><span>Continue Shopping</span></span></button>
-                                                <button id="empty_cart_button" class="button btn-empty" title="Clear Cart" value="empty_cart" name="update_cart_action" type="submit"><span><span>Clear Cart</span></span></button>
-                                                <button class="button btn-update" title="Update Cart" value="update_qty" name="update_cart_action" type="submit"><span><span>Update Cart</span></span></button></td>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         <%var cartSession = Session[CommonManager.GetCartItemsSessionName()];
                                           if (cartSession != null)
@@ -82,6 +73,14 @@
                                           }
                                         %>
                                     </tbody>
+                                    <tfoot>
+                                        <tr class="first last">
+                                            <td class="a-right last" colspan="50">
+                                                <button onclick="window.location.href='BrowseGamesGrid.aspx';" class="button btn-continue" title="Continue Shopping" type="button"><span><span>Continue Shopping</span></span></button>
+                                                <button id="empty_cart_button" class="button btn-empty" title="Clear Cart" value="empty_cart" name="update_cart_action" onclick="ClearCart();"><span><span>Clear Cart</span></span></button>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </fieldset>
                         </form>
@@ -110,7 +109,6 @@
                                         <div class="buttons-set11">
                                             <button class="button get-quote" onclick="window.location.href='MyAccountInformation.aspx';" title="Get a Quote" type="button"><span>Update Address</span></button>
                                         </div>
-                                        <!--buttons-set11-->
                                     </form>
                                 </div>
                             </div>
@@ -152,7 +150,7 @@
                                 </table>
                                 <ul class="checkout">
                                     <li>
-                                        <button onclick="" class="button btn-proceed-checkout" title="Proceed to Checkout" type="button"><span>Proceed to Checkout</span></button>
+                                        <button onclick="window.location.href='CheckoutMethod.aspx';" class="button btn-proceed-checkout" title="Proceed to Checkout" type="button"><span>Proceed to Checkout</span></button>
                                     </li>
                                     <li>
                                         <br>

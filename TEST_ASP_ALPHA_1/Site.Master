@@ -575,5 +575,22 @@
             window.location.reload();
         }
     </script>
+    <script type="text/javascript">
+        function ClearCart() {
+            $.ajax({
+                type: "POST",
+                url: "MyAccountAjaxPage.aspx/ClearCart",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccess,
+                failure: function (response) {
+                    alert(response.d);
+                }
+            });
+        }
+        function OnSuccess(response) {
+            window.location.reload();
+        }
+    </script>
 </body>
 </html>

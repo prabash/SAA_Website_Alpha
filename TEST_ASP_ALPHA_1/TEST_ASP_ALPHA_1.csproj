@@ -175,6 +175,11 @@
     <Content Include="BrowseTvSeriesGrid.aspx" />
     <Content Include="BrowseTvSeriesList.aspx" />
     <Content Include="Cart.aspx" />
+    <Content Include="CheckoutBillingInfoReg.aspx" />
+    <Content Include="CheckoutMethod.aspx" />
+    <Content Include="CheckoutBillingInfoUpdate.aspx" />
+    <Content Include="CheckoutOrderReview.aspx" />
+    <Content Include="CheckoutPaymentInfo.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -485,6 +490,41 @@
     </Compile>
     <Compile Include="Cart.aspx.designer.cs">
       <DependentUpon>Cart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CheckoutBillingInfoReg.aspx.cs">
+      <DependentUpon>CheckoutBillingInfoReg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CheckoutBillingInfoReg.aspx.designer.cs">
+      <DependentUpon>CheckoutBillingInfoReg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CheckoutMethod.aspx.cs">
+      <DependentUpon>CheckoutMethod.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CheckoutMethod.aspx.designer.cs">
+      <DependentUpon>CheckoutMethod.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CheckoutBillingInfoUpdate.aspx.cs">
+      <DependentUpon>CheckoutBillingInfoUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CheckoutBillingInfoUpdate.aspx.designer.cs">
+      <DependentUpon>CheckoutBillingInfoUpdate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CheckoutOrderReview.aspx.cs">
+      <DependentUpon>CheckoutOrderReview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CheckoutOrderReview.aspx.designer.cs">
+      <DependentUpon>CheckoutOrderReview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CheckoutPaymentInfo.aspx.cs">
+      <DependentUpon>CheckoutPaymentInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CheckoutPaymentInfo.aspx.designer.cs">
+      <DependentUpon>CheckoutPaymentInfo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Common\CommonHtmlManager.cs" />
     <Compile Include="Common\CommonManager.cs" />

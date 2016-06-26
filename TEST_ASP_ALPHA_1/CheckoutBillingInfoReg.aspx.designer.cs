@@ -10,61 +10,70 @@
 namespace TEST_ASP_ALPHA_1 {
     
     
-    public partial class MyAccountInformation {
+    public partial class CheckoutBillingInfo {
         
         /// <summary>
-        /// frmAccountInfo control.
+        /// registerForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm frmAccountInfo;
+        protected global::System.Web.UI.HtmlControls.HtmlForm registerForm;
         
         /// <summary>
-        /// dfName control.
+        /// dfnRegEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText dfName;
+        protected global::System.Web.UI.WebControls.TextBox dfnRegEmail;
         
         /// <summary>
-        /// dfAddLine1 control.
+        /// dfnRegUsername control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText dfAddLine1;
+        protected global::System.Web.UI.WebControls.TextBox dfnRegUsername;
         
         /// <summary>
-        /// dfAddLine2 control.
+        /// dfnRegPass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText dfAddLine2;
+        protected global::System.Web.UI.WebControls.TextBox dfnRegPass;
         
         /// <summary>
-        /// cmbCity control.
+        /// Regex1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect cmbCity;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator Regex1;
         
         /// <summary>
-        /// dfTelephone control.
+        /// dfnRegConfPass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText dfTelephone;
+        protected global::System.Web.UI.WebControls.TextBox dfnRegConfPass;
+        
+        /// <summary>
+        /// CompareValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
         
         /// <summary>
         /// regErrorBox control.
@@ -103,12 +112,12 @@ namespace TEST_ASP_ALPHA_1 {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl regSuccessMsg;
         
         /// <summary>
-        /// btnUpdate control.
+        /// btnRegCreateAccount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpdate;
+        protected global::System.Web.UI.WebControls.Button btnRegCreateAccount;
     }
 }

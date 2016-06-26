@@ -10,7 +10,7 @@ namespace TEST_ASP_ALPHA_1.Common
 {
     public class EmailManager
     {
-        public void SendActivationEmail(string activationCode, string username, string url)
+        public void SendActivationEmail(string activationCode, string username, string url, bool checkout = false)
         {
             var sptEmail = new AESManager().DecryptString(ConfigurationManager.AppSettings.Get("SptEmail"));
             var sptPassword = new AESManager().DecryptString(ConfigurationManager.AppSettings.Get("SptPassword"));
@@ -21,7 +21,10 @@ namespace TEST_ASP_ALPHA_1.Common
                 mm.Subject = "Account Activation";
                 string body = "Hey " + username + "!";
                 body += "<br /><br />Please click the following link to activate your account";
-                body += "<br /><a href = '" + url + "Activation.aspx?ActivationCode=" + activationCode + "'>Click here to activate your account.</a>";
+                if (!checkout)
+                    body += "<br /><a href = '" + url + "Activation.aspx?ActivationCode=" + activationCode +  "'>Click here to activate your account.</a>";
+                else
+                    body += "<br /><a href = '" + url + "Activation.aspx?ActivationCode=" + activationCode + "&Checkout=True'>Click here to activate your account.</a>";
                 body += "<br /><br />Thanks";
                 mm.Body = body;
                 mm.IsBodyHtml = true;

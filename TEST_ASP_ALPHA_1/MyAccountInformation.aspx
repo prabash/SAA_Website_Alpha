@@ -42,11 +42,6 @@
                                                                 <br />
                                                                 <input type="text" class="input-text required-entry" title="Full Name" runat="server" ID="dfName" required />
                                                             </div>
-                                                            <div class="input-box name-lastname">
-                                                                <label for="billing:lastname">NIC<span class="required">*</span> </label>
-                                                                <br />
-                                                                <input type="text" id="dfNic" title="NIC No." class="input-text required-entry" runat="server" required />
-                                                            </div>
                                                         </div>
                                                     </li>
                                                     <li>

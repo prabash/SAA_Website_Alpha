@@ -76,18 +76,40 @@ namespace TEST_ASP_ALPHA_1
             try
             {
                 var cartSession = HttpContext.Current.Session[CommonManager.GetCartItemsSessionName()];
-                var cart = (List<int>)cartSession;
-                if (cart.Contains(itemId))
+                if (cartSession != null)
                 {
-                    cart.Remove(itemId);
-                    HttpContext.Current.Session[CommonManager.GetCartItemsSessionName()] = cart;
-                    return "Successfully removed item from your cart!";
+                    var cart = (List<int>)cartSession;
+                    if (cart.Contains(itemId))
+                    {
+                        cart.Remove(itemId);
+                        HttpContext.Current.Session[CommonManager.GetCartItemsSessionName()] = cart;
+                        return "Successfully removed item from your cart!";
+                    }
                 }
                 return "";
             }
             catch (Exception ex)
             {
                 return ex.Message;
+            }
+        }
+
+        [System.Web.Services.WebMethod(EnableSession = true)]
+        public static void ClearCart()
+        {
+            try
+            {
+                var cartSession = HttpContext.Current.Session[CommonManager.GetCartItemsSessionName()];
+                if (cartSession != null)
+                {
+                    var cart = (List<int>)cartSession;
+                    cart = new List<int>();
+                    HttpContext.Current.Session[CommonManager.GetCartItemsSessionName()] = cart;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }
