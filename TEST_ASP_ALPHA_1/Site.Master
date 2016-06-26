@@ -286,9 +286,9 @@
                         <li class="level0 nav-7 level-top parent"><a runat="server" href="Contact.aspx" class="level-top"><span>Contact</span> </a></li>
                     </ul>
                     <div id="form-search" class="search-bar">
-                        <form id="search_mini_form" action="#" method="get">
+                        <form id="search_mini_form">
                             <input class="search-bar-input" placeholder="Search entire store here..." type="text" value="" name="search" id="search">
-                            <input class="search-bar-submit" type="submit" value="">
+                            <input class="search-bar-submit" value="" onclick="Search();">
                             <span class="search-icon">
                                 <img src="images/search-icon.png" alt="search-icon"></span>
                         </form>
@@ -387,12 +387,11 @@
                             </ul>
                         </div>
                         <div class="col-md-2 col-sm-6 col-xs-12">
-                            <h4 class="yellow">Style Advisor</h4>
+                            <h4 class="yellow">Account</h4>
                             <ul class="links">
                                 <li class="first"><a title="Your Account" href="MyAccountDashboard.aspx">Your Account</a></li>
                                 <li><a title="Information" href="#">Information</a></li>
                                 <li><a title="Addresses" href="#">Addresses</a></li>
-                                <li><a title="Addresses" href="#">Discount</a></li>
                                 <li><a title="Orders History" href="#">Orders History</a></li>
                                 <li class="last"><a title=" Additional Information" href="#">Additional Information</a></li>
                             </ul>
@@ -609,6 +608,12 @@
         function OnSuccess(response) {
             window.location.reload();
         }
+    </script>
+    <script type="text/javascript">
+        function Search() {
+            var searchCriterion = document.getElementById('search').value;
+            window.location.href = 'SearchGrid.aspx?title=' + searchCriterion;
+        };
     </script>
 </body>
 </html>

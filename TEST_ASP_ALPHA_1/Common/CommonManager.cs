@@ -111,38 +111,43 @@ namespace TEST_ASP_ALPHA_1.Common
 
         public static string GetPriceRangeCriterionName()
         {
-            var searchCriteria = ConfigurationManager.AppSettings["SearchCriteria"];
-            return searchCriteria.Split('|')[0];
+            return GetSearchCriterionName(0);
         }
 
         public static string GetYearCriterionName()
         {
-            var searchCriteria = ConfigurationManager.AppSettings["SearchCriteria"];
-            return searchCriteria.Split('|')[1];
+            return GetSearchCriterionName(1);
         }
 
         public static string GetGenreCriterionName()
         {
-            var searchCriteria = ConfigurationManager.AppSettings["SearchCriteria"];
-            return searchCriteria.Split('|')[2];
+            return GetSearchCriterionName(2);
         }
 
         public static string GetBestSellerCriterionName()
         {
-            var searchCriteria = ConfigurationManager.AppSettings["SearchCriteria"];
-            return searchCriteria.Split('|')[3];
+            return GetSearchCriterionName(3);
         }
 
         public static string GetOnSaleCriterionName()
         {
-            var searchCriteria = ConfigurationManager.AppSettings["SearchCriteria"];
-            return searchCriteria.Split('|')[4];
+            return GetSearchCriterionName(4);
         }
 
         public static string GetIdCriterionName()
         {
+            return GetSearchCriterionName(5);
+        }
+        
+        public static string GetTitleCriterionName()
+        {
+            return GetSearchCriterionName(6);
+        }
+
+        private static string GetSearchCriterionName(int index)
+        {
             var searchCriteria = ConfigurationManager.AppSettings["SearchCriteria"];
-            return searchCriteria.Split('|')[5];
+            return searchCriteria.Split('|')[index];
         }
 
         public static string GetSearchByIdCriterion(List<int> items)
@@ -157,6 +162,7 @@ namespace TEST_ASP_ALPHA_1.Common
             }
             return searchCriterion.ToString();
         }
+
         #endregion
 
         #region Contact Details

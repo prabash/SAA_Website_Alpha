@@ -314,7 +314,7 @@ namespace TEST_ASP_ALPHA_1.Models
 
         #region Search Criteria
 
-        public Dictionary<string, int> GetPriceRangesWithCounts(ItemType type)
+        public Dictionary<string, int> GetPriceRangesWithCounts(ItemType type, Dictionary<string, string> searchCriteria = null)
         {
             Dictionary<string, int> returnList = new Dictionary<string, int>();
             using (MySqlConnection con = ConnectionManager.GetOpenConnection())
@@ -332,6 +332,9 @@ namespace TEST_ASP_ALPHA_1.Models
                 using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
                 {
                     AppendWhereConditionByItemType(sqlString, type);
+                    if (searchCriteria != null)
+                        AppendSearchCriteriatoWhereCondition(sqlString, searchCriteria);
+
                     sqlString.Append(") t \n");
                     sqlString.Append("GROUP BY t.current_price");
 
@@ -349,7 +352,7 @@ namespace TEST_ASP_ALPHA_1.Models
             return returnList;
         }
 
-        public Dictionary<string, int> GetYearsWithCounts(ItemType type)
+        public Dictionary<string, int> GetYearsWithCounts(ItemType type, Dictionary<string, string> searchCriteria = null)
         {
             Dictionary<string, int> returnList = new Dictionary<string, int>();
             using (MySqlConnection con = ConnectionManager.GetOpenConnection())
@@ -362,6 +365,9 @@ namespace TEST_ASP_ALPHA_1.Models
                 using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
                 {
                     AppendWhereConditionByItemType(sqlString, type);
+                    if (searchCriteria != null)
+                        AppendSearchCriteriatoWhereCondition(sqlString, searchCriteria);
+
                     sqlString.Append("GROUP BY t.year");
 
                     com.CommandText = sqlString.ToString();
@@ -378,7 +384,7 @@ namespace TEST_ASP_ALPHA_1.Models
             return returnList;
         }
 
-        public Dictionary<string, int> GetGenresWithCounts(ItemType type)
+        public Dictionary<string, int> GetGenresWithCounts(ItemType type, Dictionary<string, string> searchCriteria = null)
         {
             Dictionary<string, int> returnList = new Dictionary<string, int>();
             using (MySqlConnection con = ConnectionManager.GetOpenConnection())
@@ -398,6 +404,8 @@ namespace TEST_ASP_ALPHA_1.Models
                         sqlString.Append("END AS genre \n");
                         sqlString.Append("FROM items \n");
                         AppendWhereConditionByItemType(sqlString, type);
+                        if (searchCriteria != null)
+                            AppendSearchCriteriatoWhereCondition(sqlString, searchCriteria);
                         sqlString.Append(") \n");
 
                         if (i < genresList.Count - 1)
@@ -425,7 +433,7 @@ namespace TEST_ASP_ALPHA_1.Models
             return returnList;
         }
 
-        private List<string> GetDistinctGenres(ItemType type)
+        private List<string> GetDistinctGenres(ItemType type, Dictionary<string, string> searchCriteria = null)
         {
             List<string> distinctGenres = new List<string>();
             List<string> genresList = new List<string>();
@@ -439,6 +447,8 @@ namespace TEST_ASP_ALPHA_1.Models
                 using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
                 {
                     AppendWhereConditionByItemType(sqlString, type);
+                    if (searchCriteria != null)
+                        AppendSearchCriteriatoWhereCondition(sqlString, searchCriteria);
 
                     com.CommandText = sqlString.ToString();
 
@@ -470,7 +480,7 @@ namespace TEST_ASP_ALPHA_1.Models
             return genresList;
         }
 
-        public Dictionary<string, int> GetBestSellersWithCounts(ItemType type)
+        public Dictionary<string, int> GetBestSellersWithCounts(ItemType type, Dictionary<string, string> searchCriteria = null)
         {
             Dictionary<string, int> returnList = new Dictionary<string, int>();
             using (MySqlConnection con = ConnectionManager.GetOpenConnection())
@@ -483,6 +493,9 @@ namespace TEST_ASP_ALPHA_1.Models
                 using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
                 {
                     AppendWhereConditionByItemType(sqlString, type);
+                    if (searchCriteria != null)
+                        AppendSearchCriteriatoWhereCondition(sqlString, searchCriteria);
+
                     sqlString.Append("AND t.best_seller = '1' \n");
                     sqlString.Append("GROUP BY t.best_seller");
 
@@ -500,7 +513,7 @@ namespace TEST_ASP_ALPHA_1.Models
             return returnList;
         }
 
-        public Dictionary<string, int> GetOnSaleWithCounts(ItemType type)
+        public Dictionary<string, int> GetOnSaleWithCounts(ItemType type, Dictionary<string, string> searchCriteria = null)
         {
             Dictionary<string, int> returnList = new Dictionary<string, int>();
             using (MySqlConnection con = ConnectionManager.GetOpenConnection())
@@ -513,6 +526,8 @@ namespace TEST_ASP_ALPHA_1.Models
                 using (MySqlCommand com = new MySqlCommand(sqlString.ToString(), con))
                 {
                     AppendWhereConditionByItemType(sqlString, type);
+                    if (searchCriteria != null)
+                        AppendSearchCriteriatoWhereCondition(sqlString, searchCriteria);
                     sqlString.Append("AND t.on_sale = '1' \n");
                     sqlString.Append("GROUP BY t.on_sale");
 
@@ -610,6 +625,13 @@ namespace TEST_ASP_ALPHA_1.Models
                             if (!String.IsNullOrEmpty(criterion.Value))
                             {
                                 sqlString.Append("AND id IN (" + criterion.Value + ") ");
+                            }
+                        }
+                        else if (criterion.Key == CommonManager.GetTitleCriterionName())
+                        {
+                            if (!String.IsNullOrEmpty(criterion.Value))
+                            {
+                                sqlString.Append("AND title LIKE '%" + criterion.Value + "%' ");
                             }
                         }
                     }

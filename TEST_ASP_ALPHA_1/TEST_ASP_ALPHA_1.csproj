@@ -347,6 +347,8 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="SearchGrid.aspx" />
+    <Content Include="SearchList.aspx" />
     <Content Include="Site.Master" />
     <Content Include="test_index.aspx" />
     <Content Include="ViewSwitcher.ascx" />
@@ -641,6 +643,20 @@
     </Compile>
     <Compile Include="ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SearchGrid.aspx.cs">
+      <DependentUpon>SearchGrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SearchGrid.aspx.designer.cs">
+      <DependentUpon>SearchGrid.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SearchList.aspx.cs">
+      <DependentUpon>SearchList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SearchList.aspx.designer.cs">
+      <DependentUpon>SearchList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
