@@ -10,18 +10,111 @@ namespace TEST_ASP_ALPHA_1.Models
 {
     public class IndexModel
     {
-        public List<SlideShowObj> GetSlideShowDetails()
+        #region Set
+
+        public void AddSlideshowItem(SlideShowObj item)
+        {
+            try
+            {
+                using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+                {
+                    string sqlString = @"INSERT INTO index_slideshowpictures (title, location) 
+                                    VALUES (@title, @location)";
+
+                    using (MySqlCommand com = new MySqlCommand(sqlString, con))
+                    {
+                        com.Parameters.AddWithValue("@title", item.title);
+                        com.Parameters.AddWithValue("@location", item.location);
+
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void UpdateSlideshowItem(SlideShowObj item)
+        {
+            try
+            {
+                var slideshowItem = GetSlideShowDetails(item.id);
+                if (slideshowItem.Count > 0)
+                {
+                    using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+                    {
+                        string sqlString = @"UPDATE index_slideshowpictures SET title=@title, location=@location WHERE id=@id";
+
+                        using (MySqlCommand com = new MySqlCommand(sqlString, con))
+                        {
+                            com.Parameters.AddWithValue("@title", item.title);
+                            com.Parameters.AddWithValue("@location", item.location);
+                            com.Parameters.AddWithValue("@id", item.id);
+
+                            com.ExecuteNonQuery();
+                        }
+                    }
+                }
+                else
+                    throw new Exception("slideshow item does not exist!");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void DeleteSlideshowItem(SlideShowObj item)
+        {
+            try
+            {
+                var slideshowItem = GetSlideShowDetails(item.id);
+                if (slideshowItem.Count > 0)
+                {
+                    using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+                    {
+                        string sqlString = @"DELETE FROM index_slideshowpictures WHERE id=@id";
+
+                        using (MySqlCommand com = new MySqlCommand(sqlString, con))
+                        {
+                            com.Parameters.AddWithValue("@id", item.id);
+
+                            com.ExecuteNonQuery();
+                        }
+                    }
+                }
+                else
+                    throw new Exception("slideshow item does not exist!");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
+
+        #region Get
+
+        public List<SlideShowObj> GetSlideShowDetails(int id = -1)
         {
             List<SlideShowObj> returnList = new List<SlideShowObj>();
             using (MySqlConnection con = ConnectionManager.GetOpenConnection())
             {
-                using (MySqlCommand com = new MySqlCommand("select * from index_slideshowpictures;", con))
+                var sqlString = "select * from index_slideshowpictures ";
+                if (id > -1)
+                    sqlString += "where id = " + id;
+
+                using (MySqlCommand com = new MySqlCommand(sqlString, con))
                 {
                     MySqlDataReader dr = com.ExecuteReader();
                     while (dr.Read())
                     {
                         returnList.Add(new SlideShowObj
                         {
+                            id = Convert.ToInt32(dr["id"].ToString()),
                             location = dr["location"].ToString(),
                             title = dr["title"].ToString()
                         });
@@ -64,6 +157,8 @@ namespace TEST_ASP_ALPHA_1.Models
             }
             return returnList;
         }
+
+        #endregion
 
     }
 

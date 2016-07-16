@@ -8,6 +8,7 @@ namespace TEST_ASP_ALPHA_1.Common
 
     public class SlideShowObj
     {
+        public int id { get; set; }
         public string location { get; set; }
         public string title { get; set; }
     }

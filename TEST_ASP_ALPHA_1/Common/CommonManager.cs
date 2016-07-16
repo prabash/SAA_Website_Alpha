@@ -239,22 +239,44 @@ namespace TEST_ASP_ALPHA_1.Common
         #region Item Status
         public static string Status_GetNewItemName()
         {
-            var searchCriteria = ConfigurationManager.AppSettings["ItemStatuses"];
-            return searchCriteria.Split('|')[0];
+            var status = ConfigurationManager.AppSettings["ItemStatuses"];
+            return status.Split('|')[0];
         }
 
         public static string Status_GetDeliveredItemName()
         {
-            var searchCriteria = ConfigurationManager.AppSettings["ItemStatuses"];
-            return searchCriteria.Split('|')[1];
+            var status = ConfigurationManager.AppSettings["ItemStatuses"];
+            return status.Split('|')[1];
         }
 
         public static string Status_GetCancelledItemName()
         {
-            var searchCriteria = ConfigurationManager.AppSettings["ItemStatuses"];
-            return searchCriteria.Split('|')[2];
+            var status = ConfigurationManager.AppSettings["ItemStatuses"];
+            return status.Split('|')[2];
         }
 
+
+        #endregion
+
+        #region Colors
+
+        public static string Colors_GetItemStatusColorNew()
+        {
+            var colors = ConfigurationManager.AppSettings["ItemSatatusColors"];
+            return colors.Split('|')[0];
+        }
+
+        public static string Colors_GetItemStatusColorDelivered()
+        {
+            var colors = ConfigurationManager.AppSettings["ItemSatatusColors"];
+            return colors.Split('|')[1];
+        }
+
+        public static string Colors_GetItemStatusColorCancelled()
+        {
+            var colors = ConfigurationManager.AppSettings["ItemSatatusColors"];
+            return colors.Split('|')[2];
+        }
 
         #endregion
 

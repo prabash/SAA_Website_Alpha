@@ -111,6 +111,7 @@ namespace TEST_ASP_ALPHA_1.Models
                     {
                         returnList.Add(new SlideShowObj
                         {
+                            id = Convert.ToInt32(dr["id"].ToString()),
                             location = dr["location"].ToString(),
                             title = dr["title"].ToString()
                         });

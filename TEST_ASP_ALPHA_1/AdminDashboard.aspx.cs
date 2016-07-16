@@ -3,29 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using MySql.Data.MySqlClient;
-using TEST_ASP_ALPHA_1.Models;
 using System.Web.UI.HtmlControls;
-using TEST_ASP_ALPHA_1.Common;
-using System.Globalization;
+using System.Web.UI.WebControls;
+using TEST_ASP_ALPHA_1.Models;
 
 namespace TEST_ASP_ALPHA_1
 {
-    public partial class _Default : Page
+    public partial class AdminDashboard : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 GetSlideshowDetails();
-                GetBestSellersDetails();
-                GetGiftItemsDeatils();
             }
         }
 
+
         private void GetSlideshowDetails()
-        {   
+        {
             var slideShowDetails = new IndexModel().GetSlideShowDetails();
             foreach (var item in slideShowDetails)
             {
@@ -60,30 +56,5 @@ namespace TEST_ASP_ALPHA_1
             }
         }
 
-        private void GetBestSellersDetails()
-        {
-            var bestSellersDetails = new IndexModel().GetBestSellersDetails();
-            SetIndexSliderItems(bestSellersDetails, bestSellersList);
-        }
-
-        private void GetGiftItemsDeatils()
-        {
-            var giftItemDetails = new IndexModel().GetGiftItemsDetails();
-            SetIndexSliderItems(giftItemDetails, giftItemsList);
-        }
-
-        private void SetIndexSliderItems(List<ItemObject> sliderItems, HtmlGenericControl sliderList)
-        {
-            foreach (var item in sliderItems)
-            {
-                var itemDivControl = HTMLControlsManager.GetDivTag(new[] { "item" });
-                sliderList.Controls.Add(itemDivControl);
-                {
-                    var itemInnerDivControl = ItemHtmlManager.Get_ItemInner_Grid_DivControl(item);
-                    itemDivControl.Controls.Add(itemInnerDivControl);
-                    
-                }
-            }
-        }
     }
 }

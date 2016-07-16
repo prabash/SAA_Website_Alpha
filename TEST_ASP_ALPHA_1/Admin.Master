@@ -1,0 +1,337 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="TEST_ASP_ALPHA_1.Admin" %>
+
+<%@ Import Namespace="TEST_ASP_ALPHA_1.Common" %>
+
+<!DOCTYPE html>
+<html ng-app="MyApp" lang="en">
+<head runat="server">
+    <script src="angular/angular.js"></script>
+    <script src="angular/script.js"></script>
+    <meta charset="utf-8">
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title><%: Page.Title %> - SAA Admin</title>
+    <!-- Favicons Icon -->
+    <link rel="icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico" type="image/x-icon" />
+    <!-- Mobile Specific -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- CSS Style -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slider.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.theme.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/flexslider.css" type="text/css">
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <style>
+        .error {
+            padding: 20px;
+            background-color: #f44336; /* Red */
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .success {
+            padding: 20px;
+            background-color: #098BBD; /* Red */
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        /* The close button */
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            /* When moving the mouse over the close button */
+            .closebtn:hover {
+                color: black;
+            }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-sm-4 col-md-5">
+                        <!-- Header Logo -->
+                        <a class="logo" title="SAA Video" href="Default.aspx">
+                            <img alt="SAA Video" src="images/logo_admin.png"></a>
+                        <!-- End Header Logo -->
+                    </div>
+                    <div class=" col-lg-7 col-sm-8 col-md-7 col-xs-12">
+                        <div class="header-top">
+                            <% if (Session[CommonManager.GetCustNameSessionName()] == null)
+                               { %>
+                            <div class="welcome-msg hidden-xs">Welcome to SAA Video! </div>
+                            <% }
+                               else
+                               { %>
+                            <div class="welcome-msg hidden-xs">Hello there, <%=Session[CommonManager.GetCustNameSessionName()].ToString()%>! </div>
+                            <% } %>
+                            <!-- Header Top Links -->
+                            <div class="toplinks">
+                                <div class="links">
+                                    <% if (Session[CommonManager.GetCustIdSessionName()] == null)
+                                       { %>
+                                    <div class="myaccount"><a title="My Account" href="Login.aspx"><span class="hidden-xs">My Account</span></a></div>
+                                    <% }
+                                       else
+                                       { %>
+                                    <div class="myaccount"><a title="My Account" href="AdminAccount.aspx"><span class="hidden-xs">My Account</span></a></div>
+                                    <% } %>
+                                    <% if (Session[CommonManager.GetCustIdSessionName()] == null)
+                                       { %>
+                                    <div class="login"><a href="Login.aspx"><span class="hidden-xs">Log In</span></a></div>
+                                    <% }
+                                       else
+                                       { %>
+                                    <div class="login"><a href="Login.aspx?logout=true"><span class="hidden-xs">Log Out</span></a></div>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <!-- End Header Top Links -->
+                        </div>
+                        <div class="cart_cur_block">
+                            <!-- Header Currency -->
+                            <div class="dropdown block-currency-wrapper">
+                                <a role="button" data-toggle="dropdown" data-target="#" class="block-currency dropdown-toggle" href="#">LKR <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">LKR </a></li>
+                                </ul>
+                            </div>
+                            <!-- End Header Currency -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- end header -->
+        <!-- Navbar -->
+        <nav>
+            <div class="container">
+                <div class="nav-inner">
+                    <!-- mobile-menu -->
+                    <div class="hidden-desktop" id="mobile-menu">
+                        <ul class="navmenu">
+                            <li>
+                                <div class="menutop">
+                                    <div class="toggle"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></div>
+                                    <h2>Menu</h2>
+                                </div>
+                                <ul style="display: none;" class="submenu">
+                                    <li>
+                                        <ul class="topnav">
+                                            <li class="level0 nav-6 level-top first parent"><a class="level-top" href="AdminDashboard.aspx"><span>Home</span> </a></li>
+                                            <li class="level0 nav-1 level-top first parent"><a href="BrowseGamesGrid.aspx" class="level-top"><span>Slideshow</span> </a>
+                                                <ul class="level0">
+                                                    <li class="level1 nav-1-2 parent"><a href="AdminSlideshowIndex.aspx"><span>Index Slideshow</span> </a></li>
+                                                    <li class="level1 nav-1-1 first parent"><a href="AdminSlideshowItems.aspx"><span>Items Slideshow</span> </a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="level0 nav-2 level-top parent"><a href="About.aspx" class="level-top"><span>Items</span> </a></li>
+                                            <li class="level0 nav-3 level-top parent"><a href="Contact.aspx" class="level-top"><span>Users</span> </a></li>
+                                            <li class="level0 nav-4 level-top parent"><a href="Contact.aspx" class="level-top"><span>Purchases</span> </a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <!--navmenu-->
+                    </div>
+                    <!--End mobile-menu -->
+                    <ul id="nav" class="hidden-xs">
+                        <li id="nav-home" class="level0 parent drop-menu active"><a runat="server" href="AdminDashboard.aspx"><span>Home</span> </a></li>
+                        <li class="level0 parent drop-menu"><a href="#"><span>Slideshow</span> </a>
+                            <ul style="display: none;" class="level1">
+                                <li class="level1 nav-10-2"><a href="AdminSlideshowIndex.aspx"><span>Index Slideshow</span> </a></li>
+                                <li class="level1 first"><a href="AdminSlideshowItems.aspx"><span>Items Slideshow</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="level0 nav-5 level-top first"><a runat="server" href="About.aspx" class="level-top"><span>Items</span> </a></li>
+                        <li class="level0 nav-7 level-top parent"><a runat="server" href="Contact.aspx" class="level-top"><span>Users</span> </a></li>
+                        <li class="level0 nav-8 level-top parent"><a runat="server" href="Contact.aspx" class="level-top"><span>Purchases</span> </a></li>
+                    </ul>
+                    <div id="form-search" class="search-bar">
+                        <form id="search_mini_form">
+                            <input class="search-bar-input" placeholder="Search entire store here..." type="text" value="" name="search" id="search">
+                            <input class="search-bar-submit" value="" onclick="Search();">
+                            <span class="search-icon">
+                                <img src="images/search-icon.png" alt="search-icon"></span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- end nav -->
+        <!-- Body -->
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <!-- end Body -->
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="inner">
+                    <div class="brand-logo">
+                        <div class="slider-items-products">
+                            <div id="brand-logo-slider" class="product-flexslider hidden-buttons">
+                                <div class="slider-items slider-width-col6">
+                                    <!-- Item -->
+                                    <div class="item">
+                                        <a href="#x">
+                                            <img src="images/b-logo1.png" alt="Image"></a>
+                                    </div>
+                                    <!-- End Item -->
+                                    <!-- Item -->
+                                    <div class="item">
+                                        <a href="#x">
+                                            <img src="images/b-logo2.png" alt="Image"></a>
+                                    </div>
+                                    <!-- End Item -->
+                                    <!-- Item -->
+                                    <div class="item">
+                                        <a href="#x">
+                                            <img src="images/b-logo3.png" alt="Image"></a>
+                                    </div>
+                                    <!-- End Item -->
+                                    <!-- Item -->
+                                    <div class="item">
+                                        <a href="#x">
+                                            <img src="images/b-logo4.png" alt="Image"></a>
+                                    </div>
+                                    <!-- End Item -->
+                                    <!-- Item -->
+                                    <div class="item">
+                                        <a href="#x">
+                                            <img src="images/b-logo5.png" alt="Image"></a>
+                                    </div>
+                                    <!-- End Item -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-middle">
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            <div class="footer-column-1">
+                                <div class="footer-logo">
+                                    <a href="Default.aspx" title="Logo">
+                                        <img src="images/footer-logo.png" alt="logo"></a>
+                                </div>
+                                <p>
+                                    SAA Video Entertainments (Pvt) Ltd.<br />
+                                    &nbsp;
+                                    <br />
+                                    &nbsp;
+                                    <br />
+                                    &nbsp;
+                                    <br />
+                                    &nbsp;
+                                </p>
+                                <div class="social">
+                                    <ul class="link">
+                                        <li class="fb"><a href="#"></a></li>
+                                        <li class="tw"><a href="#"></a></li>
+                                        <li class="googleplus"><a href="#"></a></li>
+                                        <%--<li class="rss"><a href="#"></a></li>--%>
+                                        <!-- <li class="pintrest"><a href="#"></a></li>-->
+                                        <li class="linkedin"><a href="#"></a></li>
+                                        <li class="youtube"><a href="#"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <h4 class="green">Shopping Guide</h4>
+                            <ul class="links">
+                                <li class="first"><a href="About.aspx">About us</a></li>
+                                <li><a href="faq.html" title="FAQs">FAQs</a></li>
+                                <li><a href="#" title="Payment">Payment</a></li>
+                                <li><a href="#" title="Shipment&lt;/a&gt;">Shipment</a></li>
+                                <li><a href="#" title="Where is my order?">Where is my order?</a></li>
+                                <li class="last"><a href="#" title="Return policy">Return policy</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <h4 class="yellow">Account</h4>
+                            <ul class="links">
+                                <li class="first"><a title="Your Account" href="MyAccountDashboard.aspx">Your Account</a></li>
+                                <li><a title="Information" href="MyAccountInformation.aspx">Account Info</a></li>
+                                <li><a title="Addresses" href="MyAccountWishlist.aspx">Wishlist</a></li>
+                                <li><a title="Orders History" href="MyAccountOrders.aspx">Orders History</a></li>
+                                <li class="last"><a title=" Additional Information" href="MyAccountChangePassword.aspx">Change Password</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <h4 class="orange">Information</h4>
+                            <ul class="links">
+                                <li class="first"><a href="About.aspx" title="Site Map">About</a></li>
+                                <li><a href="Contact.aspx" title="Contact Us">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <h4 class="blue">Contact Us</h4>
+                            <div class="contacts-info">
+                                <address>
+                                    <i class="add-icon">&nbsp;</i>387/E, Galle Road, 
+                                    <br />
+                                    &nbsp;Ratmalana.
+                                </address>
+                                <div class="phone-footer"><i class="phone-icon">&nbsp;</i>+94 11 5929266 / +94 11 5929267</div>
+                                <div class="email-footer">
+                                    <i class="email-icon">&nbsp;</i> <a href="mailto:supprt.saavideos@gmail.com">supprt.saavideos@gmail.com</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-bottom">
+                            <div class="col-sm-12 col-xs-12 coppyright">&copy; <%: DateTime.Now.Year %> - SAA Video Entertainments (Pvt) Ltd. All Rights Reserved.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+    </div>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/slider.js"></script>
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="js/jquery.flexslider.js"></script>
+    <script type="text/javascript" src="js/cloud-zoom.js"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+        jQuery(function () {
+            jQuery(".slideshow").cycle({
+                fx: 'scrollHorz', easing: 'easeInOutCubic', timeout: 10000, speedOut: 800, speedIn: 800, sync: 1, pause: 1, fit: 0, pager: '#home-slides-pager',
+                prev: '#home-slides-prev',
+                next: '#home-slides-next'
+            });
+        });
+        //]]>
+    </script>
+    <script>
+        new UISearch(document.getElementById('form-search'));
+    </script>
+    <script src="http://listjs.com/no-cdn/list.js"></script>
+</body>
+</html>

@@ -47,18 +47,18 @@
                                             <%var purchItems = new PurchItemModel().GetPurchItemDetails(PurchItemGetType.customerEmail, 0, new AESManager().EncryptToString(Session[CommonManager.GetCustEmailSessionName()].ToString()), 0, null, null, PurchItemOrderBy.OrderIdDesc, 5);
                                               if (purchItems.Count > 0)
                                               {
-                                                  var colorYellow = "#ffed81";
-                                                  var colorRed = "#ff6c6c";
-                                                  var colorBlue = "#5dbbff";
+                                                  var colorNew = CommonManager.Colors_GetItemStatusColorNew();
+                                                  var colorCancelled = CommonManager.Colors_GetItemStatusColorCancelled();
+                                                  var colorDelivered = CommonManager.Colors_GetItemStatusColorDelivered();
                                                   var selectColor = "";
                                                   foreach (var item in purchItems)
                                                   {
                                                       if (item.Status == CommonManager.Status_GetNewItemName())
-                                                          selectColor = colorYellow;
+                                                          selectColor = colorNew;
                                                       else if (item.Status == CommonManager.Status_GetDeliveredItemName())
-                                                          selectColor = colorBlue;
+                                                          selectColor = colorDelivered;
                                                       else if (item.Status == CommonManager.Status_GetCancelledItemName())
-                                                          selectColor = colorRed;
+                                                          selectColor = colorCancelled;
                                                       
                                                     %>
                                                     <tr style="background-color:<%=selectColor%>">
