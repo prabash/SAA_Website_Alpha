@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace TEST_ASP_ALPHA_1
 {
-    public partial class test_index : System.Web.UI.Page
+    public partial class JQGrid : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

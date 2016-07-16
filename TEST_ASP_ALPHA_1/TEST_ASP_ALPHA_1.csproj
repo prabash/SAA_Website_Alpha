@@ -166,6 +166,7 @@
     <Content Include="Activation.aspx" />
     <Content Include="AdminDashboard.aspx" />
     <Content Include="AdminSlideshowIndex.aspx" />
+    <Content Include="AdminSlideshowItems.aspx" />
     <Content Include="BrowseElectronicsGrid.aspx" />
     <Content Include="BrowseElectronicsList.aspx" />
     <Content Include="BrowseGamesGrid.aspx" />
@@ -278,6 +279,29 @@
     <Content Include="images\women-img.png" />
     <Content Include="images\women_banner.png" />
     <Content Include="images\women_jwellery.png" />
+    <Content Include="JQGrid.aspx" />
+    <Content Include="JQGridReq\grid.locale-en.js" />
+    <Content Include="JQGridReq\images\ui-bg_diagonals-thick_8_333333_40x40.png" />
+    <Content Include="JQGridReq\images\ui-bg_glass_40_111111_1x400.png" />
+    <Content Include="JQGridReq\images\ui-bg_glass_55_1c1c1c_1x400.png" />
+    <Content Include="JQGridReq\images\ui-bg_highlight-hard_100_f9f9f9_1x100.png" />
+    <Content Include="JQGridReq\images\ui-bg_highlight-hard_40_aaaaaa_1x100.png" />
+    <Content Include="JQGridReq\images\ui-bg_highlight-soft_50_aaaaaa_1x100.png" />
+    <Content Include="JQGridReq\images\ui-bg_inset-hard_45_cd0a0a_1x100.png" />
+    <Content Include="JQGridReq\images\ui-bg_inset-hard_55_ffeb80_1x100.png" />
+    <Content Include="JQGridReq\images\ui-icons_222222_256x240.png" />
+    <Content Include="JQGridReq\images\ui-icons_4ca300_256x240.png" />
+    <Content Include="JQGridReq\images\ui-icons_bbbbbb_256x240.png" />
+    <Content Include="JQGridReq\images\ui-icons_ededed_256x240.png" />
+    <Content Include="JQGridReq\images\ui-icons_ffcf29_256x240.png" />
+    <Content Include="JQGridReq\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="JQGridReq\jquery-1.9.0.min.js" />
+    <Content Include="JQGridReq\jquery-ui-1.9.2.custom.css" />
+    <Content Include="JQGridReq\jquery-ui.css" />
+    <Content Include="JQGridReq\jquery-ui.min.css" />
+    <Content Include="JQGridReq\jquery.jqGrid.js" />
+    <Content Include="JQGridReq\theme.css" />
+    <Content Include="JQGridReq\ui.jqgrid.css" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\cloud-zoom.js" />
     <Content Include="js\common.js" />
@@ -302,6 +326,8 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Admin.Master" />
+    <Content Include="JQGridHandler.ashx" />
+    <Content Include="Handlers\AdminSlideshowItemsHandler.ashx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="ProductDetails.aspx" />
     <Content Include="products_images\avengers-alt-img.png" />
@@ -353,7 +379,6 @@
     <Content Include="SearchGrid.aspx" />
     <Content Include="SearchList.aspx" />
     <Content Include="Site.Master" />
-    <Content Include="test_index.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -430,6 +455,13 @@
     </Compile>
     <Compile Include="AdminSlideshowIndex.aspx.designer.cs">
       <DependentUpon>AdminSlideshowIndex.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminSlideshowItems.aspx.cs">
+      <DependentUpon>AdminSlideshowItems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminSlideshowItems.aspx.designer.cs">
+      <DependentUpon>AdminSlideshowItems.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
@@ -586,6 +618,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\AdminSlideshowItemsHandler.ashx.cs">
+      <DependentUpon>AdminSlideshowItemsHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="JQGrid.aspx.cs">
+      <DependentUpon>JQGrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="JQGrid.aspx.designer.cs">
+      <DependentUpon>JQGrid.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="JQGridHandler.ashx.cs">
+      <DependentUpon>JQGridHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -697,13 +742,6 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="test_index.aspx.cs">
-      <DependentUpon>test_index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="test_index.aspx.designer.cs">
-      <DependentUpon>test_index.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

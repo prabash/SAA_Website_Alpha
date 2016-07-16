@@ -40,7 +40,7 @@ namespace TEST_ASP_ALPHA_1.Models
         {
             try
             {
-                var slideshowItem = GetSlideShowDetails(item.id);
+                var slideshowItem = GetSlideShowDetails(Convert.ToInt32(item.id));
                 if (slideshowItem.Count > 0)
                 {
                     using (MySqlConnection con = ConnectionManager.GetOpenConnection())
@@ -51,7 +51,7 @@ namespace TEST_ASP_ALPHA_1.Models
                         {
                             com.Parameters.AddWithValue("@title", item.title);
                             com.Parameters.AddWithValue("@location", item.location);
-                            com.Parameters.AddWithValue("@id", item.id);
+                            com.Parameters.AddWithValue("@id", Convert.ToInt32(item.id));
 
                             com.ExecuteNonQuery();
                         }
@@ -70,7 +70,7 @@ namespace TEST_ASP_ALPHA_1.Models
         {
             try
             {
-                var slideshowItem = GetSlideShowDetails(item.id);
+                var slideshowItem = GetSlideShowDetails(Convert.ToInt32(item.id));
                 if (slideshowItem.Count > 0)
                 {
                     using (MySqlConnection con = ConnectionManager.GetOpenConnection())

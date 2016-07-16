@@ -10,6 +10,6 @@
 namespace TEST_ASP_ALPHA_1 {
     
     
-    public partial class test_index {
+    public partial class AdminSlideshowItems {
     }
 }

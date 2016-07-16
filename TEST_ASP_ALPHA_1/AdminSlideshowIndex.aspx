@@ -32,7 +32,7 @@
                                 <p><b>INSTRUCTIONS :</b></p>
                                 <ul style="margin-left: 15px; list-style-type: square">
                                     <li style="line-height: 0.5em;">
-                                        <p>Please make sure the item dimension is = <b>860px * 320px</b></p>
+                                        <p>Please make sure the banner dimension is = <b>860px * 320px</b></p>
                                     </li>
                                     <li style="line-height: 0.5em;">
                                         <p>Always use the same folder for "location" and <b>only change the file name</b></p>
