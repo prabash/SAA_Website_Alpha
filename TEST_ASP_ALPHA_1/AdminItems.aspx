@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminSlideshowItems.aspx.cs" Inherits="TEST_ASP_ALPHA_1.AdminSlideshowItems" MasterPageFile="~/Admin.Master" Title="Items Slideshow"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminItems.aspx.cs" Inherits="TEST_ASP_ALPHA_1.AdminItems" MasterPageFile="~/Admin.Master" Title="Items" %>
 
 <%@ Import Namespace="TEST_ASP_ALPHA_1.Common" %>
 <%@ Import Namespace="TEST_ASP_ALPHA_1.Models" %>
@@ -9,35 +9,25 @@
         <div class="container">
             <div class="row">
                 <ul>
-                    <li class="home"><a title="Go to Home Page" href="AdminDashboard.aspx">Home</a><span>&raquo;</span></li>
-                    <li class="category13"><strong>Items Slideshow</strong></li>
+                    <li class="home"><a title="Go to Home Page" href="Default.aspx">Home</a><span>&raquo;</span></li>
+                    <li class="category13"><strong>Items</strong></li>
                 </ul>
             </div>
         </div>
     </div>
     <!-- main-container -->
-    <div class="main-container col2-right-layout" style="margin-left: -15px">
+    <div class="main-container col1-right-layout" style="margin-left: -15px">
         <div class="main container">
             <div class="row">
-                <section class="col-main col-sm-9 wow bounceInUp animated">
+                <section class="col-main col-sm-12 wow bounceInUp animated">
                     <div class="my-account">
                         <div class="page-title new_page_title">
-                            <h2>Items Slideshow</h2>
+                            <h2>Sales Items</h2>
                         </div>
                         <div class="dashboard">
                             <div class="welcome-msg">
                                 <strong>Hello there, Admin!</strong>
-                                <p>You can use this window to add or edit the items that will be shown when browsing for different items.</p>
-                                <br />
-                                <p><b>INSTRUCTIONS :</b></p>
-                                <ul style="margin-left: 15px; list-style-type: square">
-                                    <li style="line-height: 0.5em;">
-                                        <p>Please make sure the banner dimension is = <b>860px * 320px</b></p>
-                                    </li>
-                                    <li style="line-height: 0.5em;">
-                                        <p>Always use the same folder for "location" and <b>only change the file name</b></p>
-                                    </li>
-                                </ul>
+                                <p>You can use this window to add or edit the items.</p>
                                 <br />
                             </div>
                             <div>
@@ -50,17 +40,6 @@
                         </div>
                     </div>
                 </section>
-                <aside class="col-right sidebar col-sm-3 wow bounceInUp animated">
-                    <div class="block block-account">
-                        <div class="block-title">Slideshow</div>
-                        <div class="block-content">
-                            <ul>
-                                <li><a href="AdminSlideshowIndex.aspx">Index Slideshow</a></li>
-                                <li class="current"><a href="#">Items Slideshow</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </aside>
             </div>
         </div>
     </div>
@@ -68,39 +47,48 @@
 
     <script type="text/javascript">
         jQuery("#jQGridDemo").jqGrid({
-            url: 'Handlers/AdminSlideshowItemsHandler.ashx',
+            url: 'Handlers/AdminItemsHandler.ashx',
             datatype: "json",
-            height: 222,
-            colNames: ['Id', 'Title', 'Location', 'Type'],
+            height: 450,
+            colNames: ['Id', 'Title', 'Def. Location', 'Alt. Location', 'Reg. Price', 'Current Price', 'Description', 'Overview', 'Year', 'Type', 'Genre', 'Rating', 'On Sale', 'Best Seller'],
             colModel: [
-                        { name: 'id', index: 'id', width: 50, stype: 'text', search: true },
-   		                { name: 'title', index: 'title', width: 245, search: true, stype: 'text', sortable: true, editable: true },
-   		                { name: 'location', index: 'location', width: 245, search: true, editable: true },
-                        { name: 'type', index: 'type', width: 245, search: true, editable: true, edittype: 'select', editoptions: { value: getAllItemTypes() }, stype: 'select', searchoptions: { sopt: ['eq'], value: getAllItemTypes() } }
+                        { name: 'Id', index: 'Id', width: 50, stype: 'text', search: true },
+   		                { name: 'title', index: 'title', width: 150, search: true, stype: 'text', sortable: true, editable: true },
+   		                { name: 'defaultLocation', index: 'defaultLocation', width: 150, search: true, editable: true },
+                        { name: 'altLocation', index: 'altLocation', width: 150, search: true, editable: true },
+                        { name: 'regularPrice', index: 'regularPrice', width: 100, search: true, editable: true },
+                        { name: 'currentPrice', index: 'currentPrice', width: 100, search: true, editable: true },
+                        { name: 'description', index: 'description', width: 110, search: true, editable: true },
+                        { name: 'overview', index: 'overview', width: 110, search: true, editable: true },
+                        { name: 'year', index: 'year', width: 110, search: true, editable: true },
+                        { name: 'type', index: 'type', width: 110, editable: true, edittype: 'select', editoptions: { value: getAllItemTypes() }, stype: 'select', searchoptions: { sopt: ['eq'], value: getAllItemTypes() } },
+                        { name: 'genre', index: 'genre', width: 110, search: true, editable: true },
+                        { name: 'rating', index: 'rating', width: 110, search: true, editable: true },
+                        { name: 'onSale', index: 'onSale', width: 110, search: true, editable: true, edittype: 'select', editoptions: { value: getBinaryItems() }, stype: 'select', searchoptions: { sopt: ['eq'], value: getBinaryItems() } },
+                        { name: 'bestSeller', index: 'bestSeller', width: 110, search: true, editable: true, edittype: 'select', editoptions: { value: getBinaryItems() }, stype: 'select', searchoptions: { sopt: ['eq'], value: getBinaryItems() } }
             ],
-
-            rowNum: 10,
+            rownumbers: true,
+            rowNum: 20,
             mtype: 'GET',
             loadonce: true,
-            rowList: [10, 20, 30],
+            rowList: [20, 50, 100],
             gridview: true,
             autowidth: true,
             ignoreCase: true,
             pager: '#jQGridDemoPager',
-            sortname: 'id',
+            sortname: 'title',
             viewrecords: true,
             sortorder: 'desc',
-            caption: "Items Slideshow Details",
-            editurl: 'Handlers/AdminSlideshowItemsHandler.ashx'
+            caption: "Item Details",
+            editurl: 'Handlers/AdminItemsHandler.ashx'
         });
-
-        $("#jQGridDemo").jqGrid('filterToolbar', { searchOperators: false, searchOnEnter: false, autosearch: true, defaultSearch: 'cn' });
+        $("#jQGridDemo").jqGrid('filterToolbar', { searchOnEnter: false, autosearch: true, defaultSearch: 'cn' });
         $('#jQGridDemo').jqGrid('navGrid', '#jQGridDemoPager',
                     {
                         edit: true,
                         add: true,
                         del: true,
-                        search: false,
+                        search: true,
                         refresh: true
                     },
                     {
@@ -119,9 +107,9 @@
                             }
                         },
                         editData: {
-                            EmpId: function () {
+                            ItemId: function () {
                                 var sel_id = $('#jQGridDemo').jqGrid('getGridParam', 'selrow');
-                                var value = $('#jQGridDemo').jqGrid('getCell', sel_id, 'id');
+                                var value = $('#jQGridDemo').jqGrid('getCell', sel_id, 'Id');
                                 return value;
                             }
                         }
@@ -158,9 +146,9 @@
                             }
                         },
                         delData: {
-                            EmpId: function () {
+                            ItemId: function () {
                                 var sel_id = $('#jQGridDemo').jqGrid('getGridParam', 'selrow');
-                                var value = $('#jQGridDemo').jqGrid('getCell', sel_id, 'id');
+                                var value = $('#jQGridDemo').jqGrid('getCell', sel_id, 'Id');
                                 return value;
                             }
                         }
@@ -173,9 +161,11 @@
         });
         function getAllItemTypes() {
             var itemTypes = { '': '', 'Games': 'Games', 'Movies': 'Movies', 'TvSeries': 'TvSeries', 'TvSeries': 'TvSeries', 'Gifts': 'Gifts', 'Electronics': 'Electronics' };
-
+            return itemTypes;
+        }
+        function getBinaryItems() {
+            var itemTypes = { '':'', 'true': 'true', 'false': 'false' };
             return itemTypes;
         }
     </script>
 </asp:Content>
-

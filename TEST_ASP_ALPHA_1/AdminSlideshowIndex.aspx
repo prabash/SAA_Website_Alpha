@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row">
                 <ul>
-                    <li class="home"><a title="Go to Home Page" href="Default.aspx">Home</a><span>&raquo;</span></li>
+                    <li class="home"><a title="Go to Home Page" href="AdminDashboard.aspx">Home</a><span>&raquo;</span></li>
                     <li class="category13"><strong>Index Slideshow</strong></li>
                 </ul>
             </div>
@@ -75,6 +75,7 @@
         jQuery("#jQGridDemo").jqGrid({
             url: 'Handlers/AdminSlideshowIndexHandler.ashx',
             datatype: "json",
+            height: 222,
             colNames: ['Id', 'Title', 'Location'],
             colModel: [
                         { name: 'id', index: 'id', width: 50, stype: 'text', search: true },
@@ -96,7 +97,7 @@
             editurl: 'Handlers/AdminSlideshowIndexHandler.ashx'
         });
 
-        $("#jQGridDemo").jqGrid('filterToolbar', { searchOperators: false, searchOnEnter: false, autosearch: true });
+        $("#jQGridDemo").jqGrid('filterToolbar', { searchOperators: false, searchOnEnter: false, autosearch: true, defaultSearch: 'cn' });
         $('#jQGridDemo').jqGrid('navGrid', '#jQGridDemoPager',
                     {
                         edit: true,

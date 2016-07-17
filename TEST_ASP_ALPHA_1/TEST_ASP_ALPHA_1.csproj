@@ -165,6 +165,7 @@
     <Content Include="Account\RegisterExternalLogin.aspx" />
     <Content Include="Activation.aspx" />
     <Content Include="AdminDashboard.aspx" />
+    <Content Include="AdminItems.aspx" />
     <Content Include="AdminSlideshowIndex.aspx" />
     <Content Include="AdminSlideshowItems.aspx" />
     <Content Include="BrowseElectronicsGrid.aspx" />
@@ -344,6 +345,7 @@
     <Content Include="JQGridHandler.ashx" />
     <Content Include="Handlers\AdminSlideshowItemsHandler.ashx" />
     <Content Include="Handlers\AdminSlideshowIndexHandler.ashx" />
+    <Content Include="Handlers\AdminItemsHandler.ashx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="ProductDetails.aspx" />
     <Content Include="products_images\avengers-alt-img.png" />
@@ -464,6 +466,13 @@
     </Compile>
     <Compile Include="AdminDashboard.aspx.designer.cs">
       <DependentUpon>AdminDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminItems.aspx.cs">
+      <DependentUpon>AdminItems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminItems.aspx.designer.cs">
+      <DependentUpon>AdminItems.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminSlideshowIndex.aspx.cs">
       <DependentUpon>AdminSlideshowIndex.aspx</DependentUpon>
@@ -633,6 +642,9 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\AdminItemsHandler.ashx.cs">
+      <DependentUpon>AdminItemsHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Handlers\AdminSlideshowIndexHandler.ashx.cs">
       <DependentUpon>AdminSlideshowIndexHandler.ashx</DependentUpon>

@@ -6118,8 +6118,7 @@ ul.top-cat-box li {
 	.form-add-tags input.input-text, select, textarea {
 		border: 1px solid #ddd;
 		margin-top: 0;
-		padding: 8px;
-		width: 30%;
+		width: 90%;
 	}
 	.form-add-tags input.input-text:focus, .form-add-tags select:focus, .form-add-tags textarea:focus {
 		padding: 8px;
@@ -8639,9 +8638,8 @@ ul.top-cat-box li {
 	input.input-text, select, textarea {
 		background-color: #f0f0f0;
 		border: 1px #f1f1f1 solid;
-		padding: 10px;
 		outline: none;
-		color: #aaa;
+		color: #222222;
 	}
 	#wishlist-table textarea {
 		padding: 10px;
@@ -8649,7 +8647,6 @@ ul.top-cat-box li {
 	input.input-text:focus, select:focus, textarea:focus {
 		background-color: #fff;
 		border: 1px solid #ddd;
-		padding: 10px;
 		outline: none;
 	}
 	input#coupon_code {

@@ -21,6 +21,8 @@
     <!-- Mobile Specific -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- CSS Style -->
+    <link href="JQGridReq/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/slider.css" type="text/css">
     <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
@@ -38,7 +40,6 @@
     <script type="text/javascript" src="js/cloud-zoom.js"></script>
     <script src="JQGridReq/jquery.jqGrid.js" type="text/javascript"></script>
     <script src="JQGridReq/grid.locale-en.js" type="text/javascript"></script>
-    <link href="JQGridReq/ui.jqgrid.css" rel="stylesheet" type="text/css" />
     <!-- DARK THEME -->
     <%--<link href="JQGridReq/jquery-ui.css" rel="stylesheet" type="text/css" />
     <link href="JQGridReq/theme.css" rel="stylesheet" type="text/css" />--%>
@@ -92,7 +93,7 @@
                 <div class="row">
                     <div class="col-lg-5 col-sm-4 col-md-5">
                         <!-- Header Logo -->
-                        <a class="logo" title="SAA Video" href="Default.aspx">
+                        <a class="logo" title="SAA Video" href="AdminDashboard.aspx">
                             <img alt="SAA Video" src="images/logo_admin.png"></a>
                         <!-- End Header Logo -->
                     </div>
@@ -166,7 +167,7 @@
                                                     <li class="level1 nav-1-1 first parent"><a href="AdminSlideshowItems.aspx"><span>Items Slideshow</span> </a></li>
                                                 </ul>
                                             </li>
-                                            <li class="level0 nav-2 level-top parent"><a href="About.aspx" class="level-top"><span>Items</span> </a></li>
+                                            <li class="level0 nav-2 level-top parent"><a href="AdminItems.aspx" class="level-top"><span>Items</span> </a></li>
                                             <li class="level0 nav-3 level-top parent"><a href="Contact.aspx" class="level-top"><span>Users</span> </a></li>
                                             <li class="level0 nav-4 level-top parent"><a href="Contact.aspx" class="level-top"><span>Sales</span> </a></li>
                                         </ul>
@@ -185,7 +186,7 @@
                                 <li class="level1 first"><a href="AdminSlideshowItems.aspx"><span>Items Slideshow</span></a></li>
                             </ul>
                         </li>
-                        <li class="level0 nav-5 level-top first"><a runat="server" href="About.aspx" class="level-top"><span>Items</span> </a></li>
+                        <li class="level0 nav-5 level-top first"><a runat="server" href="AdminItems.aspx" class="level-top"><span>Items</span> </a></li>
                         <li class="level0 nav-7 level-top parent"><a runat="server" href="Contact.aspx" class="level-top"><span>Users</span> </a></li>
                         <li class="level0 nav-8 level-top parent"><a runat="server" href="Contact.aspx" class="level-top"><span>Sales</span> </a></li>
                     </ul>

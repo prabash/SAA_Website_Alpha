@@ -12,9 +12,9 @@ namespace TEST_ASP_ALPHA_1.Models
     {
         #region Set
 
-        #region Items
+        #region Sales Items
 
-        public void AddItems(List<ItemObject> items)
+        public void AddSalesItems(List<ItemObject> items)
         {
             MySqlTransaction transaction = null;
             try
@@ -73,6 +73,102 @@ namespace TEST_ASP_ALPHA_1.Models
             }
         }
 
+        public void UpdateSalesItems(List<ItemObject> items)
+        {
+            MySqlTransaction transaction = null;
+            try
+            {
+                using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+                {
+                    transaction = con.BeginTransaction();
+                    string sqlString = @"UPDATE items SET title=@title, location_default=@defLocation, location_alt=@altLocation, regular_price=@regPrice, current_price=@curPrice, rating=@rating, on_sale=@onSale, type=@type, 
+                                        overview=@overview, description=@description, best_seller=@bestSeller, year=@year, date_added=@dateAdded, genre= @genre WHERE ID=@id";
+
+                    using (MySqlCommand com = new MySqlCommand(sqlString, con))
+                    {
+                        com.Transaction = transaction;
+                        com.Parameters.AddWithValue("@title", "");
+                        com.Parameters.AddWithValue("@defLocation", "");
+                        com.Parameters.AddWithValue("@altLocation", "");
+                        com.Parameters.AddWithValue("@regPrice", 0.00);
+                        com.Parameters.AddWithValue("@curPrice", 0.00);
+                        com.Parameters.AddWithValue("@rating", 0.00);
+                        com.Parameters.AddWithValue("@onSale", 0);
+                        com.Parameters.AddWithValue("@type", "");
+                        com.Parameters.AddWithValue("@overview", "");
+                        com.Parameters.AddWithValue("@description", "");
+                        com.Parameters.AddWithValue("@bestSeller", false);
+                        com.Parameters.AddWithValue("@year", "");
+                        com.Parameters.AddWithValue("@dateAdded", DateTime.Now);
+                        com.Parameters.AddWithValue("@genre", "");
+                        com.Parameters.AddWithValue("@id", 0);
+
+                        foreach (var item in items)
+                        {
+                            var currentItem = GetItemDetailById(item.Id);
+                            if (currentItem != null)
+                            {
+                                com.Parameters["@title"].Value = item.title;
+                                com.Parameters["@defLocation"].Value = item.defaultLocation;
+                                com.Parameters["@altLocation"].Value = item.altLocation;
+                                com.Parameters["@regPrice"].Value = item.regularPrice;
+                                com.Parameters["@curPrice"].Value = item.currentPrice;
+                                com.Parameters["@rating"].Value = item.rating;
+                                com.Parameters["@onSale"].Value = Convert.ToInt32(item.onSale);
+                                com.Parameters["@type"].Value = item.type;
+                                com.Parameters["@overview"].Value = item.overview;
+                                com.Parameters["@description"].Value = item.description;
+                                com.Parameters["@bestSeller"].Value = item.bestSeller;
+                                com.Parameters["@year"].Value = item.year;
+                                com.Parameters["@dateAdded"].Value = DateTime.Now;
+                                com.Parameters["@genre"].Value = item.genre;
+                                com.Parameters["@id"].Value = item.Id;
+
+                                com.ExecuteNonQuery();
+                            }
+                            else
+                            {
+                                throw new Exception("Sales Item does not exist!");
+                            }
+                        }
+                        transaction.Commit();
+                    }
+                }
+                
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void DeleteSalesItem(int id)
+        {
+            try
+            {
+                var salesItem = GetItemDetailById(id);
+                if (salesItem != null)
+                {
+                    using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+                    {
+                        string sqlString = @"DELETE FROM items WHERE id=@id";
+
+                        using (MySqlCommand com = new MySqlCommand(sqlString, con))
+                        {
+                            com.Parameters.AddWithValue("@id", id);
+                            com.ExecuteNonQuery();
+                        }
+                    }
+                }
+                else
+                    throw new Exception("Sales item does not exist!");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
 
         #region Slideshow
