@@ -78,7 +78,7 @@
             height: 222,
             colNames: ['Id', 'Title', 'Location'],
             colModel: [
-                        { name: 'id', index: 'id', width: 50, stype: 'text', search: true },
+                        { name: 'id', index: 'id', width: 50, stype: 'text', search: true, sorttype: "int", key: true },
    		                { name: 'title', index: 'title', width: 370, search: true, stype: 'text', sortable: true, editable: true },
    		                { name: 'location', index: 'location', width: 370, search: true, editable: true }
             ],

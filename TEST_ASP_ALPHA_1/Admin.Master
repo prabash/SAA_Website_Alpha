@@ -41,12 +41,12 @@
     <script src="JQGridReq/jquery.jqGrid.js" type="text/javascript"></script>
     <script src="JQGridReq/grid.locale-en.js" type="text/javascript"></script>
     <!-- DARK THEME -->
-    <%--<link href="JQGridReq/jquery-ui.css" rel="stylesheet" type="text/css" />
-    <link href="JQGridReq/theme.css" rel="stylesheet" type="text/css" />--%>
+    <link href="JQGridReq/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="JQGridReq/theme.css" rel="stylesheet" type="text/css" />
     <!-- END DARK THEME-->
 
     <!-- FLAT LIGHT THEME -->
-    <link href="JQGridReq/jquery-ui-1.10.3.css" rel="stylesheet" type="text/css" />
+    <%--<link href="JQGridReq/jquery-ui-1.10.3.css" rel="stylesheet" type="text/css" />--%>
     <!--END FLAT LIGHT THEME -->
 
     <!-- Google Fonts -->

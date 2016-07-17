@@ -73,7 +73,7 @@
             height: 222,
             colNames: ['Id', 'Title', 'Location', 'Type'],
             colModel: [
-                        { name: 'id', index: 'id', width: 50, stype: 'text', search: true },
+                        { name: 'id', index: 'id', width: 50, stype: 'text', search: true, sorttype: "int", key: true },
    		                { name: 'title', index: 'title', width: 245, search: true, stype: 'text', sortable: true, editable: true },
    		                { name: 'location', index: 'location', width: 245, search: true, editable: true },
                         { name: 'type', index: 'type', width: 245, search: true, editable: true, edittype: 'select', editoptions: { value: getAllItemTypes() }, stype: 'select', searchoptions: { sopt: ['eq'], value: getAllItemTypes() } }
