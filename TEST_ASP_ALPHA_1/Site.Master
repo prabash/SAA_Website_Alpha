@@ -252,7 +252,7 @@
                                     <li>
                                         <ul class="topnav">
                                             <li class="level0 nav-6 level-top first parent"><a class="level-top" href="Default.aspx"><span>Home</span> </a></li>
-                                            <li class="level0 nav-1 level-top first parent"><a href="BrowseGamesGrid.aspx" class="level-top"><span>Browse</span> </a>
+                                            <li class="level0 nav-1 level-top first parent"><a href="#" class="level-top"><span>Browse</span> </a>
                                                 <ul class="level0">
                                                     <li class="level1 nav-1-1 first parent"><a href="BrowseGamesGrid.aspx"><span>Games</span> </a></li>
                                                     <li class="level1 nav-1-2 parent"><a href="BrowseTvSeriesGrid.aspx"><span>TV Series</span> </a></li>

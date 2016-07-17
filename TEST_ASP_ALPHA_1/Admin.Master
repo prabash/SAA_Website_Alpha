@@ -160,7 +160,7 @@
                                     <li>
                                         <ul class="topnav">
                                             <li class="level0 nav-6 level-top first parent"><a class="level-top" href="AdminDashboard.aspx"><span>Home</span> </a></li>
-                                            <li class="level0 nav-1 level-top first parent"><a href="BrowseGamesGrid.aspx" class="level-top"><span>Slideshow</span> </a>
+                                            <li class="level0 nav-1 level-top first parent"><a href="#" class="level-top"><span>Slideshow</span> </a>
                                                 <ul class="level0">
                                                     <li class="level1 nav-1-2 parent"><a href="AdminSlideshowIndex.aspx"><span>Index Slideshow</span> </a></li>
                                                     <li class="level1 nav-1-1 first parent"><a href="AdminSlideshowItems.aspx"><span>Items Slideshow</span> </a></li>
