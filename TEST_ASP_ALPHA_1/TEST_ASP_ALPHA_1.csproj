@@ -343,6 +343,7 @@
     <Content Include="Admin.Master" />
     <Content Include="JQGridHandler.ashx" />
     <Content Include="Handlers\AdminSlideshowItemsHandler.ashx" />
+    <Content Include="Handlers\AdminSlideshowIndexHandler.ashx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="ProductDetails.aspx" />
     <Content Include="products_images\avengers-alt-img.png" />
@@ -632,6 +633,9 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\AdminSlideshowIndexHandler.ashx.cs">
+      <DependentUpon>AdminSlideshowIndexHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Handlers\AdminSlideshowItemsHandler.ashx.cs">
       <DependentUpon>AdminSlideshowItemsHandler.ashx</DependentUpon>

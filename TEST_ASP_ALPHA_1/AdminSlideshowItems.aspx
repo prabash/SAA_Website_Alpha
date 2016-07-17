@@ -10,7 +10,7 @@
             <div class="row">
                 <ul>
                     <li class="home"><a title="Go to Home Page" href="Default.aspx">Home</a><span>&raquo;</span></li>
-                    <li class="category13"><strong>Index Slideshow</strong></li>
+                    <li class="category13"><strong>Items Slideshow</strong></li>
                 </ul>
             </div>
         </div>
@@ -22,12 +22,12 @@
                 <section class="col-main col-sm-9 wow bounceInUp animated">
                     <div class="my-account">
                         <div class="page-title new_page_title">
-                            <h2>Index Slideshow</h2>
+                            <h2>Items Slideshow</h2>
                         </div>
                         <div class="dashboard">
                             <div class="welcome-msg">
                                 <strong>Hello there, Admin!</strong>
-                                <p>You can use this window to add or edit the items that will be shown in the slideshow of the homepage.</p>
+                                <p>You can use this window to add or edit the items that will be shown when browsing for different items.</p>
                                 <br />
                                 <p><b>INSTRUCTIONS :</b></p>
                                 <ul style="margin-left: 15px; list-style-type: square">
@@ -41,12 +41,10 @@
                                 <br />
                             </div>
                             <div>
-                                
-                                <table id="jQGridDemo" class="col-main col-sm-9" style="width:600px">
+                                <table id="jQGridDemo" class="" style="width: 600px">
                                 </table>
                                 <div id="jQGridDemoPager">
                                 </div>
-                                    
                             </div>
                             <br />
                         </div>
@@ -54,10 +52,10 @@
                 </section>
                 <aside class="col-right sidebar col-sm-3 wow bounceInUp animated">
                     <div class="block block-account">
-                        <div class="block-title">My Account</div>
+                        <div class="block-title">Slideshow</div>
                         <div class="block-content">
                             <ul>
-                                <li class="current"><a href="AdminSlideshowIndex.aspx">Index Slideshow</a></li>
+                                <li><a href="AdminSlideshowIndex.aspx">Index Slideshow</a></li>
                                 <li class="current"><a href="#">Items Slideshow</a></li>
                             </ul>
                         </div>
@@ -72,12 +70,14 @@
         jQuery("#jQGridDemo").jqGrid({
             url: 'Handlers/AdminSlideshowItemsHandler.ashx',
             datatype: "json",
-            colNames: ['Id', 'Title', 'Location'],
+            colNames: ['Id', 'Title', 'Location', 'Type'],
             colModel: [
                         { name: 'id', index: 'id', width: 50, stype: 'text', search: true },
-   		                { name: 'title', index: 'title', width: 370, search:true, stype: 'text', sortable: true, editable: true },
-   		                { name: 'location', index: 'location', width: 370, search: true, editable: true }
+   		                { name: 'title', index: 'title', width: 245, search: true, stype: 'text', sortable: true, editable: true },
+   		                { name: 'location', index: 'location', width: 245, search: true, editable: true },
+                        { name: 'type', index: 'type', width: 245, search: true, editable: true, edittype: 'select', editoptions: { value: getAllItemTypes() }, stype: 'select', searchoptions: { sopt: ['eq'], value: getAllItemTypes() } }
             ],
+
             rowNum: 10,
             mtype: 'GET',
             loadonce: true,
@@ -100,9 +100,9 @@
                         add: true,
                         del: true,
                         search: false,
-                        refresh: false
+                        refresh: true
                     },
-                    {   
+                    {
                         closeOnEscape: true,//Closes the popup on pressing escape key
                         reloadAfterSubmit: true,
                         drag: true,
@@ -170,6 +170,11 @@
             var newWidth = $("#jQGridDemo").closest(".ui-jqgrid").parent().width();
             $('#jQGridDemo').jqGrid("setGridWidth", newWidth, true);
         });
+        function getAllItemTypes() {
+            var itemTypes = { 'Games': 'Games', 'Movies': 'Movies', 'TvSeries': 'TvSeries', 'TvSeries': 'TvSeries', 'Gifts': 'Gifts', 'Electronics': 'Electronics' };
+
+            return itemTypes;
+        }
     </script>
 </asp:Content>
 

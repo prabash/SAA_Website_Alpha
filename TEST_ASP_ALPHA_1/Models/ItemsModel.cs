@@ -11,7 +11,10 @@ namespace TEST_ASP_ALPHA_1.Models
     public class ItemsModel
     {
         #region Set
-        public void SaveItems(List<ItemObject> items)
+
+        #region Items
+
+        public void AddItems(List<ItemObject> items)
         {
             MySqlTransaction transaction = null;
             try
@@ -72,15 +75,121 @@ namespace TEST_ASP_ALPHA_1.Models
 
         #endregion
 
+        #region Slideshow
+
+        public void AddSlideshowItem(SlideShowObj item)
+        {
+            try
+            {
+                using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+                {
+                    string sqlString = @"INSERT INTO items_slideshowpictures (title, location, type) 
+                                    VALUES (@title, @location, @type)";
+
+                    using (MySqlCommand com = new MySqlCommand(sqlString, con))
+                    {
+                        com.Parameters.AddWithValue("@title", item.title);
+                        com.Parameters.AddWithValue("@location", item.location);
+                        com.Parameters.AddWithValue("@type", item.type);
+
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void UpdateSlideshowItem(SlideShowObj item)
+        {
+            try
+            {
+                ItemType type;
+                Enum.TryParse<ItemType>(item.type, out type);
+                var slideshowItem = GetSlideShowDetails(ItemType.All, Convert.ToInt32(item.id));
+                if (slideshowItem.Count > 0)
+                {
+                    using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+                    {
+                        string sqlString = @"UPDATE items_slideshowpictures SET title=@title, location=@location, type=@type WHERE id=@id";
+
+                        using (MySqlCommand com = new MySqlCommand(sqlString, con))
+                        {
+                            com.Parameters.AddWithValue("@title", item.title);
+                            com.Parameters.AddWithValue("@location", item.location);
+                            com.Parameters.AddWithValue("@type", item.type);
+                            com.Parameters.AddWithValue("@id", Convert.ToInt32(item.id));
+
+                            com.ExecuteNonQuery();
+                        }
+                    }
+                }
+                else
+                    throw new Exception("slideshow item does not exist!");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void DeleteSlideshowItem(int id)
+        {
+            try
+            {
+                var slideshowItem = GetSlideShowDetails(ItemType.All, Convert.ToInt32(id));
+                if (slideshowItem.Count > 0)
+                {
+                    using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+                    {
+                        string sqlString = @"DELETE FROM items_slideshowpictures WHERE id=@id";
+
+                        using (MySqlCommand com = new MySqlCommand(sqlString, con))
+                        {
+                            com.Parameters.AddWithValue("@id", id);
+
+                            com.ExecuteNonQuery();
+                        }
+                    }
+                }
+                else
+                    throw new Exception("slideshow item does not exist!");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
+
+        #endregion
+
         #region Get
 
         #region General
-        public List<SlideShowObj> GetSlideShowDetails(ItemType type)
+
+        public List<SlideShowObj> GetSlideShowDetails(ItemType type, int id = -1)
         {
             List<SlideShowObj> returnList = new List<SlideShowObj>();
             using (MySqlConnection con = ConnectionManager.GetOpenConnection())
             {
-                string sqlString = "select * from items_slideshowpictures where type = @type";
+                string sqlString = "select * from items_slideshowpictures ";
+                if (type != ItemType.All)
+                {
+                    sqlString += "where type = @type ";
+                    if (id > -1)
+                        sqlString += "and id = " + id;
+                }
+                else
+                {
+                    if (id > -1)
+                        sqlString += "where id = " + id;
+                }
+                    
+                
 
                 using (MySqlCommand com = new MySqlCommand(sqlString, con))
                 {
@@ -102,9 +211,10 @@ namespace TEST_ASP_ALPHA_1.Models
                             com.Parameters.AddWithValue("@type", "Electronics");
                             break;
                         default:
-                            com.Parameters.AddWithValue("@type", "");
                             break;
                     }
+
+                    
 
                     MySqlDataReader dr = com.ExecuteReader();
                     while (dr.Read())
@@ -113,7 +223,8 @@ namespace TEST_ASP_ALPHA_1.Models
                         {
                             id = Convert.ToInt32(dr["id"].ToString()),
                             location = dr["location"].ToString(),
-                            title = dr["title"].ToString()
+                            title = dr["title"].ToString(),
+                            type = dr["type"].ToString()
                         });
                     }
                 }

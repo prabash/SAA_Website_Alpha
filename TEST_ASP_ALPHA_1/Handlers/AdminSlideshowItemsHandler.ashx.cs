@@ -20,7 +20,7 @@ namespace TEST_ASP_ALPHA_1.Handlers
         {
             System.Collections.Specialized.NameValueCollection forms = context.Request.Form;
             string strOperation = forms.Get("oper");
-            var collectionEmployee = new IndexModel().GetSlideShowDetails();
+            var collectionEmployee = new ItemsModel().GetSlideShowDetails(ItemType.All);
             string strResponse = string.Empty;
 
             if (strOperation == null)
@@ -32,14 +32,14 @@ namespace TEST_ASP_ALPHA_1.Handlers
             else if (strOperation == "del")
             {
                 var id = Convert.ToInt32(forms.Get("EmpId").ToString());
-                new IndexModel().DeleteSlideshowItem(new SlideShowObj { id = id });
+                new ItemsModel().DeleteSlideshowItem(id);
                 strResponse = "Record removed successfully!";
                 context.Response.Write(strResponse);
             }
             else
             {
                 string strOut = string.Empty;
-                AddEdit(forms, out strOut);
+                Save(forms, out strOut);
                 context.Response.Write(strOut);
             }
 
@@ -53,26 +53,28 @@ namespace TEST_ASP_ALPHA_1.Handlers
             }
         }
 
-        private void AddEdit(NameValueCollection forms, out string strResponse)
+        private void Save(NameValueCollection forms, out string strResponse)
         {
             string strOperation = forms.Get("oper");
             string strEmpId = string.Empty;
 
             string location = forms.Get("location").ToString();
             string title = forms.Get("title").ToString();
+            string type = forms.Get("type").ToString();
 
             SlideShowObj objItem = new SlideShowObj();
             objItem.location = location;
             objItem.title = title;
+            objItem.type = type;
 
             if (strOperation == "add")
             {
-                new IndexModel().AddSlideshowItem(objItem);
+                new ItemsModel().AddSlideshowItem(objItem);
             }
             else if (strOperation == "edit")
             {
                 objItem.id = Convert.ToInt32(forms.Get("EmpId").ToString());
-                new IndexModel().UpdateSlideshowItem(objItem);
+                new ItemsModel().UpdateSlideshowItem(objItem);
             }
 
             strResponse = "Record updated successfully";

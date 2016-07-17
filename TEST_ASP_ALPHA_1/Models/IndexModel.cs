@@ -12,7 +12,7 @@ namespace TEST_ASP_ALPHA_1.Models
     {
         #region Set
 
-        public void AddSlideshowItem(SlideShowObj item)
+        public void AddIndexSlideshowItem(SlideShowObj item)
         {
             try
             {
@@ -66,11 +66,11 @@ namespace TEST_ASP_ALPHA_1.Models
             }
         }
 
-        public void DeleteSlideshowItem(SlideShowObj item)
+        public void DeleteSlideshowItem(int id)
         {
             try
             {
-                var slideshowItem = GetSlideShowDetails(Convert.ToInt32(item.id));
+                var slideshowItem = GetSlideShowDetails(Convert.ToInt32(id));
                 if (slideshowItem.Count > 0)
                 {
                     using (MySqlConnection con = ConnectionManager.GetOpenConnection())
@@ -79,7 +79,7 @@ namespace TEST_ASP_ALPHA_1.Models
 
                         using (MySqlCommand com = new MySqlCommand(sqlString, con))
                         {
-                            com.Parameters.AddWithValue("@id", item.id);
+                            com.Parameters.AddWithValue("@id", id);
 
                             com.ExecuteNonQuery();
                         }

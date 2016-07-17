@@ -7,12 +7,12 @@ using System.Web.Script.Serialization;
 using TEST_ASP_ALPHA_1.Common;
 using TEST_ASP_ALPHA_1.Models;
 
-namespace TEST_ASP_ALPHA_1
+namespace TEST_ASP_ALPHA_1.Handlers
 {
     /// <summary>
-    /// Summary description for JQGridHandler
+    /// Summary description for AdminSlideshowIndexHandler
     /// </summary>
-    public class JQGridHandler : IHttpHandler
+    public class AdminSlideshowIndexHandler : IHttpHandler
     {
         #region Handler
 
@@ -39,7 +39,7 @@ namespace TEST_ASP_ALPHA_1
             else
             {
                 string strOut = string.Empty;
-                AddEdit(forms, out strOut);
+                Save(forms, out strOut);
                 context.Response.Write(strOut);
             }
 
@@ -53,7 +53,7 @@ namespace TEST_ASP_ALPHA_1
             }
         }
 
-        private void AddEdit(NameValueCollection forms,  out string strResponse)
+        private void Save(NameValueCollection forms, out string strResponse)
         {
             string strOperation = forms.Get("oper");
             string strEmpId = string.Empty;
@@ -79,6 +79,5 @@ namespace TEST_ASP_ALPHA_1
         }
 
         #endregion
-
     }
 }

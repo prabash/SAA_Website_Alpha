@@ -32,7 +32,7 @@
                                 <p><b>INSTRUCTIONS :</b></p>
                                 <ul style="margin-left: 15px; list-style-type: square">
                                     <li style="line-height: 0.5em;">
-                                        <p>Please make sure the banner dimension is = <b>860px * 320px</b></p>
+                                        <p>Please make sure the banner dimension is = <b>1170px * 470px</b></p>
                                     </li>
                                     <li style="line-height: 0.5em;">
                                         <p>Always use the same folder for "location" and <b>only change the file name</b></p>
@@ -43,57 +43,11 @@
                             <div class="recent-orders">
                                 <form runat="server">
                                     <div class="table-responsive">
-                                        <input type="text" id="txtSearch" onkeyup="Search(this.value)" placeholder="Search"/>
-                                        <br />
-                                        <asp:GridView ID="IndexSlideshowGrid" runat="server" CssClass="data-table" AutoGenerateColumns="false" ShowFooter="true" AllowSorting="true" AllowPaging="true" PageSize="5"
-                                            OnRowEditing="lnkEdit_Click" OnRowCancelingEdit="IndexSlideshowGrid_RowCancelingEdit" OnRowUpdating="IndexSlideshowGrid_RowUpdating">
-                                            <HeaderStyle BackColor="#80c94c" />
-                                            <Columns>
-                                                <asp:TemplateField HeaderText="ID" Visible="false">
-                                                    <ItemTemplate>
-                                                        <asp:Label runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "id")%>' ID="lblId" />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="TITLE">
-                                                    <ItemTemplate>
-                                                        <asp:Label runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "title")%>' />
-                                                    </ItemTemplate>
-                                                    <EditItemTemplate>
-                                                        <asp:TextBox ID="txtEditTitle" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "title")%>' class="input-text required-entry"></asp:TextBox>
-                                                    </EditItemTemplate>
-                                                    <FooterTemplate>
-                                                        <asp:TextBox ID="txtNewTitle" runat="server" class="input-text required-entry"></asp:TextBox>
-                                                    </FooterTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="LOCATION">
-                                                    <ItemTemplate>
-                                                        <asp:Label runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "location")%>' />
-                                                    </ItemTemplate>
-                                                    <EditItemTemplate>
-                                                        <asp:TextBox ID="txtEditLocation" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "location")%>' class="input-text required-entry"></asp:TextBox>
-                                                    </EditItemTemplate>
-                                                    <FooterTemplate>
-                                                        <asp:TextBox ID="txtNewLocation" runat="server" class="input-text required-entry"></asp:TextBox>
-                                                    </FooterTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField>
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton runat="server" ID="lnkDelete" Text="Delete" OnClick="lnkDelete_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "id")%>' />
-                                                    </ItemTemplate>
-                                                    <FooterTemplate>
-                                                        <asp:Button runat="server" Text="ADD" ID="btnAdd" OnClick="btnAdd_Click" CssClass="button"></asp:Button>
-                                                    </FooterTemplate>
-                                                </asp:TemplateField>
-                                                <asp:CommandField EditText="Edit" CancelText="Cancel" ShowEditButton="true" />
-                                            </Columns>
-                                        </asp:GridView>
-                                        <div class="error" runat="server" id="regErrorBox" visible="false" style="height: 30px; margin-top: 10px; padding: 8px;">
-                                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                                            <p runat="server" id="regErrMsg"></p>
-                                        </div>
-                                        <div class="success" runat="server" id="regSuccessBox" visible="false" style="height: 30px; margin-top: 10px; padding: 8px;">
-                                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                                            <p runat="server" id="regSuccessMsg"></p>
+                                        <div>
+                                            <table id="jQGridDemo" class="data-table" style="width: 600px">
+                                            </table>
+                                            <div id="jQGridDemoPager">
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
@@ -104,11 +58,11 @@
                 </section>
                 <aside class="col-right sidebar col-sm-3 wow bounceInUp animated">
                     <div class="block block-account">
-                        <div class="block-title">My Account</div>
+                        <div class="block-title">Slideshow</div>
                         <div class="block-content">
                             <ul>
                                 <li class="current"><a href="#">Index Slideshow</a></li>
-                                <li><a href="MyAccountInformation.aspx">Items Slideshow</a></li>
+                                <li><a href="AdminSlideshowItems.aspx">Items Slideshow</a></li>
                             </ul>
                         </div>
                     </div>
@@ -118,19 +72,106 @@
     </div>
     <!--End main-container -->
     <script type="text/javascript">
-        function Search(searchCriteria) {
-            $.ajax({
-                type: "POST",
-                url: "AdminSlideshowIndex.aspx/Search",
-                data: '{criteria: "' + searchCriteria + '"}',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: OnSuccess,
-                failure: function (response) {
-                    alert(response.d);
-                }
-            });
-        }
-        function OnSuccess(response) {}
+        jQuery("#jQGridDemo").jqGrid({
+            url: 'Handlers/AdminSlideshowIndexHandler.ashx',
+            datatype: "json",
+            colNames: ['Id', 'Title', 'Location'],
+            colModel: [
+                        { name: 'id', index: 'id', width: 50, stype: 'text', search: true },
+   		                { name: 'title', index: 'title', width: 370, search: true, stype: 'text', sortable: true, editable: true },
+   		                { name: 'location', index: 'location', width: 370, search: true, editable: true }
+            ],
+            rowNum: 10,
+            mtype: 'GET',
+            loadonce: true,
+            rowList: [10, 20, 30],
+            gridview: true,
+            autowidth: true,
+            ignoreCase: true,
+            pager: '#jQGridDemoPager',
+            sortname: 'id',
+            viewrecords: true,
+            sortorder: 'desc',
+            caption: "Index Slideshow Details",
+            editurl: 'Handlers/AdminSlideshowIndexHandler.ashx'
+        });
+
+        $("#jQGridDemo").jqGrid('filterToolbar', { searchOperators: false, searchOnEnter: false, autosearch: true });
+        $('#jQGridDemo').jqGrid('navGrid', '#jQGridDemoPager',
+                    {
+                        edit: true,
+                        add: true,
+                        del: true,
+                        search: false,
+                        refresh: true
+                    },
+                    {
+                        closeOnEscape: true,//Closes the popup on pressing escape key
+                        reloadAfterSubmit: true,
+                        drag: true,
+                        afterSubmit: function (response, postdata) {
+                            if (response.responseText == "") {
+
+                                $(this).jqGrid('setGridParam', { datatype: 'json' }).trigger('reloadGrid');//Reloads the grid after edit
+                                return [true, '']
+                            }
+                            else {
+                                $(this).jqGrid('setGridParam', { datatype: 'json' }).trigger('reloadGrid'); //Reloads the grid after edit
+                                return [false, response.responseText]//Captures and displays the response text on th Edit window
+                            }
+                        },
+                        editData: {
+                            EmpId: function () {
+                                var sel_id = $('#jQGridDemo').jqGrid('getGridParam', 'selrow');
+                                var value = $('#jQGridDemo').jqGrid('getCell', sel_id, 'id');
+                                return value;
+                            }
+                        }
+                    },
+                    {
+                        closeAfterAdd: true,//Closes the add window after add
+                        afterSubmit: function (response, postdata) {
+                            if (response.responseText == "") {
+
+                                $(this).jqGrid('setGridParam', { datatype: 'json' }).trigger('reloadGrid')//Reloads the grid after Add
+                                return [true, '']
+                            }
+                            else {
+                                $(this).jqGrid('setGridParam', { datatype: 'json' }).trigger('reloadGrid')//Reloads the grid after Add
+                                return [false, response.responseText]
+                            }
+                        }
+                    },
+                    {   //DELETE
+                        closeOnEscape: true,
+                        closeAfterDelete: true,
+                        reloadAfterSubmit: true,
+                        closeOnEscape: true,
+                        drag: true,
+                        afterSubmit: function (response, postdata) {
+                            if (response.responseText == "") {
+
+                                $("#jQGridDemo").trigger("reloadGrid", [{ current: true }]);
+                                return [false, response.responseText]
+                            }
+                            else {
+                                $(this).jqGrid('setGridParam', { datatype: 'json' }).trigger('reloadGrid')
+                                return [true, response.responseText]
+                            }
+                        },
+                        delData: {
+                            EmpId: function () {
+                                var sel_id = $('#jQGridDemo').jqGrid('getGridParam', 'selrow');
+                                var value = $('#jQGridDemo').jqGrid('getCell', sel_id, 'id');
+                                return value;
+                            }
+                        }
+                    }
+             );
+
+        $(window).on("resize", function () {
+            var newWidth = $("#jQGridDemo").closest(".ui-jqgrid").parent().width();
+            $('#jQGridDemo').jqGrid("setGridWidth", newWidth, true);
+        });
     </script>
 </asp:Content>
