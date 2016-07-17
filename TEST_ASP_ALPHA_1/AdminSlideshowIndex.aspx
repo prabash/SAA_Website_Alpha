@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminSlideshowIndex.aspx.cs" Inherits="TEST_ASP_ALPHA_1.AdminSlideshowIndex" MasterPageFile="~/Admin.Master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminSlideshowIndex.aspx.cs" Inherits="TEST_ASP_ALPHA_1.AdminSlideshowIndex" MasterPageFile="~/Admin.Master" Title="Index Slideshow"%>
 
 <%@ Import Namespace="TEST_ASP_ALPHA_1.Common" %>
 <%@ Import Namespace="TEST_ASP_ALPHA_1.Models" %>
