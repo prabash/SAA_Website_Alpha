@@ -93,7 +93,7 @@
             editurl: 'Handlers/AdminSlideshowItemsHandler.ashx'
         });
 
-        $("#jQGridDemo").jqGrid('filterToolbar', { searchOperators: true, sopt: ['cn', 'bw', 'eq'], searchOnEnter: false, autosearch: true });
+        $("#jQGridDemo").jqGrid('filterToolbar', { searchOperators: false, searchOnEnter: false, autosearch: true });
         $('#jQGridDemo').jqGrid('navGrid', '#jQGridDemoPager',
                     {
                         edit: true,
