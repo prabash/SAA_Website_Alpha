@@ -125,5 +125,19 @@ namespace TEST_ASP_ALPHA_1
                 throw ex;
             }
         }
+
+        [System.Web.Services.WebMethod(EnableSession = true)]
+        public static string getLineChartData()
+        {
+            try
+            {
+                var data = "15/07/2016,16/07/2016,17/07/2016,18/07/2016,19/07/2016|2,3,8,1,6";
+                return data;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
