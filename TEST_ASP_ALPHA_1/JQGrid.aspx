@@ -13,6 +13,10 @@
     <script src="JQGridReq/jquery.jqGrid.js" type="text/javascript"></script>
     <link href="JQGridReq/ui.jqgrid.css" rel="stylesheet" type="text/css" />
     <script src="JQGridReq/grid.locale-en.js" type="text/javascript"></script>
+
+    <link href="css/flapper.css" type="text/css" rel="stylesheet" />
+    <script src="Scripts/jquery.flapper.js"></script>
+    <script src="Scripts/flapdemo.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -27,12 +31,17 @@
             <!--style="width:400px;height:400px"-->
             <canvas id="myChart"></canvas>
         </div>
-        <div class="wrapper">
-            <div class="cell">
-                <div id="holder">
-                    <div class="digits"></div>
-                </div>
-            </div>
+
+       <div class="displays">
+            <div class="activity"></div><input class="displayA M" /><input class="displayB M" />
+        </div>
+        <div class="inputarea" style="visibility:hidden">
+            <div class="inline"><textarea id="typesomethingA" placeholder="Type Something Here..." rows="1" cols="5"></textarea></div>
+            <div class="inline"><button id="showmeA">And Click Here</button></div>
+        </div>
+        <div class="inputarea" style="visibility:hidden">
+            <div class="inline"><textarea id="typesomethingB" placeholder="Type Something Here..." rows="1" cols="5"></textarea></div>
+            <div class="inline"><button id="showmeB">And Click Here</button></div>
         </div>
     </form>
     <script type="text/javascript">
@@ -101,6 +110,26 @@
             });
         }
         GetData();
+    </script>
+    <script>
+        
+        //Flap('input.displayA', 'PRABASH');
+        
+    </script>
+    <script>
+        setInterval(test, 3000);
+        function test()
+        {
+            $('#typesomethingA').val(Math.floor((Math.random() * 999) + 1));
+            $('#showmeA').click();
+        }
+    </script>
+    <script>
+        setInterval(test, 3000);
+        function test() {
+            $('#typesomethingB').val(Math.floor((Math.random() * 999) + 1));
+            $('#showmeB').click();
+        }
     </script>
 </body>
 

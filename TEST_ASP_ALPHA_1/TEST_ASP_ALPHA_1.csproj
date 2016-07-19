@@ -192,6 +192,7 @@
     <Content Include="css\blogmate.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\fancybox.css" />
+    <Content Include="css\flapper.css" />
     <Content Include="css\flexslider.css" />
     <Content Include="css\font-awesome.css" />
     <Content Include="css\owl.carousel.css" />
@@ -374,8 +375,10 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\flapdemo.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.flapper.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
