@@ -82,7 +82,6 @@
                         <div class="block-content">
                             <ul>
                                 <li class="current"><a href="#">User Details</a></li>
-                                <li><a href="AdminResetUserPassword.aspx">Reset User Passwords</a></li>
                                 <li><a href="AdminUserQueries.aspx">User Queries</a></li>
                             </ul>
                         </div>
