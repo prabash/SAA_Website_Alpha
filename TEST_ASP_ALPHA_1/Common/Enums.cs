@@ -35,7 +35,8 @@ namespace TEST_ASP_ALPHA_1.Common
         email,
         name,
         telephone,
-        registeredDate
+        registeredDate,
+        all
     }
 
     public enum PurchItemGetType

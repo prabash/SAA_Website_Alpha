@@ -523,13 +523,13 @@
                 data: '{itemId: "' + itemId + '", itemTitle: "' + itemTitle + '" }',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: OnSuccess,
+                success: OnSuccessLogin,
                 failure: function (response) {
                     alert(response.d);
                 }
             });
         }
-        function OnSuccess(response) {
+        function OnSuccessLogin(response) {
             if (response.d == "Login") {
                 window.location.href = "Login.aspx";
             }
@@ -546,13 +546,13 @@
                 data: '{itemId: "' + itemId + '", itemTitle: "' + itemTitle + '" }',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: OnSuccess,
+                success: OnSuccessAddtoCart,
                 failure: function (response) {
                     alert(response.d);
                 }
             });
         }
-        function OnSuccess(response) {
+        function OnSuccessAddtoCart(response) {
             window.location.reload();
         }
     </script>
@@ -564,13 +564,13 @@
                 data: '{itemId: "' + itemId + '"}',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: OnSuccess,
+                success: OnSuccessRemoveFromCart,
                 failure: function (response) {
                     alert(response.d);
                 }
             });
         }
-        function OnSuccess(response) {
+        function OnSuccessRemoveFromCart(response) {
             window.location.reload();
         }
     </script>
@@ -581,13 +581,13 @@
                 url: "MyAccountAjaxPage.aspx/ClearCart",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: OnSuccess,
+                success: OnSuccessClearCart,
                 failure: function (response) {
                     alert(response.d);
                 }
             });
         }
-        function OnSuccess(response) {
+        function OnSuccessClearCart(response) {
             window.location.reload();
         }
     </script>
@@ -599,13 +599,13 @@
                 data: '{purchId: "' + purchId + '"}',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: OnSuccess,
+                success: OnSuccessCancelOrder,
                 failure: function (response) {
                     alert(response.d);
                 }
             });
         }
-        function OnSuccess(response) {
+        function OnSuccessCancelOrder(response) {
             window.location.reload();
         }
     </script>

@@ -280,6 +280,20 @@ namespace TEST_ASP_ALPHA_1.Common
 
         #endregion
 
+        #region Counter Names
+
+        public static string Counter_GetLoggedInToday_Name()
+        {
+            return ConfigurationManager.AppSettings["Count_LoggedInToday"];
+        }
+
+        public static int Counter_GetRefreshTimeOut()
+        {
+            return Convert.ToInt32(ConfigurationManager.AppSettings["GetRefreshTimeOut"]);
+        }
+
+        #endregion
+
         #endregion
     }
 }

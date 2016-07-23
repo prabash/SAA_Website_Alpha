@@ -168,6 +168,7 @@
     <Content Include="AdminItems.aspx" />
     <Content Include="AdminSlideshowIndex.aspx" />
     <Content Include="AdminSlideshowItems.aspx" />
+    <Content Include="AdminUsers.aspx" />
     <Content Include="BrowseElectronicsGrid.aspx" />
     <Content Include="BrowseElectronicsList.aspx" />
     <Content Include="BrowseGamesGrid.aspx" />
@@ -356,6 +357,7 @@
     <Content Include="Handlers\AdminSlideshowItemsHandler.ashx" />
     <Content Include="Handlers\AdminSlideshowIndexHandler.ashx" />
     <Content Include="Handlers\AdminItemsHandler.ashx" />
+    <Content Include="Handlers\AdminUserDetailsHandler.ashx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="ProductDetails.aspx" />
     <Content Include="products_images\avengers-alt-img.png" />
@@ -500,6 +502,13 @@
     </Compile>
     <Compile Include="AdminSlideshowItems.aspx.designer.cs">
       <DependentUpon>AdminSlideshowItems.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminUsers.aspx.cs">
+      <DependentUpon>AdminUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminUsers.aspx.designer.cs">
+      <DependentUpon>AdminUsers.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
@@ -665,6 +674,9 @@
     <Compile Include="Handlers\AdminSlideshowItemsHandler.ashx.cs">
       <DependentUpon>AdminSlideshowItemsHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\AdminUserDetailsHandler.ashx.cs">
+      <DependentUpon>AdminUserDetailsHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="JQGrid.aspx.cs">
       <DependentUpon>JQGrid.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -684,6 +696,7 @@
     </Compile>
     <Compile Include="Common\AESManager.cs" />
     <Compile Include="Common\ConnectionManager.cs" />
+    <Compile Include="Models\CounterModel.cs" />
     <Compile Include="Models\CustCommentsModel.cs" />
     <Compile Include="Models\CustWishlistModel.cs" />
     <Compile Include="Models\PurchCartModel.cs" />

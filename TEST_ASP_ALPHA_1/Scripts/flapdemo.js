@@ -150,7 +150,7 @@ FlapDemo.prototype = {
 
 $(document).ready(function () {
 
-    new FlapDemo('input.displayA', '#typesomethingA', '#showmeA');
-    new FlapDemo('input.displayB', '#typesomethingB', '#showmeB');
+    new FlapDemo('input.disTotalActiveUsers', '#txtTotalActiveUsers', '#btnTotalActiveUsers');
+    new FlapDemo('input.disLoggedInToday', '#txtLoggedInToday', '#btnLoggedInToday');
 });
 

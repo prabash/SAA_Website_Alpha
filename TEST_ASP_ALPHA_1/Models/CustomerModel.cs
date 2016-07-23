@@ -130,7 +130,52 @@ namespace TEST_ASP_ALPHA_1.Models
                 throw ex;
             }
         }
-        
+
+        public void SetLastLoggedDate(int id)
+        {
+            try
+            {
+                using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+                {
+                    string sqlString = @"UPDATE customers SET last_logged = @lastLogged WHERE id = @id";
+
+                    using (MySqlCommand com = new MySqlCommand(sqlString, con))
+                    {
+                        com.Parameters.AddWithValue("@lastLogged", DateTime.Now);
+                        com.Parameters.AddWithValue("@id", id);
+
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void DeleteCustomer(int id)
+        {
+            try
+            {
+                using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+                {
+                    string sqlString = @"DELETE FROM customers WHERE id=@id";
+
+                    using (MySqlCommand com = new MySqlCommand(sqlString, con))
+                    {
+                        com.Parameters.AddWithValue("@id", id);
+
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         #endregion
 
         #region Get
@@ -142,24 +187,23 @@ namespace TEST_ASP_ALPHA_1.Models
             {
                 StringBuilder sbSqlString = new StringBuilder();
                 sbSqlString.Append("SELECT * FROM customers ");
-                sbSqlString.Append("WHERE ");
 
                 switch (getType)
                 {
                     case CustomerGetType.id:
-                        sbSqlString.Append("id = @id");
+                        sbSqlString.Append("WHERE id = @id");
                         break;
                     case CustomerGetType.email:
-                        sbSqlString.Append("email_address = @email");
+                        sbSqlString.Append("WHERE email_address = @email");
                         break;
                     case CustomerGetType.name:
-                        sbSqlString.Append("name like '% @name %'");
+                        sbSqlString.Append("WHERE name like '% @name %'");
                         break;
                     case CustomerGetType.telephone:
-                        sbSqlString.Append("telephone_no like '% @tel %'");
+                        sbSqlString.Append("WHERE telephone_no like '% @tel %'");
                         break;
                     case CustomerGetType.registeredDate:
-                        sbSqlString.Append("registered_date BETWEEN @fromRegDate AND @toRegDate");
+                        sbSqlString.Append("WHERE registered_date BETWEEN @fromRegDate AND @toRegDate");
                         break;
                     default:
                         break;
@@ -220,6 +264,8 @@ namespace TEST_ASP_ALPHA_1.Models
                         if ((customer.addressLine1 != null || customer.addressLine2 != null) && customer.city != null)
                             checkoutElgible = true;
 
+                        SetLastLoggedDate(custId);
+                        new CounterModel().IncrementCounter(CommonManager.Counter_GetLoggedInToday_Name());
                         loginSuccess = true;
                     }
                     else
@@ -260,6 +306,34 @@ namespace TEST_ASP_ALPHA_1.Models
 
             return validateSuccess;
         }
+
+        public int Count_GetTotalActiveUsersCount()
+        {
+            try
+            {
+                using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+                {
+                    int count = 0;
+                    StringBuilder sbSqlString = new StringBuilder();
+                    sbSqlString.Append("SELECT COUNT(1) AS count FROM customers WHERE active=1");
+
+                    string sqlString = sbSqlString.ToString();
+                    using (MySqlCommand com = new MySqlCommand(sqlString, con))
+                    {
+                        MySqlDataReader dr = com.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            count = Convert.ToInt32(dr["count"]);
+                        }
+                    }
+                    return count;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         
         #endregion
 
@@ -287,6 +361,9 @@ namespace TEST_ASP_ALPHA_1.Models
             returnOb.password = dr["password"].ToString();
             returnOb.registeredDate = Convert.ToDateTime(dr["registered_date"]);
             returnOb.active = Convert.ToBoolean(Convert.ToInt32(dr["active"].ToString()));
+            var lastLogged = dr["last_logged"];
+            if (lastLogged != System.DBNull.Value)
+                returnOb.lastLoggedDate = Convert.ToDateTime(dr["last_logged"]);
 
             return returnOb;
         }

@@ -46,6 +46,7 @@ namespace TEST_ASP_ALPHA_1.Common
         public string password { get; set; }
         public DateTime registeredDate { get; set; }
         public bool active { get; set; }
+        public DateTime lastLoggedDate { get; set; }
     }
 
     public class PurchaseItemObject
