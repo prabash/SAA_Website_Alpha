@@ -62,6 +62,18 @@ namespace TEST_ASP_ALPHA_1
                     }
 
                     productDescription.InnerText = itemDetails.description;
+                    btnAddToCart.Attributes["onclick"] = "AddToCart(" + itemDetails.Id + ",'" + itemDetails.title + "');";
+
+                    if (itemDetails.onSale)
+                    {
+                        divItemStatus.Attributes["class"] = "sale-label sale-top-left";
+                        divItemStatus.InnerText = "Sale";
+                    }
+                    else
+                    {
+                        divItemStatus.Attributes["class"] = "new-label new-top-left";
+                        divItemStatus.InnerText = "New";
+                    }
 
                     GetRelatedItemsGridDetails(Convert.ToInt32(id), currentItemType);
                 }
