@@ -75,4 +75,15 @@ namespace TEST_ASP_ALPHA_1.Common
         public double CartTotal { get; set; }
         public string CartStatus { get; set; }
     }
+
+    public class CustomerCommentObject
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string EmailAddress { get; set; }
+        public string TelephoneNo { get; set; }
+        public string Subject { get; set; }
+        public string Comment { get; set; }
+        public DateTime Date { get; set; }
+    }
 }

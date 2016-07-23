@@ -27,17 +27,27 @@ namespace TEST_ASP_ALPHA_1
             {
                 var name = dfnFirstname.Value;
                 var email = dfnEmail.Value;
-                var company = dfnCompany.Value;
                 var telephone = dfnTelephone.Value;
-                var address = dfnAddress.Value;
+                var subject = dfnSubject.Value;
                 var comment = dfnComment.Value;
-                new CustCommentsModel().SaveComment(name, email, company, telephone, address, comment);
+                new CustCommentsModel().SaveCustComment(name, email, telephone, subject, comment);
+                
+                ClearFields();
                 successBox.Visible = true;
             }
             catch (Exception)
             {
                 errorBox.Visible = true;
             }
+        }
+
+        private void ClearFields()
+        {
+            dfnFirstname.Value = String.Empty;
+            dfnEmail.Value = String.Empty;
+            dfnTelephone.Value = String.Empty;
+            dfnSubject.Value = String.Empty;
+            dfnComment.Value = String.Empty;
         }
     }
 }

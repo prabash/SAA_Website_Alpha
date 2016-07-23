@@ -44,20 +44,15 @@
                                             </li>
                                             <li>
                                                 <div class="input-box">
-                                                    <label for="company">Company <span class="required" style="visibility:hidden">*</span> </label>
+                                                    <label for="email">Telephone</label>
                                                     <br>
-                                                    <input type="text" Id="dfnCompany" name="billing[company]" value="" title="Company" class="input-text" runat="server" >
-                                                </div>
-                                                <div class="input-box">
-                                                    <label for="email">Telephone <span class="required">*</span></label>
-                                                    <br>
-                                                    <input type="number" name="billing[telephone]" Id="dfnTelephone" value="" title="Telephone" class="input-text" runat="server" required>
+                                                    <input type="number" name="billing[telephone]" Id="dfnTelephone" value="" title="Telephone" class="input-text" runat="server">
                                                 </div>
                                             </li>
                                             <li>
-                                                <label for="address">Address <span class="required">*</span></label>
+                                                <label for="address">Subject <span class="required">*</span></label>
                                                 <br>
-                                                <input type="text" title="Street Address" name="billing[address]" Id="dfnAddress" value="" class="input-text required-entry" runat="server" required>
+                                                <input type="text" title="Subject" name="billing[subject]" Id="dfnSubject" value="" class="input-text required-entry" runat="server" required>
                                             </li>
                                             <li class="">
                                                 <label>Comment<em class="required">*</em></label>

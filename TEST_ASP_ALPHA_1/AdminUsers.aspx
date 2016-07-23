@@ -12,7 +12,7 @@
             <div class="row">
                 <ul>
                     <li class="home"><a title="Go to Home Page" href="AdminDashboard.aspx">Home</a><span>&raquo;</span></li>
-                    <li class="Users">Users</a><span>&raquo;</span></li>
+                    <li class="Users"><a>Users</a><span>&raquo;</span></li>
                     <li class="category13"><strong>User Details</strong></li>
                 </ul>
             </div>
@@ -117,7 +117,7 @@
             autowidth: true,
             ignoreCase: true,
             pager: '#jQGridDemoPager',
-            sortname: 'id',
+            sortname: 'Id',
             viewrecords: true,
             sortorder: 'desc',
             caption: "User Details",

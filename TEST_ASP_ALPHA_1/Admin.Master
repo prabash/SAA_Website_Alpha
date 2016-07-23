@@ -168,7 +168,12 @@
                                                 </ul>
                                             </li>
                                             <li class="level0 nav-2 level-top parent"><a href="AdminItems.aspx" class="level-top"><span>Items</span> </a></li>
-                                            <li class="level0 nav-3 level-top parent"><a href="Contact.aspx" class="level-top"><span>Users</span> </a></li>
+                                            <li class="level0 nav-3 level-top parent"><a href="#" class="level-top"><span>Users</span> </a>
+                                                <ul class="level0">
+                                                    <li class="level1 nav-3-2 parent"><a href="AdminUsers.aspx"><span>User Details</span> </a></li>
+                                                    <li class="level1 nav-3-1 first parent"><a href="AdminUserQueries.aspx"><span>User Queries</span> </a></li>
+                                                </ul>
+                                            </li>
                                             <li class="level0 nav-4 level-top parent"><a href="Contact.aspx" class="level-top"><span>Sales</span> </a></li>
                                         </ul>
                                     </li>
@@ -187,7 +192,12 @@
                             </ul>
                         </li>
                         <li class="level0 nav-5 level-top first"><a runat="server" href="AdminItems.aspx" class="level-top"><span>Items</span> </a></li>
-                        <li class="level0 nav-7 level-top parent"><a runat="server" href="Contact.aspx" class="level-top"><span>Users</span> </a></li>
+                        <li class="level0 parent drop-menu"><a href="#"><span>Users</span> </a>
+                            <ul style="display: none;" class="level1">
+                                <li class="level1 nav-7-2"><a href="AdminUsers.aspx"><span>User Details</span> </a></li>
+                                <li class="level1 first"><a href="AdminUserQueries.aspx"><span>User Queries</span></a></li>
+                            </ul>
+                        </li>
                         <li class="level0 nav-8 level-top parent"><a runat="server" href="Contact.aspx" class="level-top"><span>Sales</span> </a></li>
                     </ul>
                     <div id="form-search" class="search-bar">

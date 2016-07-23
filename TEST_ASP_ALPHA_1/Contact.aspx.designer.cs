@@ -40,15 +40,6 @@ namespace TEST_ASP_ALPHA_1 {
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl dfnEmail;
         
         /// <summary>
-        /// dfnCompany control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText dfnCompany;
-        
-        /// <summary>
         /// dfnTelephone control.
         /// </summary>
         /// <remarks>
@@ -58,13 +49,13 @@ namespace TEST_ASP_ALPHA_1 {
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl dfnTelephone;
         
         /// <summary>
-        /// dfnAddress control.
+        /// dfnSubject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText dfnAddress;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText dfnSubject;
         
         /// <summary>
         /// dfnComment control.
