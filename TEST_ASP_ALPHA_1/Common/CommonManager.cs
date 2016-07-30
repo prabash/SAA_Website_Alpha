@@ -255,7 +255,11 @@ namespace TEST_ASP_ALPHA_1.Common
             return status.Split('|')[2];
         }
 
-
+        public static string Status_GetClosedItemName()
+        {
+            var status = ConfigurationManager.AppSettings["ItemStatuses"];
+            return status.Split('|')[3];
+        }
         #endregion
 
         #region Colors
@@ -276,6 +280,12 @@ namespace TEST_ASP_ALPHA_1.Common
         {
             var colors = ConfigurationManager.AppSettings["ItemSatatusColors"];
             return colors.Split('|')[2];
+        }
+
+        public static string Colors_GetItemStatusColorClosed()
+        {
+            var colors = ConfigurationManager.AppSettings["ItemSatatusColors"];
+            return colors.Split('|')[3];
         }
 
         #endregion

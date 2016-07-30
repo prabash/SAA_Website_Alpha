@@ -44,7 +44,8 @@ namespace TEST_ASP_ALPHA_1.Common
         customerEmail,
         customerId,
         purchCartId,
-        purchDate
+        purchDate,
+        purchId
     }
 
     public enum PurchItemOrderBy
@@ -60,7 +61,8 @@ namespace TEST_ASP_ALPHA_1.Common
         customerEmail,
         customerId,
         purchDate,
-        totalValue
+        totalValue,
+        cartId
     }
 
     public enum CartOrderBy
@@ -69,5 +71,14 @@ namespace TEST_ASP_ALPHA_1.Common
         purchDateDesc,
         OrderIdAsc,
         OrderIdDesc
+    }
+
+    public enum ItemStatus
+    {
+        New,
+        Delivered,
+        Cancelled,
+        Closed,
+        All
     }
 }

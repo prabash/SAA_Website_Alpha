@@ -120,14 +120,13 @@
             multiboxonly: true,
             editurl: 'Handlers/AdminUserQueriesHandler.ashx',
             onSelectRow: function (id) {
-
                 var sel_id = $('#jQGridDemo').jqGrid('getGridParam', 'selrow');
                 var subject = $('#jQGridDemo').jqGrid('getCell', sel_id, 'Subject');
                 var comment = $('#jQGridDemo').jqGrid('getCell', sel_id, 'Comment');
                 var email = $('#jQGridDemo').jqGrid('getCell', sel_id, 'EmailAddress');
-                $('#txtCommSubject').val(subject)
-                $('#txtComment').val(comment)
-                $('#txtCustEmail').val(email)
+                $('#txtCommSubject').val(subject);
+                $('#txtComment').val(comment);
+                $('#txtCustEmail').val(email);
             }
         });
 

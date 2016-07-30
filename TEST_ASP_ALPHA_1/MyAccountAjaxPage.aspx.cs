@@ -118,7 +118,7 @@ namespace TEST_ASP_ALPHA_1
         {
             try
             {
-                new PurchItemModel().CancelOrder(Convert.ToInt32(purchId));
+                new PurchItemModel().UpdateItemStatus(Convert.ToInt32(purchId), ItemStatus.Cancelled);
             }
             catch (Exception ex)
             {

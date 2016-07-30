@@ -41,7 +41,7 @@ namespace TEST_ASP_ALPHA_1.Models
                     }
                 }
                 cartOb.Items.ForEach(rec => rec.PurchCartId = Convert.ToInt32(cartId));
-                new PurchItemModel().SavePurchaseItems(cartOb.Items);
+                new PurchItemModel().AddPurchaseItems(cartOb.Items);
             }
             catch (Exception ex)
             {
@@ -77,6 +77,9 @@ namespace TEST_ASP_ALPHA_1.Models
                         break;
                     case CartGetType.purchDate:
                         sbSqlString.Append("pc.purchased_date BETWEEN @fromPurchDate AND @toPurchDate ");
+                        break;
+                    case CartGetType.cartId:
+                        sbSqlString.Append("pc.id = @purchCartId ");
                         break;
                     default:
                         break;
@@ -124,6 +127,9 @@ namespace TEST_ASP_ALPHA_1.Models
                             com.Parameters.AddWithValue("@fromPurchDate", fromPurchDate);
                             com.Parameters.AddWithValue("@toPurchDate", toPurchDate);
                             break;
+                        case CartGetType.cartId:
+                            com.Parameters.AddWithValue("@purchCartId", purchCartId);
+                            break;
                         default:
                             break;
                     }
@@ -138,6 +144,115 @@ namespace TEST_ASP_ALPHA_1.Models
             return returnList;
         }
 
+        public List<SalesCartObject> GetSalesCartDetails(ItemStatus cartStatus, DateTime? fromPurchDate = null, DateTime? toPurchDate = null)
+        {
+            List<SalesCartObject> returnList = new List<SalesCartObject>();
+            using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+            {
+                StringBuilder sbSqlString = new StringBuilder();
+                sbSqlString.Append("SELECT pc.id cart_id, cus.id cust_id, cus.name, pc.purchased_date, count(pi.item_id) items, pc.cart_status ");
+                sbSqlString.Append("FROM purchase_items pi, purchase_cart pc, items it, customers cus ");
+                sbSqlString.Append("WHERE pi.purchase_cart_id = pc.id ");
+                sbSqlString.Append("AND pi.item_id = it.id ");
+                sbSqlString.Append("AND pc.cust_id = cus.id ");
+
+                if (cartStatus != ItemStatus.All)
+                    sbSqlString.Append("AND pc.cart_status = @cartStatus ");
+
+                if (fromPurchDate != null || toPurchDate != null)
+                {
+                    if (fromPurchDate != null && toPurchDate == null)
+                        sbSqlString.Append("AND pc.purchased_date >= @fromPurchDate ");
+                    else if (fromPurchDate == null && toPurchDate != null)
+                        sbSqlString.Append("AND pc.purchased_date <= @toPurchDate ");
+                    else if (fromPurchDate != null && toPurchDate != null)
+                        sbSqlString.Append("AND pc.purchased_date BETWEEN @fromPurchDate AND @toPurchDate ");
+                }
+
+                sbSqlString.Append("GROUP BY pc.purchased_date ");
+                sbSqlString.Append("ORDER BY pc.purchased_date DESC");
+
+                string sqlString = sbSqlString.ToString();
+                using (MySqlCommand com = new MySqlCommand(sqlString, con))
+                {
+                    switch (cartStatus)
+                    {
+                        case ItemStatus.New:
+                            com.Parameters.AddWithValue("@cartStatus", CommonManager.Status_GetNewItemName());
+                            break;
+                        case ItemStatus.Delivered:
+                            com.Parameters.AddWithValue("@cartStatus", CommonManager.Status_GetDeliveredItemName());
+                            break;
+                        case ItemStatus.Cancelled:
+                            com.Parameters.AddWithValue("@cartStatus", CommonManager.Status_GetCancelledItemName());
+                            break;
+                        case ItemStatus.Closed:
+                            com.Parameters.AddWithValue("@cartStatus", CommonManager.Status_GetClosedItemName());
+                            break;
+                        default:
+                            break;
+                    }
+
+                    if (fromPurchDate != null)
+                        com.Parameters.AddWithValue("@fromPurchDate", fromPurchDate);
+                    if (toPurchDate != null)
+                        com.Parameters.AddWithValue("@toPurchDate", toPurchDate);
+
+                    MySqlDataReader dr = com.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        returnList.Add(GetInfoAddedSalesCartObject(dr));
+                    }
+                }
+            }
+
+            return returnList;
+        }
+
+        public void UpdateCartStatus(int id, ItemStatus status)
+        {
+            MySqlTransaction transaction = null;
+            try
+            {
+                using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+                {
+                    transaction = con.BeginTransaction();
+                    string sqlString = @"UPDATE purchase_cart SET cart_status=@status WHERE id=@id";
+
+                    using (MySqlCommand com = new MySqlCommand(sqlString, con))
+                    {
+                        com.Transaction = transaction;
+                        switch (status)
+                        {
+                            case ItemStatus.New:
+                                com.Parameters.AddWithValue("@status", CommonManager.Status_GetNewItemName());
+                                break;
+                            case ItemStatus.Delivered:
+                                com.Parameters.AddWithValue("@status", CommonManager.Status_GetDeliveredItemName());
+                                break;
+                            case ItemStatus.Cancelled:
+                                com.Parameters.AddWithValue("@status", CommonManager.Status_GetCancelledItemName());
+                                break;
+                            case ItemStatus.Closed:
+                                com.Parameters.AddWithValue("@status", CommonManager.Status_GetClosedItemName());
+                                break;
+                            default:
+                                break;
+                        }
+                        com.Parameters.AddWithValue("@id", id);
+                        com.ExecuteNonQuery();
+
+                        transaction.Commit();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         #endregion
 
         #region Objects
@@ -148,7 +263,7 @@ namespace TEST_ASP_ALPHA_1.Models
             cartOb.CartId = Convert.ToInt32(dr["id"]);
             cartOb.CustId = Convert.ToInt32(dr["cust_id"]);
             cartOb.CustEmailAddress = dr["cust_email_address"].ToString();
-            cartOb.PurchaseDate = Convert.ToDateTime(dr["purchase_cart"]);
+            cartOb.PurchaseDate = Convert.ToDateTime(dr["purchased_date"]);
             cartOb.CartDiscount = dr["cart_discount"] != null ? Convert.ToDouble(dr["cart_discount"]) : 0.00;
             cartOb.CartDelivery = dr["car_delivery"] != null ? Convert.ToDouble(dr["car_delivery"]) : 0.00;
             cartOb.CartTotal = dr["cart_total"] != null ? Convert.ToDouble(dr["cart_total"]) : 0.00;
@@ -157,6 +272,19 @@ namespace TEST_ASP_ALPHA_1.Models
 
             return cartOb;
         }
+
+        private SalesCartObject GetInfoAddedSalesCartObject(MySqlDataReader dr)
+        {
+            var cartOb = new SalesCartObject();
+            cartOb.CartId = Convert.ToInt32(dr["cart_id"]);
+            cartOb.CustId = Convert.ToInt32(dr["cust_id"]);
+            cartOb.CustName = dr["name"].ToString();
+            cartOb.PurchasedDate = Convert.ToDateTime(dr["purchased_date"]);
+            cartOb.PurchasedItems = dr["items"] != null ? Convert.ToInt32(dr["items"]) : 0;
+            cartOb.CartStatus = dr["cart_status"] != null ? dr["cart_status"].ToString() : "";
+
+            return cartOb;
+         }
 
         #endregion
     }

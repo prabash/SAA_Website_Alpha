@@ -12,7 +12,7 @@ namespace TEST_ASP_ALPHA_1.Models
     public class PurchItemModel
     {
         #region Set
-        public void SavePurchaseItems(List<PurchaseItemObject> purchItems)
+        public void AddPurchaseItems(List<PurchaseItemObject> purchItems)
         {
             MySqlTransaction transaction = null;
             try
@@ -57,7 +57,7 @@ namespace TEST_ASP_ALPHA_1.Models
             }
         }
 
-        public void CancelOrder(int id)
+        public void UpdateItemStatus(int id, ItemStatus status)
         {
             MySqlTransaction transaction = null;
             try
@@ -70,15 +70,74 @@ namespace TEST_ASP_ALPHA_1.Models
                     using (MySqlCommand com = new MySqlCommand(sqlString, con))
                     {
                         com.Transaction = transaction;
-
-                        com.Parameters.AddWithValue("@status", CommonManager.Status_GetCancelledItemName());
+                        switch (status)
+                        {
+                            case ItemStatus.New:
+                                com.Parameters.AddWithValue("@status", CommonManager.Status_GetNewItemName());
+                                break;
+                            case ItemStatus.Delivered:
+                                com.Parameters.AddWithValue("@status", CommonManager.Status_GetDeliveredItemName());
+                                break;
+                            case ItemStatus.Cancelled:
+                                com.Parameters.AddWithValue("@status", CommonManager.Status_GetCancelledItemName());
+                                break;
+                            default:
+                                break;
+                        }
                         com.Parameters.AddWithValue("@id", id);
                         com.ExecuteNonQuery();
 
                         transaction.Commit();
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                UpdateCartStatusByItem(id, status);
+            }
+        }
 
+        private void UpdateCartStatusByItem(int purchItemId, ItemStatus status)
+        {
+            try
+            {
+                var currentStatus = "";
+                bool allItemsInStatus = false;
+
+                switch (status)
+                {
+                    case ItemStatus.New:
+                        currentStatus = CommonManager.Status_GetNewItemName();
+                        break;
+                    case ItemStatus.Delivered:
+                        currentStatus = CommonManager.Status_GetDeliveredItemName();
+                        break;
+                    case ItemStatus.Cancelled:
+                        currentStatus = CommonManager.Status_GetCancelledItemName();
+                        break;
+                    default:
+                        break;
+                }
+
+                var purchItem = GetPurchItemDetails(PurchItemGetType.purchId, 0, null, 0, null, null, purchItemId).First();
+                var cartDetails = new PurchCartModel().GetCartDetails(CartGetType.cartId, 0, null, purchItem.PurchCartId).First();
+                foreach (var item in cartDetails.Items)
+                {
+                    if (item.Status == currentStatus)
+                        allItemsInStatus = true;
+                    else
+                    {
+                        allItemsInStatus = false;
+                        break;
+                    }
+                }
+
+                if (allItemsInStatus)
+                    new PurchCartModel().UpdateCartStatus(cartDetails.CartId, status);
             }
             catch (Exception ex)
             {
@@ -90,7 +149,7 @@ namespace TEST_ASP_ALPHA_1.Models
 
         #region Get
 
-        public List<PurchaseItemObject> GetPurchItemDetails(PurchItemGetType getType, int custId = 0, string custEmail = null, int purchCartId = 0, DateTime? fromPurchDate = null, DateTime? toPurchDate = null, PurchItemOrderBy orderBy = PurchItemOrderBy.purchDateAsc, int limit = 0, int currentPage = 0)
+        public List<PurchaseItemObject> GetPurchItemDetails(PurchItemGetType getType, int custId = 0, string custEmail = null, int purchCartId = 0, DateTime? fromPurchDate = null, DateTime? toPurchDate = null, int purchId = -1, PurchItemOrderBy orderBy = PurchItemOrderBy.purchDateAsc, int limit = 0, int currentPage = 0)
         {
             List<PurchaseItemObject> returnList = new List<PurchaseItemObject>();
             using (MySqlConnection con = ConnectionManager.GetOpenConnection())
@@ -115,6 +174,9 @@ namespace TEST_ASP_ALPHA_1.Models
                         break;
                     case PurchItemGetType.purchDate:
                         sbSqlString.Append("pc.purchased_date BETWEEN @fromPurchDate AND @toPurchDate ");
+                        break;
+                    case PurchItemGetType.purchId:
+                        sbSqlString.Append("pi.id = @purchId ");
                         break;
                     default:
                         break;
@@ -160,6 +222,9 @@ namespace TEST_ASP_ALPHA_1.Models
                         case PurchItemGetType.purchDate:
                             com.Parameters.AddWithValue("@fromPurchDate", fromPurchDate);
                             com.Parameters.AddWithValue("@toPurchDate", toPurchDate);
+                            break;
+                        case PurchItemGetType.purchId:
+                            com.Parameters.AddWithValue("@purchId", purchId);
                             break;
                         default:
                             break;

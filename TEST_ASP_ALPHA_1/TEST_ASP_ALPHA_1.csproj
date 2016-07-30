@@ -167,6 +167,8 @@
     <Content Include="AdminDashboard.aspx" />
     <Content Include="AdminItems.aspx" />
     <Content Include="AdminSalesDashboard.aspx" />
+    <Content Include="AdminSalesDetails.aspx" />
+    <Content Include="AdminSalesLedger.aspx" />
     <Content Include="AdminSlideshowIndex.aspx" />
     <Content Include="AdminSlideshowItems.aspx" />
     <Content Include="AdminUserQueries.aspx" />
@@ -361,6 +363,8 @@
     <Content Include="Handlers\AdminItemsHandler.ashx" />
     <Content Include="Handlers\AdminUserDetailsHandler.ashx" />
     <Content Include="Handlers\AdminUserQueriesHandler.ashx" />
+    <Content Include="Handlers\AdminSalesMasterHandler.ashx" />
+    <Content Include="Handlers\AdminSalesDetailsHandler.ashx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="ProductDetails.aspx" />
     <Content Include="products_images\avengers-alt-img.png" />
@@ -498,6 +502,20 @@
     </Compile>
     <Compile Include="AdminSalesDashboard.aspx.designer.cs">
       <DependentUpon>AdminSalesDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminSalesDetails.aspx.cs">
+      <DependentUpon>AdminSalesDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminSalesDetails.aspx.designer.cs">
+      <DependentUpon>AdminSalesDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminSalesLedger.aspx.cs">
+      <DependentUpon>AdminSalesLedger.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminSalesLedger.aspx.designer.cs">
+      <DependentUpon>AdminSalesLedger.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminSlideshowIndex.aspx.cs">
       <DependentUpon>AdminSlideshowIndex.aspx</DependentUpon>
@@ -684,6 +702,12 @@
     </Compile>
     <Compile Include="Handlers\AdminItemsHandler.ashx.cs">
       <DependentUpon>AdminItemsHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\AdminSalesDetailsHandler.ashx.cs">
+      <DependentUpon>AdminSalesDetailsHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\AdminSalesMasterHandler.ashx.cs">
+      <DependentUpon>AdminSalesMasterHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Handlers\AdminSlideshowIndexHandler.ashx.cs">
       <DependentUpon>AdminSlideshowIndexHandler.ashx</DependentUpon>

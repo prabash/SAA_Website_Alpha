@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminSalesDashboard.aspx.cs" Inherits="TEST_ASP_ALPHA_1.AdminSalesDashboard" MasterPageFile="~/Admin.Master" Title="Sales" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminSalesDashboard.aspx.cs" Inherits="TEST_ASP_ALPHA_1.AdminSalesDashboard" MasterPageFile="~/Admin.Master" Title="Sales Dashboard" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <script src="scripts/Chart.js" type="text/javascript"></script>
@@ -89,7 +89,7 @@
                             <ul>
                                 <li class="current"><a href="#">Sales Dashboard</a></li>
                                 <li><a href="AdminSalesDetails.aspx">Sales Details</a></li>
-                                <li><a href="AdminSalesDetails.aspx">Sales Ledger</a></li>
+                                <li><a href="AdminSalesLedger.aspx">Sales Ledger</a></li>
                             </ul>
                         </div>
                     </div>

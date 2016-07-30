@@ -53,7 +53,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <%var purchItems = new PurchItemModel().GetPurchItemDetails(PurchItemGetType.customerEmail, 0, new AESManager().EncryptToString(Session[CommonManager.GetCustEmailSessionName()].ToString()), 0, null, null, PurchItemOrderBy.OrderIdDesc, currentViewPerPage, (currentPage - 1) * currentViewPerPage);
+                                            <%var purchItems = new PurchItemModel().GetPurchItemDetails(PurchItemGetType.customerEmail, 0, new AESManager().EncryptToString(Session[CommonManager.GetCustEmailSessionName()].ToString()), 0, null, null, 0, PurchItemOrderBy.OrderIdDesc, currentViewPerPage, (currentPage - 1) * currentViewPerPage);
                                               if (purchItems.Count > 0)
                                               {
                                                   var colorNew = CommonManager.Colors_GetItemStatusColorNew();

@@ -168,13 +168,19 @@
                                                 </ul>
                                             </li>
                                             <li class="level0 nav-2 level-top parent"><a href="AdminItems.aspx" class="level-top"><span>Items</span> </a></li>
-                                            <li class="level0 nav-3 level-top parent"><a href="#" class="level-top"><span>Users</span> </a>
+                                            <li class="level0 nav-3 level-top parent"><a href="AdminUsers.aspx" class="level-top"><span>Users</span> </a>
                                                 <ul class="level0">
                                                     <li class="level1 nav-3-2 parent"><a href="AdminUsers.aspx"><span>User Details</span> </a></li>
                                                     <li class="level1 nav-3-1 first parent"><a href="AdminUserQueries.aspx"><span>User Queries</span> </a></li>
                                                 </ul>
                                             </li>
-                                            <li class="level0 nav-4 level-top parent"><a href="Contact.aspx" class="level-top"><span>Sales</span> </a></li>
+                                            <li class="level0 nav-4 level-top parent"><a href="AdminSalesDashboard.aspx" class="level-top"><span>Sales</span> </a>
+                                                <ul class="level0">
+                                                    <li class="level1 nav-4-3 parent"><a href="AdminSalesDashboard.aspx"><span>Sales Dashboard</span> </a></li>
+                                                    <li class="level1 nav-4-2 first parent"><a href="AdminSalesDetails.aspx"><span>Sales Details</span> </a></li>
+                                                    <li class="level1 nav-4-1 first parent"><a href="AdminSalesLedger.aspx"><span>Sales Ledger</span> </a></li>
+                                                </ul>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -192,13 +198,19 @@
                             </ul>
                         </li>
                         <li class="level0 nav-5 level-top first"><a runat="server" href="AdminItems.aspx" class="level-top"><span>Items</span> </a></li>
-                        <li class="level0 parent drop-menu"><a href="#"><span>Users</span> </a>
+                        <li class="level0 parent drop-menu"><a href="AdminUsers.aspx"><span>Users</span> </a>
                             <ul style="display: none;" class="level1">
                                 <li class="level1 nav-7-2"><a href="AdminUsers.aspx"><span>User Details</span> </a></li>
                                 <li class="level1 first"><a href="AdminUserQueries.aspx"><span>User Queries</span></a></li>
                             </ul>
                         </li>
-                        <li class="level0 nav-8 level-top parent"><a runat="server" href="Contact.aspx" class="level-top"><span>Sales</span> </a></li>
+                        <li class="level0 nav-8 drop-menu"><a runat="server" href="AdminSalesDashboard.aspx" class="level-top"><span>Sales</span> </a>
+                            <ul style="display: none;" class="level1">
+                                <li class="level1 nav-8-3"><a href="AdminSalesDashboard.aspx"><span>Sales Dashboard</span> </a></li>
+                                <li class="level1 nav-8-2 first"><a href="AdminSalesDetails.aspx"><span>Sales Details</span> </a></li>
+                                <li class="level1 nav-8-1 first"><a href="AdminSalesLedger.aspx"><span>Sales Ledger</span> </a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <div id="form-search" class="search-bar">
                         <form id="search_mini_form">
@@ -342,7 +354,7 @@
         <!-- End Footer -->
     </div>
     <!-- JavaScript -->
-    
+
     <script type="text/javascript">
         //<![CDATA[
         jQuery(function () {
@@ -357,6 +369,6 @@
     <script>
         new UISearch(document.getElementById('form-search'));
     </script>
-    
+
 </body>
 </html>
