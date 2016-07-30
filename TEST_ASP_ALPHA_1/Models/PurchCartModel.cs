@@ -125,7 +125,7 @@ namespace TEST_ASP_ALPHA_1.Models
                             break;
                         case CartGetType.purchDate:
                             com.Parameters.AddWithValue("@fromPurchDate", fromPurchDate);
-                            com.Parameters.AddWithValue("@toPurchDate", toPurchDate);
+                            com.Parameters.AddWithValue("@toPurchDate", ((DateTime)toPurchDate).AddDays(1));
                             break;
                         case CartGetType.cartId:
                             com.Parameters.AddWithValue("@purchCartId", purchCartId);

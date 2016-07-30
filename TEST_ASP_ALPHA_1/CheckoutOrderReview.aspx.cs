@@ -68,6 +68,7 @@ namespace TEST_ASP_ALPHA_1
                         var purchItem = new PurchaseItemObject();
                         purchItem.ItemId = item.Id;
                         purchItem.ItemQuantity = cart.Items.First(rec => rec.ItemId == item.Id).ItemQuantity;
+                        purchItem.CostPerItem = item.currentPrice;
                         purchItem.ItemTitle = item.title;
                         purchItem.PurchCartId = 0;
                         purchItem.PurchDate = DateTime.Now;

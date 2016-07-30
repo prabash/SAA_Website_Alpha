@@ -172,7 +172,7 @@
             sortorder: 'desc',
             sortname: 'PurchasedDate',
             viewrecords: true,
-            caption: "New Sales Details",
+            caption: "Sales Details",
             editurl: 'Handlers/AdminSalesMasterHandler.ashx',
             onSelectRow: function (id) {
                 var sel_id = $('#jQGridDemo').jqGrid('getGridParam', 'selrow');

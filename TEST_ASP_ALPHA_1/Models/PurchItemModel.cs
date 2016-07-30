@@ -221,7 +221,7 @@ namespace TEST_ASP_ALPHA_1.Models
                             break;
                         case PurchItemGetType.purchDate:
                             com.Parameters.AddWithValue("@fromPurchDate", fromPurchDate);
-                            com.Parameters.AddWithValue("@toPurchDate", toPurchDate);
+                            com.Parameters.AddWithValue("@toPurchDate", ((DateTime)toPurchDate).AddDays(1));
                             break;
                         case PurchItemGetType.purchId:
                             com.Parameters.AddWithValue("@purchId", purchId);

@@ -365,6 +365,8 @@
     <Content Include="Handlers\AdminUserQueriesHandler.ashx" />
     <Content Include="Handlers\AdminSalesMasterHandler.ashx" />
     <Content Include="Handlers\AdminSalesDetailsHandler.ashx" />
+    <Content Include="Handlers\AdminSalesLedgerHandler.ashx" />
+    <Content Include="Handlers\AdminSalesLedgerDetailsHandler.ashx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="ProductDetails.aspx" />
     <Content Include="products_images\avengers-alt-img.png" />
@@ -705,6 +707,12 @@
     </Compile>
     <Compile Include="Handlers\AdminSalesDetailsHandler.ashx.cs">
       <DependentUpon>AdminSalesDetailsHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\AdminSalesLedgerDetailsHandler.ashx.cs">
+      <DependentUpon>AdminSalesLedgerDetailsHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\AdminSalesLedgerHandler.ashx.cs">
+      <DependentUpon>AdminSalesLedgerHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Handlers\AdminSalesMasterHandler.ashx.cs">
       <DependentUpon>AdminSalesMasterHandler.ashx</DependentUpon>
