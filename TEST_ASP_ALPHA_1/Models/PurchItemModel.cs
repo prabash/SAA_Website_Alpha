@@ -46,9 +46,10 @@ namespace TEST_ASP_ALPHA_1.Models
                             com.ExecuteNonQuery();
                         }
                         transaction.Commit();
+                        new CounterModel().IncrementCounter(CommonManager.Counter_GetPurchasedItemsToday_Name(), purchItems.Count);
+                        new CounterModel().IncrementCounter(CommonManager.Counter_GetPurchasedUsersToday_Name());
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -183,6 +184,50 @@ namespace TEST_ASP_ALPHA_1.Models
                 return 0;
         }
 
+        public string Chart_GetPurchasedItemByType(DateTime? fromPurchDate = null, DateTime? toPurchDate = null)
+        {
+            string chartData = "";
+            List<string> typesList = new List<string>();
+            List<string> countsList = new List<string>();
+
+            using (MySqlConnection con = ConnectionManager.GetOpenConnection())
+            {
+                StringBuilder sbSqlString = new StringBuilder();
+                sbSqlString.Append("SELECT it.type type, COUNT(pi.item_id) count ");
+                sbSqlString.Append("FROM purchase_items pi, purchase_cart pc, items it ");
+                sbSqlString.Append("WHERE pi.purchase_cart_id = pc.id ");
+                sbSqlString.Append("AND pi.item_id = it.id ");
+                if (fromPurchDate != null || toPurchDate != null)
+                {
+                    if (fromPurchDate != null && toPurchDate == null)
+                        sbSqlString.Append("AND pc.purchased_date >= @fromPurchDate ");
+                    else if (fromPurchDate == null && toPurchDate != null)
+                        sbSqlString.Append("AND pc.purchased_date <= @toPurchDate ");
+                    else if (fromPurchDate != null && toPurchDate != null)
+                        sbSqlString.Append("AND pc.purchased_date BETWEEN @fromPurchDate AND @toPurchDate ");
+                }
+                sbSqlString.Append("GROUP BY it.type ");
+
+                string sqlString = sbSqlString.ToString();
+                using (MySqlCommand com = new MySqlCommand(sqlString, con))
+                {
+                    if (fromPurchDate != null)
+                        com.Parameters.AddWithValue("@fromPurchDate", fromPurchDate);
+                    if (toPurchDate != null)
+                        com.Parameters.AddWithValue("@toPurchDate", toPurchDate);
+                    
+                    MySqlDataReader dr = com.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        typesList.Add(dr["type"].ToString());
+                        countsList.Add(dr["count"].ToString());
+                    }
+                }
+            }
+            chartData = FormatListForChart(typesList) + "|" + FormatListForChart(countsList);
+            return chartData;
+        }
+
         #endregion
 
         #region Objects
@@ -201,6 +246,23 @@ namespace TEST_ASP_ALPHA_1.Models
             purchItemOb.PurchDate = dr["purchased_date"] != null ? Convert.ToDateTime(dr["purchased_date"]) : Convert.ToDateTime("00/00/0000");
             purchItemOb.ItemTitle = dr["title"] != null ? dr["title"].ToString() : "";
             return purchItemOb;
+        }
+
+        private string FormatListForChart(List<string> list)
+        {
+            var returnStr = new StringBuilder();
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (i < list.Count - 1)
+                {
+                    returnStr.Append(list[i] + ",");
+                }
+                else if (i == list.Count - 1)
+                {
+                    returnStr.Append(list[i]);
+                }
+            }
+            return returnStr.ToString();
         }
 
         #endregion

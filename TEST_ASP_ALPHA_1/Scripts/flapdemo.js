@@ -152,5 +152,6 @@ $(document).ready(function () {
 
     new FlapDemo('input.disTotalActiveUsers', '#txtTotalActiveUsers', '#btnTotalActiveUsers');
     new FlapDemo('input.disLoggedInToday', '#txtLoggedInToday', '#btnLoggedInToday');
+    new FlapDemo('input.disPurchasedItemsToday', '#txtPurchasedItemsToday', '#btnPurchasedItemsToday');
 });
 

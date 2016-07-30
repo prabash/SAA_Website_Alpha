@@ -166,6 +166,7 @@
     <Content Include="Activation.aspx" />
     <Content Include="AdminDashboard.aspx" />
     <Content Include="AdminItems.aspx" />
+    <Content Include="AdminSalesDashboard.aspx" />
     <Content Include="AdminSlideshowIndex.aspx" />
     <Content Include="AdminSlideshowItems.aspx" />
     <Content Include="AdminUserQueries.aspx" />
@@ -490,6 +491,13 @@
     </Compile>
     <Compile Include="AdminItems.aspx.designer.cs">
       <DependentUpon>AdminItems.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminSalesDashboard.aspx.cs">
+      <DependentUpon>AdminSalesDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminSalesDashboard.aspx.designer.cs">
+      <DependentUpon>AdminSalesDashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminSlideshowIndex.aspx.cs">
       <DependentUpon>AdminSlideshowIndex.aspx</DependentUpon>

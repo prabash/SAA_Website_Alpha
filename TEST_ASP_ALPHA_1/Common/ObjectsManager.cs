@@ -86,4 +86,11 @@ namespace TEST_ASP_ALPHA_1.Common
         public string Comment { get; set; }
         public DateTime Date { get; set; }
     }
+
+    public class CounterObject
+    {
+        public string CounterName { get; set; }
+        public int Count { get; set; }
+        public DateTime Date { get; set; }
+    }
 }

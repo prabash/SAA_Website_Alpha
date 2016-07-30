@@ -287,10 +287,21 @@ namespace TEST_ASP_ALPHA_1.Common
             return ConfigurationManager.AppSettings["Count_LoggedInToday"];
         }
 
+        public static string Counter_GetPurchasedUsersToday_Name()
+        {
+            return ConfigurationManager.AppSettings["Count_PurchasedUsersToday"];
+        }
+
+        public static string Counter_GetPurchasedItemsToday_Name()
+        {
+            return ConfigurationManager.AppSettings["Count_PurchasedItemsToday"];
+        }
+
         public static int Counter_GetRefreshTimeOut()
         {
             return Convert.ToInt32(ConfigurationManager.AppSettings["GetRefreshTimeOut"]);
         }
+
 
         #endregion
 

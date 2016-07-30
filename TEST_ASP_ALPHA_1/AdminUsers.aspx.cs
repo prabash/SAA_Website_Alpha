@@ -21,7 +21,7 @@ namespace TEST_ASP_ALPHA_1
         {
             try
             {
-                var loggedCountToday = new CounterModel().GetCounterValue(CommonManager.Counter_GetLoggedInToday_Name());
+                var loggedCountToday = new CounterModel().GetCounterValue(CommonManager.Counter_GetLoggedInToday_Name()).Count;
                 return loggedCountToday.ToString();
             }
             catch (Exception ex)

@@ -15,11 +15,20 @@ namespace TEST_ASP_ALPHA_1.Models
         {
             try
             {
-                int currentCount = GetCounterValue(counterName);
+                var counterOb  = GetCounterValue(counterName);
+                int currentCount = counterOb.Count;
+
+                DateTime currentDate = counterOb.Date;
+                if (currentDate.Date != DateTime.Today)
+                {
+                    ResetCounter(counterName);
+                    currentCount = 0;
+                }
+                    
                 int newCount = currentCount + incrementBy;
                 using (MySqlConnection con = ConnectionManager.GetOpenConnection())
                 {
-                    string sqlString = @"UPDATE system_counters SET count = @count WHERE counter_name = @counterName";
+                    string sqlString = @"UPDATE system_counters_per_day SET count = @count WHERE counter_name = @counterName";
 
                     using (MySqlCommand com = new MySqlCommand(sqlString, con))
                     {
@@ -42,10 +51,11 @@ namespace TEST_ASP_ALPHA_1.Models
             {
                 using (MySqlConnection con = ConnectionManager.GetOpenConnection())
                 {
-                    string sqlString = @"UPDATE system_counters SET count = @count WHERE counter_name = @counterName";
+                    string sqlString = @"UPDATE system_counters_per_day SET count = @count, date = @date WHERE counter_name = @counterName";
 
                     using (MySqlCommand com = new MySqlCommand(sqlString, con))
                     {
+                        com.Parameters.AddWithValue("@date", DateTime.Today);
                         com.Parameters.AddWithValue("@count", resetCount);
                         com.Parameters.AddWithValue("@counterName", counterName);
 
@@ -63,14 +73,14 @@ namespace TEST_ASP_ALPHA_1.Models
 
         #region Get
 
-        public int GetCounterValue(string counterName)
+        public CounterObject GetCounterValue(string counterName)
         {
             try
             {
-                int count = 0;
+                CounterObject returnOb = new CounterObject();
                 using (MySqlConnection con = ConnectionManager.GetOpenConnection())
                 {
-                    string sqlString = @"SELECT count FROM system_counters WHERE counter_name = @counterName";
+                    string sqlString = @"SELECT * FROM system_counters_per_day WHERE counter_name = @counterName";
 
                     using (MySqlCommand com = new MySqlCommand(sqlString, con))
                     {
@@ -79,16 +89,26 @@ namespace TEST_ASP_ALPHA_1.Models
                         MySqlDataReader dr = com.ExecuteReader();
                         while (dr.Read())
                         {
-                            count = Convert.ToInt32(dr["count"]);
+                            returnOb = GetCounterObject(dr);
                         }
                     }
                 }
-                return count;
+                return returnOb;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+        }
+
+        private CounterObject GetCounterObject(MySqlDataReader dr)
+        {
+            CounterObject returnOb = new CounterObject();
+            returnOb.CounterName = dr["counter_name"].ToString();
+            returnOb.Count = Convert.ToInt32(dr["count"]);
+            returnOb.Date = dr["date"] != System.DBNull.Value ? Convert.ToDateTime(dr["date"]) : Convert.ToDateTime("01/01/0001");
+
+            return returnOb;
         }
 
         #endregion
