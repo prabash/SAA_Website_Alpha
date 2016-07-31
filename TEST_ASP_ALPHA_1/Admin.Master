@@ -32,12 +32,6 @@
     <link rel="stylesheet" href="css/flexslider.css" type="text/css">
 
     <script src="JQGridReq/jquery-1.9.0.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/common.js"></script>
-    <script type="text/javascript" src="js/slider.js"></script>
-    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="js/jquery.flexslider.js"></script>
-    <script type="text/javascript" src="js/cloud-zoom.js"></script>
     <script src="JQGridReq/jquery.jqGrid.js" type="text/javascript"></script>
     <script src="JQGridReq/grid.locale-en.js" type="text/javascript"></script>
     <!-- DARK THEME -->
@@ -116,7 +110,7 @@
                                     <% }
                                        else
                                        { %>
-                                    <div class="myaccount"><a title="My Account" href="AdminAccount.aspx"><span class="hidden-xs">Change Password</span></a></div>
+                                    <div class="myaccount"><a title="My Account" href="AdminChangePassword.aspx"><span class="hidden-xs">Change Password</span></a></div>
                                     <% } %>
                                     <% if (Session[CommonManager.Session_GetAdminIdSessionName()] == null)
                                        { %>
@@ -356,6 +350,13 @@
         <!-- End Footer -->
     </div>
     <!-- JavaScript -->
+    
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/slider.js"></script>
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="js/jquery.flexslider.js"></script>
+    <script type="text/javascript" src="js/cloud-zoom.js"></script>
 
     <script type="text/javascript">
         //<![CDATA[
