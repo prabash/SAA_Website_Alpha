@@ -93,10 +93,10 @@
         </div>
     </div>
     <script>
-        Date.prototype.toDateInputValue = (function() {
+        Date.prototype.toDateInputValue = (function () {
             var local = new Date(this);
             local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-            return local.toJSON().slice(0,10);
+            return local.toJSON().slice(0, 10);
         });
 
         document.getElementById('dtStartDate_PurchCart').value = new Date().toDateInputValue();
@@ -112,13 +112,13 @@
             height: '300',
             colNames: ['Cart Id', 'Cust Email', 'Cart Status', 'Purchased Date', 'Cart Discount', 'Cart Delivery', 'Cart Total'],
             colModel: [
-                        { name: 'CartId', index: 'CartId', width: 150, stype: 'text', search: true, sorttype: "int", key: true, editable: false },
-                        { name: 'CustEmailAddress', index: 'CustEmailAddress', width: 300, search: true, stype: 'text', sortable: true, editable: false },
-                        { name: 'CartStatus', index: 'CartStatus', width: 300, search: true, stype: 'text', sortable: true, editable: true, formatter: fontFormatter, edittype: 'select', editoptions: { value: getPurchCartStatuses() } },
-                        { name: 'PurchaseDate', index: 'PurchaseDate', width: 400, search: true, stype: 'text', sortable: true, formatter: "date", formatoptions: { newformat: "d/m/Y H:i:s" }, sorttype: 'date' },
+                        { name: 'CartId', index: 'CartId', width: 100, stype: 'text', search: true, sorttype: "int", key: true, editable: false },
+                        { name: 'CustEmailAddress', index: 'CustEmailAddress', width: 450, search: true, stype: 'text', sortable: true, editable: false },
+                        { name: 'CartStatus', index: 'CartStatus', width: 200, search: true, stype: 'text', sortable: true, editable: true, formatter: fontFormatter, edittype: 'select', editoptions: { value: getPurchCartStatuses() } },
+                        { name: 'PurchaseDate', index: 'PurchaseDate', width: 300, search: true, stype: 'text', sortable: true, formatter: "date", formatoptions: { newformat: "d/m/Y H:i:s" }, sorttype: 'date' },
                         { name: 'CartDiscount', index: 'CartDiscount', width: 200, search: true, stype: 'text', sortable: true, editable: false },
                         { name: 'CartDelivery', index: 'CartDelivery', width: 200, search: true, stype: 'text', sortable: true, editable: false },
-                        { name: 'CartTotal', index: 'CartTotal', width: 300, search: true, stype: 'text', sortable: true, editable: false }
+                        { name: 'CartTotal', index: 'CartTotal', width: 200, search: true, stype: 'text', sortable: true, editable: false }
 
             ],
             rowNum: 10,
@@ -134,12 +134,12 @@
             caption: "Sales Ledger",
             subGrid: true,
             footerrow: true,
-            gridComplete: function() {
+            gridComplete: function () {
                 var $grid = $('#jQGridDemo');
                 var colSum = $grid.jqGrid('getCol', 'CartTotal', false, 'sum');
                 $grid.jqGrid('footerData', 'set', { 'CartTotal': colSum });
             },
-            subGridRowExpanded: function(subgrid_id, row_id) {
+            subGridRowExpanded: function (subgrid_id, row_id) {
                 //start of subgrid row expanded
                 var subgrid_table_id, pager_id;
                 subgrid_table_id = subgrid_id + "_t";
@@ -188,16 +188,16 @@
         function fontFormatter(cellValue, opts, rowObject) {
             switch (cellValue) {
                 case "<%=CommonManager.Status_GetNewItemName()%>":
-                    return '<span style="color:<%=CommonManager.Colors_GetItemStatusColorNew()%>">' + cellValue + '</span>';
+                    return '<span class="cellWithoutBackground" style="color:Black;background-color:<%=CommonManager.Colors_GetItemStatusColorNew()%>">' + cellValue + '</span>';
                     break;
                 case "<%=CommonManager.Status_GetDeliveredItemName()%>":
-                    return '<span style="color:<%=CommonManager.Colors_GetItemStatusColorDelivered()%>">' + cellValue + '</span>';
+                    return '<span class="cellWithoutBackground" style="color:Black;background-color:<%=CommonManager.Colors_GetItemStatusColorDelivered()%>">' + cellValue + '</span>';
                     break;
                 case "<%=CommonManager.Status_GetClosedItemName()%>":
-                    return '<span style="color:<%=CommonManager.Colors_GetItemStatusColorClosed()%>">' + cellValue + '</span>';
+                    return '<span class="cellWithoutBackground" style="color:Black;background-color:<%=CommonManager.Colors_GetItemStatusColorClosed()%>">' + cellValue + '</span>';
                     break;
                 case "<%=CommonManager.Status_GetCancelledItemName()%>":
-                    return '<span style="color:<%=CommonManager.Colors_GetItemStatusColorCancelled()%>">' + cellValue + '</span>';
+                    return '<span class="cellWithoutBackground" style="color:Black;background-color:<%=CommonManager.Colors_GetItemStatusColorCancelled()%>">' + cellValue + '</span>';
                     break;
             }
         };
@@ -228,4 +228,14 @@
             jQuery("#jQGridDemo").jqGrid('setGridParam', { url: newUrl, page: 1, datatype: 'json' }).trigger('reloadGrid');
         };
     </script>
+    <style>
+        span.cellWithoutBackground {
+            display: block;
+            background-image: none;
+            margin-right: -2px;
+            margin-left: -2px;
+            height: '100%';
+            text-align:center
+        }
+    </style>
 </asp:Content>

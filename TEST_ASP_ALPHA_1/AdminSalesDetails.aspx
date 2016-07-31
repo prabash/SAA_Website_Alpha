@@ -302,16 +302,16 @@
         function fontFormatter(cellValue, opts, rowObject) {
             switch (cellValue) {
                 case "<%=CommonManager.Status_GetNewItemName()%>":
-                    return '<span style="color:<%=CommonManager.Colors_GetItemStatusColorNew()%>">' + cellValue + '</span>';
+                    return '<span class="cellWithoutBackground" style="color:Black;background-color:<%=CommonManager.Colors_GetItemStatusColorNew()%>">' + cellValue + '</span>';
                     break;
                 case "<%=CommonManager.Status_GetDeliveredItemName()%>":
-                    return '<span style="color:<%=CommonManager.Colors_GetItemStatusColorDelivered()%>">' + cellValue + '</span>';
+                    return '<span class="cellWithoutBackground" style="color:Black;background-color:<%=CommonManager.Colors_GetItemStatusColorDelivered()%>">' + cellValue + '</span>';
                     break;
                 case "<%=CommonManager.Status_GetClosedItemName()%>":
-                    return '<span style="color:<%=CommonManager.Colors_GetItemStatusColorClosed()%>">' + cellValue + '</span>';
+                    return '<span class="cellWithoutBackground" style="color:Black;background-color:<%=CommonManager.Colors_GetItemStatusColorClosed()%>">' + cellValue + '</span>';
                     break;
                 case "<%=CommonManager.Status_GetCancelledItemName()%>":
-                    return '<span style="color:<%=CommonManager.Colors_GetItemStatusColorCancelled()%>">' + cellValue + '</span>';
+                    return '<span class="cellWithoutBackground" style="color:Black;background-color:<%=CommonManager.Colors_GetItemStatusColorCancelled()%>">' + cellValue + '</span>';
                     break;
             }
         };
@@ -371,4 +371,14 @@
             document.getElementById('txtCustTelephone').value = customer["telephoneNo"];
         };
     </script>
+    <style>
+        span.cellWithoutBackground {
+            display: block;
+            background-image: none;
+            margin-right: -2px;
+            margin-left: -2px;
+            height: '100%';
+            text-align:center
+        }
+    </style>
 </asp:Content>
