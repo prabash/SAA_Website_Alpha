@@ -81,6 +81,7 @@
                             <ul>
                                 <li><a href="AdminUsers.aspx">User Details</a></li>
                                 <li class="current"><a href="#">User Queries</a></li>
+                                <li><a href="AdminSiteAdministrators.aspx">Administrators</a></li>
                             </ul>
                         </div>
                     </div>

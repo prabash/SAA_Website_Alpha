@@ -103,4 +103,12 @@ namespace TEST_ASP_ALPHA_1.Common
         public int Count { get; set; }
         public DateTime Date { get; set; }
     }
+
+    public class AdminUserObject
+    {
+        public int Id { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Type { get; set; }
+    }
 }

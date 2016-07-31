@@ -16,6 +16,9 @@ namespace TEST_ASP_ALPHA_1.Common
         const string ses_cartItemsWithQty = "CartItemsWithQty";
         const string ses_checkoutEligible = "CheckoutEligible";
 
+        const string ses_adminId = "AdminId";
+        const string ses_adminUsername = "AdminUsername";
+        const string ses_adminType = "AdminType";
         #region Web Config Manager
 
         #region Sort By
@@ -232,6 +235,21 @@ namespace TEST_ASP_ALPHA_1.Common
         public static string GetCheckoutEligibleSessionName()
         {
             return ses_checkoutEligible;
+        }
+
+        public static string Session_GetAdminIdSessionName()
+        {
+            return ses_adminId;
+        }
+
+        public static string Session_GetAdminUsernameSessionName()
+        {
+            return ses_adminUsername;
+        }
+
+        public static string Session_GetAdminTypeSessionName()
+        {
+            return ses_adminType;
         }
 
         #endregion

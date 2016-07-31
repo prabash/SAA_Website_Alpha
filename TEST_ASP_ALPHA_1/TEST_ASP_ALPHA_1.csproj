@@ -166,9 +166,11 @@
     <Content Include="Activation.aspx" />
     <Content Include="AdminDashboard.aspx" />
     <Content Include="AdminItems.aspx" />
+    <Content Include="AdminLogin.aspx" />
     <Content Include="AdminSalesDashboard.aspx" />
     <Content Include="AdminSalesDetails.aspx" />
     <Content Include="AdminSalesLedger.aspx" />
+    <Content Include="AdminSiteAdministrators.aspx" />
     <Content Include="AdminSlideshowIndex.aspx" />
     <Content Include="AdminSlideshowItems.aspx" />
     <Content Include="AdminUserQueries.aspx" />
@@ -367,6 +369,7 @@
     <Content Include="Handlers\AdminSalesDetailsHandler.ashx" />
     <Content Include="Handlers\AdminSalesLedgerHandler.ashx" />
     <Content Include="Handlers\AdminSalesLedgerDetailsHandler.ashx" />
+    <Content Include="Handlers\AdminSiteAdminstratorsHandler.ashx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="ProductDetails.aspx" />
     <Content Include="products_images\avengers-alt-img.png" />
@@ -498,6 +501,13 @@
     <Compile Include="AdminItems.aspx.designer.cs">
       <DependentUpon>AdminItems.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminLogin.aspx.cs">
+      <DependentUpon>AdminLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminLogin.aspx.designer.cs">
+      <DependentUpon>AdminLogin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminSalesDashboard.aspx.cs">
       <DependentUpon>AdminSalesDashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -518,6 +528,13 @@
     </Compile>
     <Compile Include="AdminSalesLedger.aspx.designer.cs">
       <DependentUpon>AdminSalesLedger.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminSiteAdministrators.aspx.cs">
+      <DependentUpon>AdminSiteAdministrators.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminSiteAdministrators.aspx.designer.cs">
+      <DependentUpon>AdminSiteAdministrators.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminSlideshowIndex.aspx.cs">
       <DependentUpon>AdminSlideshowIndex.aspx</DependentUpon>
@@ -717,6 +734,9 @@
     <Compile Include="Handlers\AdminSalesMasterHandler.ashx.cs">
       <DependentUpon>AdminSalesMasterHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\AdminSiteAdminstratorsHandler.ashx.cs">
+      <DependentUpon>AdminSiteAdminstratorsHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Handlers\AdminSlideshowIndexHandler.ashx.cs">
       <DependentUpon>AdminSlideshowIndexHandler.ashx</DependentUpon>
     </Compile>
@@ -748,6 +768,7 @@
     </Compile>
     <Compile Include="Common\AESManager.cs" />
     <Compile Include="Common\ConnectionManager.cs" />
+    <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\CounterModel.cs" />
     <Compile Include="Models\CustCommentsModel.cs" />
     <Compile Include="Models\CustWishlistModel.cs" />

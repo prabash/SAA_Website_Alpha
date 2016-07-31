@@ -99,32 +99,32 @@
                     </div>
                     <div class=" col-lg-7 col-sm-8 col-md-7 col-xs-12">
                         <div class="header-top">
-                            <% if (Session[CommonManager.GetCustNameSessionName()] == null)
+                            <% if (Session[CommonManager.Session_GetAdminUsernameSessionName()] == null)
                                { %>
-                            <div class="welcome-msg hidden-xs">Welcome to SAA Video! </div>
+                            <div class="welcome-msg hidden-xs">Welcome to SAA Admin! </div>
                             <% }
                                else
                                { %>
-                            <div class="welcome-msg hidden-xs">Hello there, <%=Session[CommonManager.GetCustNameSessionName()].ToString()%>! </div>
+                            <div class="welcome-msg hidden-xs">Hello there, <%=Session[CommonManager.Session_GetAdminUsernameSessionName()].ToString()%>! </div>
                             <% } %>
                             <!-- Header Top Links -->
                             <div class="toplinks">
                                 <div class="links">
-                                    <% if (Session[CommonManager.GetCustIdSessionName()] == null)
+                                    <% if (Session[CommonManager.Session_GetAdminIdSessionName()] == null)
                                        { %>
-                                    <div class="myaccount"><a title="My Account" href="Login.aspx"><span class="hidden-xs">My Account</span></a></div>
+                                    <div class="myaccount"><a title="My Account" href="AdminLogin.aspx"><span class="hidden-xs">My Account</span></a></div>
                                     <% }
                                        else
                                        { %>
-                                    <div class="myaccount"><a title="My Account" href="AdminAccount.aspx"><span class="hidden-xs">My Account</span></a></div>
+                                    <div class="myaccount"><a title="My Account" href="AdminAccount.aspx"><span class="hidden-xs">Change Password</span></a></div>
                                     <% } %>
-                                    <% if (Session[CommonManager.GetCustIdSessionName()] == null)
+                                    <% if (Session[CommonManager.Session_GetAdminIdSessionName()] == null)
                                        { %>
-                                    <div class="login"><a href="Login.aspx"><span class="hidden-xs">Log In</span></a></div>
+                                    <div class="login"><a href="AdminLogin.aspx"><span class="hidden-xs">Log In</span></a></div>
                                     <% }
                                        else
                                        { %>
-                                    <div class="login"><a href="Login.aspx?logout=true"><span class="hidden-xs">Log Out</span></a></div>
+                                    <div class="login"><a href="AdminLogin.aspx?logout=true"><span class="hidden-xs">Log Out</span></a></div>
                                     <% } %>
                                 </div>
                             </div>
@@ -172,6 +172,7 @@
                                                 <ul class="level0">
                                                     <li class="level1 nav-3-2 parent"><a href="AdminUsers.aspx"><span>User Details</span> </a></li>
                                                     <li class="level1 nav-3-1 first parent"><a href="AdminUserQueries.aspx"><span>User Queries</span> </a></li>
+                                                    <li class="level1 nav-3-1 first parent"><a href="AdminSiteAdministrators.aspx"><span>Administrators</span> </a></li>
                                                 </ul>
                                             </li>
                                             <li class="level0 nav-4 level-top parent"><a href="AdminSalesDashboard.aspx" class="level-top"><span>Sales</span> </a>
@@ -202,6 +203,7 @@
                             <ul style="display: none;" class="level1">
                                 <li class="level1 nav-7-2"><a href="AdminUsers.aspx"><span>User Details</span> </a></li>
                                 <li class="level1 first"><a href="AdminUserQueries.aspx"><span>User Queries</span></a></li>
+                                <li class="level1 first"><a href="AdminSiteAdministrators.aspx"><span>Administrators</span></a></li>
                             </ul>
                         </li>
                         <li class="level0 nav-8 drop-menu"><a runat="server" href="AdminSalesDashboard.aspx" class="level-top"><span>Sales</span> </a>
