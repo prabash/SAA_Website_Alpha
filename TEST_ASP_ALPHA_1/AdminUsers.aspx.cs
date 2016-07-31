@@ -13,7 +13,18 @@ namespace TEST_ASP_ALPHA_1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (Session[CommonManager.Session_GetAdminUsernameSessionName()] == null)
+                {
+                    throw new HttpException(403, "Forbidden");
+                }
+                else
+                {
+                    if (Session[CommonManager.Session_GetAdminTypeSessionName()].ToString() != "Main")
+                        throw new HttpException(403, "Forbidden");
+                }
+            }
         }
 
         [System.Web.Services.WebMethod]

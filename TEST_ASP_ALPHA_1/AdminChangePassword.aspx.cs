@@ -25,8 +25,7 @@ namespace TEST_ASP_ALPHA_1
             {
                 if (Session[CommonManager.Session_GetAdminUsernameSessionName()] == null)
                 {
-                    string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
-                    Response.Redirect("AdminLogin.aspx");
+                    throw new HttpException(403, "Forbidden");
                 }
             }
         }
